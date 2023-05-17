@@ -1,101 +1,118 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_safe, require_POST, require_http_methods
+import requests
 
-from .models import Board, Comment
-from .serializers import UserInfoSerializer,BoardSerializer,BoardUserSerializer,BoardCommentSerializer,BoardCommentUserSerializer
+from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 
-from rest_framework.response import Response
-from rest_framework.decorators import authentication_classes, permission_classes
+from rest_framework import status
 from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+
+from .models import Post, PostComment
+from .serializers import PostSerializer, PostUserSerializer, PostCommentSerializer, PostCommentUserSerializer
 
 
-# ---------------------------------community---------------------------------
-# community 
+# Create your views here.
 @api_view(['GET'])
-def index(request):
-    boards = Board.objects.order_by('-pk')
-    serializer = BoardUserSerializer(boards, many=True)
-    return Response(serializer.data, safe=False)
+def post_list(request):
+    posts = Post.objects.order_by('pk')
+    serializer = PostUserSerializer(posts, many=True)
+    return Response(serializer.data)
+    
 
-# community C(create)
+
 @api_view(['POST'])
-def create(request):
-    serializer = BoardSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=201)
-    return Response(serializer.errors, status=400)
-
-# community R(detail)
-@api_view(['GET'])
-def detail(request, board_pk):
-    board = get_object_or_404(Board, pk=board_pk)
-    serializer = BoardUserSerializer(board)
-    return Response(serializer.data, safe=False)
-
-# community UD(update & delete)
-@api_view(['DELETE', 'PUT'])
+@authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
-@authentication_classes([JWTAuthentication])
-def update_delete(request, board_pk):
-    board = get_object_or_404(Board, pk=board_pk)
+def post_create(request):
+    posts = request.data
+    post = Post(
+        user = request.user,
+        title = posts['title'],
+        content = posts['content'],
+        post_code = 1 # 자유게시판일 경우 code는 1, 문의게시판 코드 2, .....
+    )
+    post.save()
+    serializer = PostUserSerializer(post)
+
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def post_detail(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
+    serializer = PostUserSerializer(post)
+    return Response(serializer.data)
+    
+
+
+@api_view(['DELETE', 'PUT'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def post_delete_update(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
     if request.method == 'DELETE' :
-        serializer = BoardUserSerializer(board)
-        if request.user.is_superuser or board.user == request.user :
-            board.delete()
+        serializer = PostUserSerializer(post)
+        if request.user.is_superuser or post.user == request.user :
+            post.delete()
         return Response(True)
     else :
-        if board.user == request.user : 
+        if post.user == request.user : 
             request.data['user'] = request.user.pk
-            serializer = BoardSerializer(board, data=request.data)
+            serializer = PostSerializer(post, data=request.data)
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
+            else : 
+                print("----update error", serializer.errors)
             return Response(serializer.data)
-        
-# ---------------------------------comment---------------------------------
+
+
 @api_view(['GET'])
-def comment_list(request, board_pk):
-    comments = Comment.objects.order_by('pk').filter(board_id=board_pk)
-    serializer = BoardCommentUserSerializer(comments, many=True)
+def comment_list(request, post_pk):
+    comments = PostComment.objects.order_by('pk').filter(post_id=post_pk)
+    serializer = PostCommentUserSerializer(comments, many=True)
     return Response(serializer.data)
 
+
 @api_view(['POST'])
+@authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
-@authentication_classes([JWTAuthentication])
-def comment_create(request, board_pk):
-    board = get_object_or_404(Board, pk=board_pk)
-    commentItem = request.data
-    comment = Comment(
-        board = board,
+def comment_create(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
+    comments = request.data
+    comment = PostComment(
+        post = post,
         user = request.user,
-        content = commentItem['content'],
+        content = comments['content'],
     )
     comment.save()
-    serializer = BoardCommentUserSerializer(comment)
+    serializer = PostCommentUserSerializer(comment)
     return Response(serializer.data)
 
 @api_view(['DELETE', 'PUT'])
-@authentication_classes([JWTAuthentication])
+@authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
-def comment_update_delete(request, board_pk, comment_pk):
-    board = get_object_or_404(Board, pk=board_pk)
-    comment = get_object_or_404(Comment, pk=comment_pk)
+def comment_update_delete(request, post_pk, comment_pk):
+    post = get_object_or_404(Post, pk=post_pk)
+    comment = get_object_or_404(PostComment, pk=comment_pk)
     commentId = comment.id
     if request.method == 'DELETE' :
-        serializer = BoardCommentSerializer(comment)
-        if request.user.is_superuser or board.user == request.user :
+        serializer = PostCommentSerializer(comment)
+        if request.user.is_superuser or post.user == request.user :
             comment.delete()
         return Response({'id':commentId})
     else :
         if comment.user == request.user : 
             request.data['user'] = request.user.pk
-            serializer = BoardCommentSerializer(comment, data=request.data)
+            serializer = PostCommentSerializer(comment, data=request.data)
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
                 return Response(serializer.data)
             else : 
+                print("----update error", serializer.errors)
                 return Response(False)
             
 

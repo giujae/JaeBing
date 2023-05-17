@@ -1,36 +1,38 @@
 from rest_framework import serializers
-from .models import Board, Comment
+from .models import Post, PostComment
 from django.contrib.auth import get_user_model
 
-# user info
+
 class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ('id', 'username')
 
-# community detail
-class BoardSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Board
-        fields = ('id','user','title','content','board_code','created_at','updated_at')
 
-# community create user
-class BoardUserSerializer(serializers.ModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ('id','user','title','content','post_code','created_at','updated_at')
+
+
+class PostUserSerializer(serializers.ModelSerializer):
     user = UserInfoSerializer()
     class Meta:
-        model = Board
-        fields = ('id','user','title','content','board_code','created_at','updated_at')
+        model = Post
+        fields = ('id','user','title','content','post_code','created_at','updated_at')
 
-# community comment create
-class BoardCommentSerializer(serializers.ModelSerializer):
+
+
+
+class PostCommentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Comment
-        fields = ('id','user','board','content','created_at','updated_at')
+        model = PostComment
+        fields = ('id','user','post','content','created_at','updated_at')
 
-# community comment create user 
-class BoardCommentUserSerializer(serializers.ModelSerializer):
+
+class PostCommentUserSerializer(serializers.ModelSerializer):
     user = UserInfoSerializer()
-    board = BoardSerializer()
+    post = PostSerializer()
     class Meta:
-        model = Comment
-        fields = ('id','user','board','content','created_at','updated_at')
+        model = PostComment
+        fields = ('id','user','post','content','created_at','updated_at')
