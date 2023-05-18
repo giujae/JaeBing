@@ -1,7 +1,7 @@
-import random
+# import random
 
 from django.shortcuts import get_object_or_404
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
 
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -232,7 +232,7 @@ def update_delete_review(request, movie_pk):
             count = Review.objects.all().filter(movie_id=movie_pk).count()
 
             total[movie_pk] -= review.rate
-            movie.rate = total[movie_pk] / int(count - 1)
+            movie.vote_average = total[movie_pk] / int(count - 1)
             movie.save()
 
             serializer = ReviewUserSerializer(review)

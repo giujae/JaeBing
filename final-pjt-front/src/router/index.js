@@ -8,9 +8,9 @@ import AdminManagement from '@/views/admin/AdminManagement';
 import Post from '@/views/community/Post';
 import CreatePost from '@/views/community/CreatePost';
 import PostDetail from '@/views/community/PostDetail';
-import MovieAddForm from '@/views/admin/MovieAddForm';
-import MovieSearchForm from '@/views/admin/MovieSearchForm';
-import MovieUpdateForm from '@/views/admin/MovieUpdateForm';
+// import MovieAddForm from '@/views/admin/MovieAddForm';
+// import MovieSearchForm from '@/views/admin/MovieSearchForm';
+// import MovieUpdateForm from '@/views/admin/MovieUpdateForm';
 
 Vue.use(VueRouter);
 
@@ -35,21 +35,21 @@ const routes = [
     name: 'ManageMovie',
     component: ManageMovie,
   },
-  {
-    path: '/movieaddform',
-    name: 'MovieAddForm',
-    component: MovieAddForm,
-  },
-  {
-    path: '/moviesearchform',
-    name: 'MovieSearchForm',
-    component: MovieSearchForm,
-  },
-  {
-    path: '/movieupdateform',
-    name: 'MovieUpdateForm',
-    component: MovieUpdateForm,
-  },
+  // {
+  //   path: '/movieaddform',
+  //   name: 'MovieAddForm',
+  //   component: MovieAddForm,
+  // },
+  // {
+  //   path: '/moviesearchform',
+  //   name: 'MovieSearchForm',
+  //   component: MovieSearchForm,
+  // },
+  // {
+  //   path: '/movieupdateform',
+  //   name: 'MovieUpdateForm',
+  //   component: MovieUpdateForm,
+  // },
   {
     path: '/management',
     name: 'AdminManagement',

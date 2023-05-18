@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container>
-      <b-row>
+      <!-- <b-row>
         <b-col sm="6">
           <b-button
             size="lg"
@@ -26,7 +26,7 @@
             >검색 추가</b-button
           >
         </b-col>
-      </b-row>
+      </b-row> -->
 
       <!-- <b-row> -->
 
