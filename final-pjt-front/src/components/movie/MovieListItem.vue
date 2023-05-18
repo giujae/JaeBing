@@ -8,11 +8,11 @@
         img-top
         tag="article"
         style="max-width: 20rem; max-height: 25rem; min-height: 25rem"
-        class="my-2 bg-dark"
+        class="my-2"
         @click="showDetail"
       >
         <!-- <b-card-text>개봉일 : {{movie.release_date}}</b-card-text> -->
-        <b-card-text class="font-1-8em font-do font-color-white" :style="{ 'max-width': '20rem' }">
+        <b-card-text class="font-1-8em font-do" :style="{ 'max-width': '20rem' }">
           👍 : {{ movie.vote_count }}</b-card-text
         >
 
@@ -29,7 +29,7 @@
         @click="showDetail"
       >
         <!-- <b-card-text>개봉일 : {{movie.release_date}}</b-card-text> -->
-        <b-card-text class="font-1-8em font-do font-color-white" :style="{ 'max-width': '20rem' }">
+        <b-card-text class="font-1-8em font-do" :style="{ 'max-width': '20rem' }">
           👍 : {{ movie.vote_count }}</b-card-text
         >
 
@@ -44,10 +44,6 @@
       v-model="show"
       size="lg"
       title="Movie information"
-      header-bg-variant="dark"
-      header-text-variant="light"
-      body-bg-variant="dark"
-      body-text-variant="light"
       footer-bg-variant="dark"
       footer-text-variant="dark"
     >

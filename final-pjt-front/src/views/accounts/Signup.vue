@@ -29,23 +29,23 @@
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
 
-    <div class="form-group mt-5 font-poor font-1-2em">
+    <!-- <div class="form-group mt-5 font-poor font-1-2em">
       <label for="date_of_birth">생년월일: </label>
       <input type="date" class="form-control" id="date_of_birth" v-model="credentials.date_of_birth" />
-    </div>
+    </div> -->
 
-    <div class="form-group mt-3 float-left">
+    <!-- <div class="form-group mt-3 float-left">
       <div class="form-check">
         <input class="form-check-input" type="checkbox" id="gridCheck" checked="true" v-model="agree" />
         <label class="form-check-label" for="gridCheck">
           <p @click="agreePage">개인정보 이용 약관에 동의합니다.</p>
         </label>
       </div>
-    </div>
+    </div> -->
     <br />
 
     <div class="form-group mt-5 font-poor font-1-2em">
-      <button @click="signup" id="signupbtn" class="btn btn-pink my-5 form-group">회원가입</button>
+      <button @click="signup" id="signupbtn" class="btn my-5 form-group">회원가입</button>
     </div>
   </div>
 </template>
@@ -98,6 +98,12 @@ export default {
 </script>
 
 <style scoped>
+input{
+  width: 200px;
+  height: 40px;
+  display: block;
+  margin: 0 auto;
+}
 #signupbtn {
   font-size: 2em !important;
   width: 200px !important;

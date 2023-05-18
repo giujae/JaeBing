@@ -25,7 +25,6 @@
               :caption="movie.title"
               img-blank-color="dark"
               img-height="480"
-              style="background: #343a40"
             >
               <template #img>
                 <img
