@@ -1,4 +1,5 @@
 from rest_framework import status
+from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import UserSerializer
@@ -69,3 +70,11 @@ def delete_members(request, member_id):
 @permission_classes([IsAuthenticated])
 def get_user(request):
     return Response(request.user.id)
+
+
+@api_view(['GET'])
+def get_profile(request, username):
+    User = get_user_model()
+    user = get_object_or_404(User, username=username)
+    serializer = UserSerializer(user)
+    return Response(serializer.data)

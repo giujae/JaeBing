@@ -21,8 +21,9 @@
           </b-navbar-nav>
 
           <b-navbar-nav>
+            <router-link :to="{ name: 'Profile', params: { username: username } }">프로필</router-link>
             <div v-if="login">
-              <p class="mr-3">해윙 {{ username }} ! </p>
+              <p class="mr-3">해윙 {{ username }} !</p>
             </div>
 
             <div v-if="is_admin">
@@ -59,8 +60,7 @@
           <div class="col-3">
             <!-- <img :src="images.logo" width="190" alt="logo" /> -->
           </div>
-          <div class="col-9">
-          </div>
+          <div class="col-9"></div>
         </div>
       </div>
     </div>
@@ -114,7 +114,6 @@ export default {
   },
 };
 </script>
-<!-- Js Plugins -->
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Gothic&family=Poor+Story&family=Slabo+27px&display=swap');
