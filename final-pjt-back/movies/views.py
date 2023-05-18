@@ -127,8 +127,11 @@ def getAllReviews(request, movie_pk):
     serializer = ReviewUserSerializer(reviews, many=True)
     return Response(serializer.data)
 
-
-
+@api_view(['GET'])
+def getUserReviews(request, username):
+    reviews = Review.objects.filter(user__username=username)
+    serializer = ReviewUserSerializer(reviews, many=True)
+    return Response(serializer.data)
 
 total = [0]*1000
 

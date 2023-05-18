@@ -8,6 +8,17 @@
       <p><strong>생일:</strong> {{ profile.date_of_birth }}</p>
       <p><strong>이메일:</strong> {{ profile.email }}</p>
       <p><strong>등급:</strong> {{ isAdmin ? '관리자' : '일반회원' }}</p>
+
+      <div>
+        <h2>작성한 리뷰</h2>
+        <ul>
+          <li v-for="review in reviews" :key="review.id">
+            <p><strong>영화:</strong> {{ review.movie.title }}</p>
+            <p><strong>평점:</strong> {{ review.rate }}</p>
+            <p><strong>내용:</strong> {{ review.content }}</p>
+          </li>
+        </ul>
+      </div>
     </div>
     <p v-else>Loading...</p>
   </div>
@@ -24,6 +35,7 @@ export default {
     return {
       profile: null,
       isAdmin: false,
+      reviews: [], // reviews 속성 추가
     };
   },
   methods: {
@@ -33,11 +45,19 @@ export default {
   },
   created() {
     const username = this.$route.params.username;
+    this.reviews = [];
     axios
       .get(`${SERVER_URL}/accounts/profile/${username}/`)
       .then((res) => {
         this.profile = res.data;
-        this.isAdmin = res.data.is_superuser;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    axios
+      .get(`${SERVER_URL}/movies/${username}/reviews/`)
+      .then((res) => {
+        this.reviews = res.data;
       })
       .catch((err) => {
         console.log(err);
