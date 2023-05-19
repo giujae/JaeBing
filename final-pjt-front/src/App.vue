@@ -14,41 +14,56 @@
           <router-link :to="{ name: 'MovieList' }" id="logo" class="font-weight-bold"></router-link>
         </b-navbar-brand>
 
-        <b-collapse id="nav-collapse" is-nav class="d-flex justify-content-between">
-          <b-navbar-nav>
-            <router-link :to="{ name: 'MovieList' }" class="nav-margin">Movies</router-link>
-            <router-link :to="{ name: 'Post' }" class="nav-margin">Post</router-link>
-          </b-navbar-nav>
+        <b-navbar-nav>
+          <b-nav-item>
+            <router-link :to="{ name: 'MovieList' }" id="logo" class="font-weight-bold"> Home </router-link>
+          </b-nav-item>
+
+          <!-- Navbar dropdowns -->
+          <b-nav-item-dropdown text="Community" right>
+            <b-dropdown-item class="drop-item">
+              <router-link :to="{ name: 'Post' }" class="nav-margin">Post</router-link>
+            </b-dropdown-item>
+            <b-dropdown-item class="drop-item">ES</b-dropdown-item>
+          </b-nav-item-dropdown>
+
+          <b-nav-item-dropdown text="My Page" right>
+            <b-dropdown-item class="drop-item">
+              <router-link :to="{ name: 'Profile', params: { username: username } }">Profile</router-link>
+            </b-dropdown-item>
+            <b-dropdown-item class="drop-item">Settings</b-dropdown-item>
+          </b-nav-item-dropdown>
 
           <b-navbar-nav>
-            <router-link :to="{ name: 'Profile', params: { username: username } }">프로필</router-link>
             <div v-if="login">
               <p class="mr-3">해윙 {{ username }} !</p>
             </div>
 
             <div v-if="is_admin">
-              <router-link :to="{ name: 'ManageMovie' }" class="nav-margin"
-                ><span class="badge badge-pill badge-warning">영화관리</span></router-link
+              <router-link :to="{ name: 'ManageMovie' }" class="nav-margin">
+                <span class="badge badge-pill badge-warning">영화관리</span></router-link
               >
-              <router-link :to="{ name: 'AdminManagement' }" class="nav-margin"
-                ><span class="badge badge-pill badge-warning">회원관리</span></router-link
+              <router-link :to="{ name: 'AdminManagement' }" class="nav-margin">
+                <span class="badge badge-pill badge-warning">회원관리</span></router-link
               >
             </div>
-            <div v-if="login" class="mr-auto">
+
+            <div v-if="login">
               <router-link @click.native="logout" to="#" class="nav-margin">
                 <span class="badge badge-pill badge-info">Logout</span></router-link
               >
             </div>
-            <div v-else class="mr-auto">
-              <router-link :to="{ name: 'Signup' }" class="mr-auto nav-margin"
-                ><button class="btn">Signup</button></router-link
-              >
-              <router-link :to="{ name: 'Login' }" class="mr-auto nav-margin">
-                <button class="btn">Login</button>
+
+            <div v-else>
+              <router-link :to="{ name: 'Signup' }" class="nav-margin">
+                <button class="font-weight-bold">Signup</button>
+              </router-link>
+              <router-link :to="{ name: 'Login' }" class="nav-margin">
+                <button class="font-weight-bold">Login</button>
               </router-link>
             </div>
           </b-navbar-nav>
-        </b-collapse>
+        </b-navbar-nav>
       </b-navbar>
     </div>
 
@@ -126,36 +141,59 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: black;
-  /* background-color: #0b0c2a; */
+  background: #0f2648;
+  /* background-color: #0F2648; */
   width: 100%;
   min-height: 100vh;
 }
 
-#navbar {
-  /* background-color: #070720; */
-}
-
-#nav {
-  background-color: antiquewhite;
-}
-
 #nav a {
   font-weight: bold;
+  /* background: linear-gradient(45deg, #E8D1D9, #3C537F, #0f2648); */
   /* color: #2c3e50; */
 }
 
 #nav a.router-link-exact-active {
   /* color: #D44C7F; */
-  color: #de5078;
+  color: #e8d1d9;
 }
 
 #logo {
-  color: #de5078 !important;
+  /* color: #de5078 !important; */
 }
 
 #footerjumbo {
   /* background-color: #de5078; */
   height: 250px;
   margin-bottom: 0rem;
+}
+
+/* 추가 */
+
+/* community Mypage 네브바 속성 */
+span {
+  color: #e8d1d9;
+}
+
+/* 네브바 속성 */
+.navbar {
+  background-color: #0f2648;
+}
+
+/* 네브바 클릭시 나오는 item 속성 */
+.drop-item {
+  color: #e8d1d9;
+}
+
+/* signup login 속성 */
+button {
+  color: #e8d1d9;
+  background-color: #0f2648;
+  border-color: #0f264800;
+  padding: 8px;
+}
+
+.dropdown-toggle::after {
+  color: #e8d1d9;
 }
 </style>
