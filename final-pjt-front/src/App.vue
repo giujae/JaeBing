@@ -1,3 +1,4 @@
+ 
 <template>
   <div id="app">
     <link
@@ -7,48 +8,63 @@
       crossorigin="anonymous"
     />
 
-    <div id="nav" class="p-2 main-nav">
-      <b-navbar toggleable="lg" type="dark" id="navbar">
-        <b-navbar-brand :style="{ 'font-size': '40px' }" class="nav-margin">
-          <!-- <img :src="images.logo" width="80" alt="logo" /> -->
-          <router-link :to="{ name: 'MovieList' }" id="logo" class="font-weight-bold"></router-link>
-        </b-navbar-brand>
+    <div id="nav" class="main-nav">
+      <b-navbar>
 
-        <b-collapse id="nav-collapse" is-nav class="d-flex justify-content-between">
-          <b-navbar-nav>
-            <router-link :to="{ name: 'MovieList' }" class="nav-margin">Movies</router-link>
+        <b-navbar-nav>
+          <b-nav-item>
+          <router-link :to="{ name: 'MovieList' }" id="logo" class="font-weight-bold">
+            Home
+          </router-link>
+          </b-nav-item>
+
+      <!-- Navbar dropdowns -->
+        <b-nav-item-dropdown text="Community" right>
+          <b-dropdown-item class="drop-item">
             <router-link :to="{ name: 'Post' }" class="nav-margin">Post</router-link>
-          </b-navbar-nav>
+          </b-dropdown-item>
+          <b-dropdown-item class="drop-item">ES</b-dropdown-item>
+        </b-nav-item-dropdown>
 
-          <b-navbar-nav>
+        <b-nav-item-dropdown text="My Page" right>
+          <b-dropdown-item class="drop-item">
+            <router-link :to="{ name: 'Profile', params: { username: username } }">Profile</router-link>
+          </b-dropdown-item>
+          <b-dropdown-item class="drop-item">Settings</b-dropdown-item>
+        </b-nav-item-dropdown>
+        
+
+        <b-navbar-nav>
             <div v-if="login">
-              <p class="mr-3">해윙 {{ username }} ! </p>
+              <p class="mr-3">해윙 {{ username }} !</p>
             </div>
 
             <div v-if="is_admin">
-              <router-link :to="{ name: 'ManageMovie' }" class="nav-margin"
-                ><span class="badge badge-pill badge-warning">영화관리</span></router-link
-              >
-              <router-link :to="{ name: 'AdminManagement' }" class="nav-margin"
-                ><span class="badge badge-pill badge-warning">회원관리</span></router-link
-              >
+              <router-link :to="{ name: 'ManageMovie' }" class="nav-margin">
+                <span class="badge badge-pill badge-warning">영화관리</span></router-link>
+              <router-link :to="{ name: 'AdminManagement' }" class="nav-margin">
+                <span class="badge badge-pill badge-warning">회원관리</span></router-link>
             </div>
-            <div v-if="login" class="mr-auto">
+
+            <div v-if="login">
               <router-link @click.native="logout" to="#" class="nav-margin">
                 <span class="badge badge-pill badge-info">Logout</span></router-link
               >
             </div>
-            <div v-else class="mr-auto">
-              <router-link :to="{ name: 'Signup' }" class="mr-auto nav-margin"
-                ><button class="btn">Signup</button></router-link
-              >
-              <router-link :to="{ name: 'Login' }" class="mr-auto nav-margin">
-                <button class="btn">Login</button>
+
+            <div v-else >
+              <router-link :to="{ name: 'Signup' }" class="nav-margin">
+                <button class="font-weight-bold">Signup</button>
+              </router-link>
+              <router-link :to="{ name: 'Login' }" class="nav-margin">
+                <button class="font-weight-bold">Login</button>
               </router-link>
             </div>
           </b-navbar-nav>
-        </b-collapse>
+
+        </b-navbar-nav> 
       </b-navbar>
+
     </div>
 
     <router-view @login="login = true" />
@@ -59,8 +75,7 @@
           <div class="col-3">
             <!-- <img :src="images.logo" width="190" alt="logo" /> -->
           </div>
-          <div class="col-9">
-          </div>
+          <div class="col-9"></div>
         </div>
       </div>
     </div>
@@ -114,7 +129,6 @@ export default {
   },
 };
 </script>
-<!-- Js Plugins -->
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Gothic&family=Poor+Story&family=Slabo+27px&display=swap');
@@ -127,36 +141,59 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: black;
-  /* background-color: #0b0c2a; */
+  background: #0F2648;
+  /* background-color: #0F2648; */
   width: 100%;
   min-height: 100vh;
 }
 
-#navbar {
-  /* background-color: #070720; */
-}
-
-#nav {
-  background-color: antiquewhite;
-}
-
 #nav a {
   font-weight: bold;
+  /* background: linear-gradient(45deg, #E8D1D9, #3C537F, #0f2648); */
   /* color: #2c3e50; */
 }
 
 #nav a.router-link-exact-active {
   /* color: #D44C7F; */
-  color: #de5078;
+  color: #E8D1D9;
 }
 
 #logo {
-  color: #de5078 !important;
+  /* color: #de5078 !important; */
 }
 
 #footerjumbo {
   /* background-color: #de5078; */
   height: 250px;
   margin-bottom: 0rem;
+}
+
+/* 추가 */
+
+/* community Mypage 네브바 속성 */
+span{
+  color: #E8D1D9;
+}
+
+/* 네브바 속성 */
+.navbar {
+  background-color: #0F2648;
+}
+
+/* 네브바 클릭시 나오는 item 속성 */
+.drop-item{
+  color: #E8D1D9;
+}
+
+/* signup login 속성 */
+button {
+  color: #E8D1D9;
+  background-color: #0F2648;
+  border-color: #0f264800;
+  padding: 8px;
+}
+
+.dropdown-toggle::after {
+  color: #E8D1D9;
 }
 </style>
