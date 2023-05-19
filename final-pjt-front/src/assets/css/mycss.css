@@ -51,11 +51,6 @@
   font-size: 1.8em;
 }
 
-.btn-pink {
-  font-family: Jua;
-  background-color: #de5078 !important;
-  color: aliceblue !important;
-}
 
 .btn-delete {
   background-color: gray;
@@ -76,7 +71,7 @@
   color: lightgray;
 }
 
-.font-color-navy {
+/* .font-color-navy {
   color: #0b0c2a !important;
 }
 
@@ -86,12 +81,12 @@
 
 .background-darkblue {
   background-color: #2c3e50 !important;
-}
+} */
 
-.background-dark {
+/* .background-dark {
   background-color: #343a40 !important;
-}
+} */
 
-.font-dark {
+/* .font-dark {
   color: #343a40 !important;
-}
+} */

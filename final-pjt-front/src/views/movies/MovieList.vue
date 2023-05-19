@@ -13,7 +13,7 @@
             :interval="2000"
             controls
             indicators
-            background="#ababab"
+            background="#000000"
             style="text-shadow: 1px 1px 2px #333"
             @sliding-start="onSlideStart"
             @sliding-end="onSlideEnd"
@@ -143,5 +143,9 @@ export default {
   padding-bottom: 20px;
   color: #fff;
   /* text-align: center; */
+}
+
+h1 {
+  color: #e8d1d9;
 }
 </style>

@@ -17,7 +17,7 @@
           <!-- Navbar dropdowns -->
           <b-nav-item-dropdown text="Community" right>
             <b-dropdown-item class="drop-item">
-              <router-link :to="{ name: 'Post' }" class="nav-margin">Post</router-link>
+              <router-link :to="{ name: 'Post' }" >Post</router-link>
             </b-dropdown-item>
             <b-dropdown-item class="drop-item">ES</b-dropdown-item>
           </b-nav-item-dropdown>
@@ -31,7 +31,7 @@
 
           <b-navbar-nav>
             <div v-if="login">
-              <p class="mr-3">해윙 {{ username }} !</p>
+              <p class="user font-weight-bold">해윙 {{ username }} !</p>
             </div>
 
             <div v-if="is_admin">
@@ -43,9 +43,9 @@
               >
             </div>
 
-            <div v-if="login">
+            <div class="logout-box" v-if="login">
               <router-link @click.native="logout" to="#" class="nav-margin">
-                <span class="badge badge-pill badge-info">Logout</span></router-link
+                <span class="logout">Logout</span></router-link
               >
             </div>
 
@@ -144,6 +144,8 @@ export default {
 
 #nav a {
   font-weight: bold;
+  color:#3c537f;
+  text-decoration-line: none;
   /* background: linear-gradient(45deg, #E8D1D9, #3C537F, #0f2648); */
   /* color: #2c3e50; */
 }
@@ -177,7 +179,7 @@ span {
 
 /* 네브바 클릭시 나오는 item 속성 */
 .drop-item {
-  color: #e8d1d9;
+  color: #3c537f;
 }
 
 /* signup login 속성 */
@@ -190,5 +192,25 @@ button {
 
 .dropdown-toggle::after {
   color: #e8d1d9;
+  margin: -5px;
+}
+
+.logout {
+  border-color: #0f264800;
+  background-color: #0f264800;
+}
+
+.logout-box {
+  padding: 8px;
+}
+
+.user {
+  color:#e8d1d9;
+  padding: 8px;
+  margin: 0px;
+}
+
+.jumbotron {
+  background: linear-gradient(45deg, #E8D1D9, #3C537F, #0f2648);
 }
 </style>
