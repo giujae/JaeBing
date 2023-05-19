@@ -45,12 +45,12 @@
       </b-row>
     </b-container>
 
-    <!-- <div class="container" v-if="login && recommend_list.length > 0">
+    <div class="container" v-if="login && recommend_list.length > 0">
       <h1 class="font-do my-3">당신을 위한 영화 추천!</h1>
       <div class="row">
         <MovieListItem v-for="(movie, idx) in recommend_list" :key="idx" :movie="movie" class="col-3" />
       </div>
-    </div> -->
+    </div>
 
     <div>
       <h1 class="font-do my-5">영화 리스트</h1>
@@ -101,14 +101,14 @@ export default {
       this.sliding = false;
     },
   },
-  // created: function () {
-  //   this.i = 0;
-  //   if (this.login && this.is_admin === false) {
-  //     this.$store.dispatch('recommendMovie');
-  //   }
-  // },
+  created: function () {
+    this.i = 0;
+    if (this.login && this.is_admin === false) {
+      this.$store.dispatch('recommendMovie');
+    }
+  },
   computed: {
-    ...mapState(['login', 'login_user', 'is_admin', 'movie_list', 'ordered_movie_list']),
+    ...mapState(['login', 'login_user', 'is_admin', 'movie_list', 'ordered_movie_list', 'recommend_list']),
 
     movies: function () {
       return this.movie_list.filter((movie) => {

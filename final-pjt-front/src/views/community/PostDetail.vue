@@ -10,7 +10,12 @@
           <img :src="images.logo" width="50" class="mr-3" alt="..." />
           <div class="media-body text-justify">
             <h2 class="mt-0">{{ post.title }}</h2>
-            <p class="font-1-5em font-lightgray">작성자: {{ postUsername }}</p>
+            <p class="font-1-5em font-lightgray">
+              작성자:
+              <router-link :to="{ name: 'Profile', params: { username: postUsername } }">{{
+                postUsername
+              }}</router-link>
+            </p>
             <p>
               작성: {{ $moment(post.created_at).format('YYYY-MM-DD hh:mm:ss') }} | 최근수정:
               {{ $moment(post.updated_at).format('YYYY-MM-DD hh:mm:ss') }}
@@ -23,6 +28,8 @@
             <div class="d-flex justify-content-end">
               <!--작성자와 접속자가 같다면, 수정/삭제 버튼 활성화-->
               <!--단, 관리자의 경우 삭제 버튼 활성화 -->
+              <button @click="toggleLikePost" class="btn btn-primary">좋아요</button>
+              <p>좋아요: {{ likesCount }}</p>
               <button
                 class="btn btn-warning font-do mr-3 font-1-2em"
                 v-if="postUsername === this.$store.state.username"
@@ -75,12 +82,12 @@ import CommentList from '@/components/comment/CommentList';
 import CommentForm from '@/components/comment/CommentForm';
 
 export default {
-  name: 'MovieDetail',
+  name: 'PostDetail',
   components: {
     CommentList,
     CommentForm,
   },
-  data: function () {
+  data() {
     return {
       post: '',
       postUsername: '',
@@ -90,10 +97,12 @@ export default {
         logo: require('@/assets/images/logo.png'),
         flamingo: require('@/assets/images/flamingo.png'),
       },
+      isPostLiked: false,
+      likesCount: 0,
     };
   },
   methods: {
-    setToken: function () {
+    setToken() {
       const token = localStorage.getItem('jwt');
 
       const config = {
@@ -103,12 +112,12 @@ export default {
       };
       return config;
     },
-    backToPost: function () {
+    backToPost() {
       this.$router.push({
         name: 'Post',
       });
     },
-    deletePost: function (post) {
+    deletePost(post) {
       const config = this.setToken();
       axios
         .delete(`${SERVER_URL}/community/post_delete_update/${post.id}/`, config)
@@ -121,7 +130,7 @@ export default {
           console.log(err);
         });
     },
-    updatePostForm: function (post) {
+    updatePostForm(post) {
       const postItem = {
         id: post.id,
         purpose: 'update',
@@ -133,7 +142,7 @@ export default {
         params: postItem,
       });
     },
-    getAllComment: function () {
+    getAllComment() {
       axios
         .get(`${SERVER_URL}/community/${this.postItem}/comments/`)
         .then((res) => {
@@ -146,14 +155,38 @@ export default {
           console.log(err);
         });
     },
+    toggleLikePost() {
+      const config = this.setToken();
+      axios
+        .post(`${SERVER_URL}/community/posts/${this.post.id}/like/`, {}, config)
+        .then((res) => {
+          this.isPostLiked = res.data.liked;
+          this.likesCount = res.data.likes_count;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getLikesCount() {
+      const config = this.setToken();
+      axios
+        .get(`${SERVER_URL}/community/posts/${this.post.id}/like/`, config)
+        .then((res) => {
+          this.likesCount = res.data.likes_count;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
-  created: function () {
+  created() {
     this.postItem = this.$route.params.id;
     axios
       .get(`${SERVER_URL}/community/${this.postItem}/`)
       .then((res) => {
         this.post = res.data;
         this.postUsername = this.post.user.username;
+        this.getLikesCount();
       })
       .catch((err) => {
         console.log(err);

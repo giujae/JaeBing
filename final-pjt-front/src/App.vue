@@ -1,4 +1,3 @@
- 
 <template>
   <div id="app">
     <link
@@ -10,40 +9,38 @@
 
     <div id="nav" class="main-nav">
       <b-navbar>
-
         <b-navbar-nav>
           <b-nav-item>
-          <router-link :to="{ name: 'MovieList' }" id="logo" class="font-weight-bold">
-            Home
-          </router-link>
+            <router-link :to="{ name: 'MovieList' }" id="logo" class="font-weight-bold"> Home </router-link>
           </b-nav-item>
 
-      <!-- Navbar dropdowns -->
-        <b-nav-item-dropdown text="Community" right>
-          <b-dropdown-item class="drop-item">
-            <router-link :to="{ name: 'Post' }" class="nav-margin">Post</router-link>
-          </b-dropdown-item>
-          <b-dropdown-item class="drop-item">ES</b-dropdown-item>
-        </b-nav-item-dropdown>
+          <!-- Navbar dropdowns -->
+          <b-nav-item-dropdown text="Community" right>
+            <b-dropdown-item class="drop-item">
+              <router-link :to="{ name: 'Post' }" class="nav-margin">Post</router-link>
+            </b-dropdown-item>
+            <b-dropdown-item class="drop-item">ES</b-dropdown-item>
+          </b-nav-item-dropdown>
 
-        <b-nav-item-dropdown text="My Page" right>
-          <b-dropdown-item class="drop-item">
-            <router-link :to="{ name: 'Profile', params: { username: username } }">Profile</router-link>
-          </b-dropdown-item>
-          <b-dropdown-item class="drop-item">Settings</b-dropdown-item>
-        </b-nav-item-dropdown>
-        
+          <b-nav-item-dropdown text="My Page" right>
+            <b-dropdown-item class="drop-item">
+              <router-link :to="{ name: 'Profile', params: { username: username } }">Profile</router-link>
+            </b-dropdown-item>
+            <b-dropdown-item class="drop-item">Settings</b-dropdown-item>
+          </b-nav-item-dropdown>
 
-        <b-navbar-nav>
+          <b-navbar-nav>
             <div v-if="login">
               <p class="mr-3">해윙 {{ username }} !</p>
             </div>
 
             <div v-if="is_admin">
               <router-link :to="{ name: 'ManageMovie' }" class="nav-margin">
-                <span class="badge badge-pill badge-warning">영화관리</span></router-link>
+                <span class="badge badge-pill badge-warning">영화관리</span></router-link
+              >
               <router-link :to="{ name: 'AdminManagement' }" class="nav-margin">
-                <span class="badge badge-pill badge-warning">회원관리</span></router-link>
+                <span class="badge badge-pill badge-warning">회원관리</span></router-link
+              >
             </div>
 
             <div v-if="login">
@@ -52,7 +49,7 @@
               >
             </div>
 
-            <div v-else >
+            <div v-else>
               <router-link :to="{ name: 'Signup' }" class="nav-margin">
                 <button class="font-weight-bold">Signup</button>
               </router-link>
@@ -61,10 +58,8 @@
               </router-link>
             </div>
           </b-navbar-nav>
-
-        </b-navbar-nav> 
+        </b-navbar-nav>
       </b-navbar>
-
     </div>
 
     <router-view @login="login = true" />
@@ -141,7 +136,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: black;
-  background: #0F2648;
+  background: #0f2648;
   /* background-color: #0F2648; */
   width: 100%;
   min-height: 100vh;
@@ -155,7 +150,7 @@ export default {
 
 #nav a.router-link-exact-active {
   /* color: #D44C7F; */
-  color: #E8D1D9;
+  color: #e8d1d9;
 }
 
 #logo {
@@ -171,29 +166,29 @@ export default {
 /* 추가 */
 
 /* community Mypage 네브바 속성 */
-span{
-  color: #E8D1D9;
+span {
+  color: #e8d1d9;
 }
 
 /* 네브바 속성 */
 .navbar {
-  background-color: #0F2648;
+  background-color: #0f2648;
 }
 
 /* 네브바 클릭시 나오는 item 속성 */
-.drop-item{
-  color: #E8D1D9;
+.drop-item {
+  color: #e8d1d9;
 }
 
 /* signup login 속성 */
 button {
-  color: #E8D1D9;
-  background-color: #0F2648;
+  color: #e8d1d9;
+  background-color: #0f2648;
   border-color: #0f264800;
   padding: 8px;
 }
 
 .dropdown-toggle::after {
-  color: #E8D1D9;
+  color: #e8d1d9;
 }
 </style>
