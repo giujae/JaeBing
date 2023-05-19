@@ -262,7 +262,7 @@ export default {
           .then((res) => {
             console.log(res);
             const idx1 = this.review_list.findIndex((review) => {
-              return review.id === res.data.id;
+              return review.id === movie.id;
             });
             this.$store.state.review_list.splice(idx1, 1);
             let dcount = 0;

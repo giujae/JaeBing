@@ -12,4 +12,7 @@ urlpatterns = [
     path('delete_members/<int:member_id>/', views.delete_members),
     path('user/', views.get_user),
     path('profile/<username>/', views.get_profile),
+    path('profile/<username>/follow/', views.follow),
+    path('profile/<username>/unfollow/', views.unfollow),
+    path('profile/<username>/followers/', views.get_followers),
 ]

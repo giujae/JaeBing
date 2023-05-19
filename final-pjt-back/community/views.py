@@ -47,7 +47,7 @@ def post_create(request):
 @api_view(['GET'])
 def post_detail(request, post_pk):
     post = get_object_or_404(Post, pk=post_pk)
-    serializer = PostUserSerializer(post)
+    serializer = PostUserSerializer(post, context={'request': request})
     return Response(serializer.data)
     
 
@@ -76,9 +76,8 @@ def post_delete_update(request, post_pk):
 @api_view(['GET'])
 def comment_list(request, post_pk):
     comments = PostComment.objects.order_by('pk').filter(post_id=post_pk)
-    serializer = PostCommentUserSerializer(comments, many=True)
+    serializer = PostCommentUserSerializer(comments, many=True, context={'request': request})
     return Response(serializer.data)
-
 
 @api_view(['POST'])
 @authentication_classes([JSONWebTokenAuthentication])
@@ -118,4 +117,49 @@ def comment_update_delete(request, post_pk, comment_pk):
                 print("----update error", serializer.errors)
                 return Response(False)
             
+@api_view(['GET'])
+def user_posts(request, username):
+    posts = Post.objects.filter(user__username=username)
+    serializer = PostSerializer(posts, many=True)
+    return Response(serializer.data)
 
+
+@api_view(['GET'])
+def user_comments(request, username):
+    comments = PostComment.objects.filter(user__username=username)
+    serializer = PostCommentSerializer(comments, many=True)
+    return Response(serializer.data)
+
+@api_view(['POST', 'GET'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def like_post(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
+    user = request.user
+
+    if post.likes.filter(id=user.id).exists():
+        post.likes.remove(user)
+        liked = False
+    else:
+        post.likes.add(user)
+        liked = True
+
+    serializer = PostUserSerializer(post, context={'request': request})
+    return Response({'liked': liked, 'likes_count': post.likes.count(), 'post': serializer.data})
+
+@api_view(['POST', 'GET'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def like_comment(request, comment_pk):
+    comment = get_object_or_404(PostComment, pk=comment_pk)
+    user = request.user
+
+    if comment.likes.filter(id=user.id).exists():
+        comment.likes.remove(user)
+        liked = False
+    else:
+        comment.likes.add(user)
+        liked = True
+
+    serializer = PostCommentUserSerializer(comment, context={'request': request})
+    return Response({'liked': liked, 'likes_count': comment.likes.count(), 'comment': serializer.data})
