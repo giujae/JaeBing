@@ -7,13 +7,8 @@
       crossorigin="anonymous"
     />
 
-    <div id="nav" class="p-2 main-nav">
-      <b-navbar toggleable="lg" type="dark" id="navbar">
-        <b-navbar-brand :style="{ 'font-size': '40px' }" class="nav-margin">
-          <!-- <img :src="images.logo" width="80" alt="logo" /> -->
-          <router-link :to="{ name: 'MovieList' }" id="logo" class="font-weight-bold"></router-link>
-        </b-navbar-brand>
-
+    <div id="nav" class="main-nav">
+      <b-navbar>
         <b-navbar-nav>
           <b-nav-item>
             <router-link :to="{ name: 'MovieList' }" id="logo" class="font-weight-bold"> Home </router-link>
