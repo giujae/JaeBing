@@ -3,16 +3,16 @@
     <b-col>
       <b-card
         v-if="!movie.poster_path.includes('#')"
-        :img-src="movie.poster_path"
+        :img-src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`"
         img-alt="Image"
         img-top
         tag="article"
         style="max-width: 20rem; max-height: 25rem; min-height: 25rem"
-        class="my-2 bg-dark"
+        class="my-2"
         @click="showDetail"
       >
         <!-- <b-card-text>개봉일 : {{movie.release_date}}</b-card-text> -->
-        <b-card-text class="font-1-8em font-do font-color-white" :style="{ 'max-width': '20rem' }">
+        <b-card-text class="font-1-8em font-do" :style="{ 'max-width': '20rem' }">
           👍 : {{ movie.vote_count }}</b-card-text
         >
 
@@ -29,7 +29,7 @@
         @click="showDetail"
       >
         <!-- <b-card-text>개봉일 : {{movie.release_date}}</b-card-text> -->
-        <b-card-text class="font-1-8em font-do font-color-white" :style="{ 'max-width': '20rem' }">
+        <b-card-text class="font-1-8em font-do" :style="{ 'max-width': '20rem' }">
           👍 : {{ movie.vote_count }}</b-card-text
         >
 
@@ -44,16 +44,17 @@
       v-model="show"
       size="lg"
       title="Movie information"
-      header-bg-variant="dark"
-      header-text-variant="light"
-      body-bg-variant="dark"
-      body-text-variant="light"
       footer-bg-variant="dark"
       footer-text-variant="dark"
     >
       <!-- 영화디테일 부분 -->
       <div class="detail-box">
-        <img :src="movie.poster_path" alt="movie poster" id="movie-poster" v-if="!movie.poster_path.includes('#')" />
+        <img
+          :src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`"
+          alt="movie poster"
+          id="movie-poster"
+          v-if="!movie.poster_path.includes('#')"
+        />
         <img
           src="https://image.tmdb.org/t/p/w185/g3gpHLUuQLGI9gRmfraSQCN1TYk.jpg"
           alt="movie poster"
@@ -65,7 +66,7 @@
         <h5 class="font-do" v-if="movie.adult">19세 관람가</h5>
         <br />
         <h4 class="font-poor">줄거리: {{ movie.overview | truncate(100, '...') }}</h4>
-        <h4 class="font-poor">평점: {{ movie_list[movie.id - 1]['rate'].toFixed(1) }}</h4>
+        <h4 class="font-poor">평점: {{ movie.vote_average }}</h4>
         <hr />
       </div>
       <br />
@@ -261,7 +262,7 @@ export default {
           .then((res) => {
             console.log(res);
             const idx1 = this.review_list.findIndex((review) => {
-              return review.id === res.data.id;
+              return review.id === movie.id;
             });
             this.$store.state.review_list.splice(idx1, 1);
             let dcount = 0;

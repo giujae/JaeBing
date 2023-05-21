@@ -6,7 +6,7 @@
       </div>
       <div class="row">
         <div class="col-6" id="rightline">
-          <div class="card text-white bg-dark mb-3 mt-5" style="max-width: 18rem">
+          <div class="card mb-3 mt-5" style="max-width: 18rem">
             <h2 class="card-header font-do">로그인</h2>
             <div class="card-body">
               <div class="input-group-lg">
@@ -26,17 +26,17 @@
                 />
               </div>
               <br />
-              <button @click="login" class="btn btn-pink mt-3 font-1-5em btn-block">로그인</button>
+              <button @click="login" class="btn mt-3 font-1-5em btn-block">로그인</button>
             </div>
           </div>
         </div>
 
         <div class="col-6 d-flex align-items-center justify-content-center">
           <div>
-            <h3 class="font-do">잠깐! :0 아직 회원이 아니신가요?</h3>
+            <h3 class="font-do">어허 아직도 회원가입 안 했어?</h3>
             <div class="emptydiv"></div>
-            <router-link :to="{ name: 'Signup' }" class="btn btn-block btn-pink mr-auto nav-margin font-1-5em"
-              >회원 가입 하러가기</router-link
+            <router-link :to="{ name: 'Signup' }" class="btn btn-block mr-auto nav-margin font-1-5em"
+              >회원가입</router-link
             >
             <div class="emptydiv"></div>
           </div>

@@ -45,7 +45,7 @@
     <br />
 
     <div class="form-group mt-5 font-poor font-1-2em">
-      <button @click="signup" id="signupbtn" class="btn btn-pink my-5 form-group">회원가입</button>
+      <button @click="signup" id="signupbtn" class="btn my-5 form-group">회원가입</button>
     </div>
   </div>
 </template>
@@ -56,7 +56,7 @@ import axios from 'axios';
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: 'Singup',
+  name: 'Signup',
   data: function () {
     return {
       credentials: {
@@ -98,6 +98,12 @@ export default {
 </script>
 
 <style scoped>
+input {
+  width: 200px;
+  height: 40px;
+  display: block;
+  margin: 0 auto;
+}
 #signupbtn {
   font-size: 2em !important;
   width: 200px !important;
