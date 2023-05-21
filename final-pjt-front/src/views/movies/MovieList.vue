@@ -103,7 +103,7 @@ export default {
   },
   created: function () {
     this.i = 0;
-    if (this.login && this.is_admin === false) {
+    if (this.login === true && this.is_admin === false) {
       this.$store.dispatch('recommendMovie');
     }
   },
@@ -128,6 +128,9 @@ export default {
   },
   mounted() {
     window.scrollTo(0, 0);
+    if (this.login === true && this.is_admin === false) {
+      this.$store.dispatch('recommendMovie');
+    }
   },
 };
 </script>

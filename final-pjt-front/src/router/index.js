@@ -9,10 +9,16 @@ import AdminManagement from '@/views/admin/AdminManagement';
 import Post from '@/views/community/Post';
 import CreatePost from '@/views/community/CreatePost';
 import PostDetail from '@/views/community/PostDetail';
+import Main from '@/views/MainPage/main';
 
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: '/',
+    name: 'Main',
+    component: Main,
+  },
   {
     path: '/signup',
     name: 'Signup',

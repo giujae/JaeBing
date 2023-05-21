@@ -7,7 +7,7 @@
       crossorigin="anonymous"
     />
 
-    <div id="nav" class="main-nav">
+    <div id="nav" class="main-nav" v-if="this.$route.path !== '/'">
       <b-navbar>
         <b-navbar-nav>
           <b-nav-item>
@@ -17,7 +17,7 @@
           <!-- Navbar dropdowns -->
           <b-nav-item-dropdown text="Community" right>
             <b-dropdown-item class="drop-item">
-              <router-link :to="{ name: 'Post' }" >Post</router-link>
+              <router-link :to="{ name: 'Post' }">Post</router-link>
             </b-dropdown-item>
             <b-dropdown-item class="drop-item">ES</b-dropdown-item>
           </b-nav-item-dropdown>
@@ -30,7 +30,7 @@
           </b-nav-item-dropdown>
 
           <b-navbar-nav>
-            <div v-if="login">
+            <div v-if="$store.state.login">
               <p class="user font-weight-bold">해윙 {{ username }} !</p>
             </div>
 
@@ -43,7 +43,7 @@
               >
             </div>
 
-            <div class="logout-box" v-if="login">
+            <div class="logout-box" v-if="$store.state.login">
               <router-link @click.native="logout" to="#" class="nav-margin">
                 <span class="logout">Logout</span></router-link
               >
@@ -63,7 +63,6 @@
     </div>
 
     <router-view @login="login = true" />
-
     <div class="jumbotron font-poor mt-5" id="footerjumbo">
       <div class="container">
         <div class="row">
@@ -97,28 +96,40 @@ export default {
   methods: {
     logout: function () {
       localStorage.removeItem('jwt');
+      localStorage.removeItem('username');
+      localStorage.removeItem('login_user');
       this.login = false;
       this.$store.state.login = false;
       this.$store.state.is_admin = false;
       this.$store.state.login_user = '';
       this.$store.state.username = null;
       this.$router.push({
-        name: 'Login',
+        name: 'Main',
       });
     },
   },
   created: function () {
     // 로그인
-
     const token = localStorage.getItem('jwt');
 
-    if (token) {
-      this.login = true;
+    if (this.$route.path !== '/') {
+      console.log('입구컷');
+      if (token) {
+        this.login = true;
+      }
+      console.log('1번 발동');
+      this.$store.dispatch('getMovie');
+      if (this.$store.state.ordered_movie_list.length == 0) {
+        // 영화 목록이 비어있는 경우에만 getMovie 액션 호출
+        console.log('비었는데요?');
+      }
+      if (this.$route.path !== '/movies') {
+        console.log('2번 발동');
+        this.$router.push({ name: 'MovieList' });
+      }
     }
-    this.$store.dispatch('getMovie');
-
-    this.$router.push({ name: 'MovieList' });
   },
+
   computed: {
     ...mapState(['is_admin', 'username']),
   },
@@ -144,7 +155,7 @@ export default {
 
 #nav a {
   font-weight: bold;
-  color:#3c537f;
+  color: #3c537f;
   text-decoration-line: none;
   /* background: linear-gradient(45deg, #E8D1D9, #3C537F, #0f2648); */
   /* color: #2c3e50; */
@@ -205,12 +216,12 @@ button {
 }
 
 .user {
-  color:#e8d1d9;
+  color: #e8d1d9;
   padding: 8px;
   margin: 0px;
 }
 
 .jumbotron {
-  background: linear-gradient(45deg, #E8D1D9, #3C537F, #0f2648);
+  background: linear-gradient(45deg, #e8d1d9, #3c537f, #0f2648);
 }
 </style>

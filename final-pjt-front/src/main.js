@@ -6,14 +6,10 @@ import VueMoment from 'vue-moment';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import VModal from 'vue-js-modal';
 
-// import './assets/css/mycss.css'
 require('@/assets/css/mycss.css');
 
-// Install BootstrapVue
 Vue.use(BootstrapVue);
-// Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
-
 Vue.use(VModal);
 
 Vue.config.productionTip = false;
@@ -32,6 +28,14 @@ const halfStar = function (rate) {
   return rate / 2;
 };
 Vue.filter('half', halfStar);
+
+// 로그인 사용자 정보 가져오기
+const username = localStorage.getItem('username');
+const jwt = localStorage.getItem('jwt');
+const login_user = localStorage.getItem('login_user');
+if (username && jwt) {
+  store.dispatch('login', { username, jwt, login_user });
+}
 
 new Vue({
   router,

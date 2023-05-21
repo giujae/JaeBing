@@ -33,8 +33,16 @@ export default new Vuex.Store({
   },
   getters: {},
   mutations: {
+    setLogin(state, value) {
+      state.login = value; // 로그인 상태 변경
+    },
+    setUser(state, value) {
+      state.login_user = value; // 로그인 사용자 변경
+    },
+    setName(state, value) {
+      state.username = value;
+    },
     IS_ADMIN: function (state, status) {
-      // console.log(status)
       state.is_admin = status;
     },
     GET_MOVIE: function (state) {
@@ -49,6 +57,7 @@ export default new Vuex.Store({
           state.ordered_movie_list.sort((a, b) => {
             return parseFloat(b.vote_count) - parseFloat(a.vote_count);
           });
+          console.log(state.login_user);
         })
         .catch((err) => {
           console.log(err);
@@ -66,7 +75,6 @@ export default new Vuex.Store({
       console.log(state.review_list);
     },
     RECOMMEND_MOVIE: function (state, id) {
-      // console.log(state.is_admin)
       if (state.is_admin) {
         state.recommend_list = [];
       } else {
@@ -77,9 +85,7 @@ export default new Vuex.Store({
           axios
             .get(`${SERVER_URL}/movies/recommend/${id}/`)
             .then((res) => {
-              // console.log(res)
               state.recommend_list = res.data;
-              // console.log(state.recommend_list)
             })
             .catch((err) => {
               console.log(err);
@@ -89,6 +95,17 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    login({ commit }, { username, jwt, login_user }) {
+      // 로그인 성공 후 로그인 상태 변경
+      commit('setLogin', true);
+      // 로그인 사용자 변경
+      commit('setUser', login_user);
+      commit('setName', username);
+      // 로그인 정보를 로컬 스토리지에 저장
+      localStorage.setItem('username', username);
+      localStorage.setItem('jwt', jwt);
+      localStorage.setItem('login_user', login_user);
+    },
     isAdmin: function ({ commit }, status) {
       commit('IS_ADMIN', status);
     },
