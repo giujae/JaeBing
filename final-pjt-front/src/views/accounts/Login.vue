@@ -2,12 +2,12 @@
   <div>
     <div class="container">
       <div class="row">
-        <h1 class="font-do mt-5">Hello! :)</h1>
+        <h1 class="font-do mt-5">안농 :)</h1>
       </div>
       <div class="row">
-        <div class="col-6" id="rightline">
-          <div class="card text-white bg-dark mb-3 mt-5" style="max-width: 18rem">
-            <h2 class="card-header font-do">로그인</h2>
+        <div class="col-6 d-flex justify-content-center" id="rightline">
+          <div class=" mb-3 mt-5" style="max-width: 18rem">
+            <h2 class="card-header">로그인</h2>
             <div class="card-body">
               <div class="input-group-lg">
                 <h4 class="card-title font-do">아이디</h4>
@@ -26,18 +26,16 @@
                 />
               </div>
               <br />
-              <button @click="login" class="btn btn-pink mt-3 font-1-5em btn-block">로그인</button>
+              <button @click="login" class="login-btn btn mt-3 font-1-5em btn-block">드가자</button>
             </div>
           </div>
         </div>
 
         <div class="col-6 d-flex align-items-center justify-content-center">
           <div>
-            <h3 class="font-do">잠깐! :0 아직 회원이 아니신가요?</h3>
+            <h3 class="signup-ment">이걸 아직도 가입 안 했어?!</h3>
             <div class="emptydiv"></div>
-            <router-link :to="{ name: 'Signup' }" class="btn btn-block btn-pink mr-auto nav-margin font-1-5em"
-              >회원 가입 하러가기</router-link
-            >
+            <router-link class="signup-a" :to="{ name: 'Signup' }">당장 가입 해.</router-link>
             <div class="emptydiv"></div>
           </div>
         </div>
@@ -161,11 +159,25 @@ export default {
 </script>
 
 <style scoped>
+
+/* 중간 점선 */
 #rightline {
-  border-right: dotted grey;
+  border-right: dashed #e8d1d969;
 }
 
 .emptydiv {
   height: 50px;
+}
+
+/* 회원가입 버튼 속성 */
+.signup-ment, .signup-a {
+  color: #e8d1d9;
+  text-decoration: none;
+}
+
+/* 로그인 버튼 속성 */
+.login-btn {
+  color: #e8d1d9;
+  font-size: 20px;
 }
 </style>
