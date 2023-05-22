@@ -6,77 +6,82 @@
       integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-..."
+      crossorigin="anonymous"
+    />
 
     <div id="nav" class="main-nav" v-if="this.$route.path !== '/'">
       <b-navbar toggleable="lg">
-      <b-navbar-toggle target="navbar-nav-collapse"></b-navbar-toggle>
+        <b-navbar-toggle target="navbar-nav-collapse">
+          <i class="fas fa-bars"></i>
+        </b-navbar-toggle>
 
-    <b-navbar-brand href="/movies" class="font-weight-bold">Home</b-navbar-brand>
+        <b-navbar-brand href="/movies" class="font-weight-bold">Home</b-navbar-brand>
 
-    <b-collapse id="navbar-nav-collapse" is-nav>
-      <b-navbar-nav>
-        <b-nav-item-dropdown text="Community">
-          <b-dropdown-item>
-            <router-link :to="{ name: 'Post' }">Post</router-link>
-          </b-dropdown-item>
-          <b-dropdown-item>ES</b-dropdown-item>
-        </b-nav-item-dropdown>
+        <b-collapse id="navbar-nav-collapse" is-nav>
+          <b-navbar-nav>
+            <b-nav-item-dropdown text="Community">
+              <b-dropdown-item>
+                <router-link :to="{ name: 'Post' }">Post</router-link>
+              </b-dropdown-item>
+              <b-dropdown-item>ES</b-dropdown-item>
+            </b-nav-item-dropdown>
 
-        <b-nav-item-dropdown text="My Page">
-          <b-dropdown-item>
-            <router-link :to="{ name: 'Profile', params: { username: username } }">Profile</router-link>
-          </b-dropdown-item>
-          <b-dropdown-item>Settings</b-dropdown-item>
-        </b-nav-item-dropdown>
+            <b-nav-item-dropdown v-if="$store.state.login" :text="username">
+              <b-dropdown-item>
+                <router-link :to="{ name: 'Profile', params: { username: username } }">Profile</router-link>
+              </b-dropdown-item>
 
-        <template v-if="is_admin">
-          <b-nav-item>
-            <router-link :to="{ name: 'ManageMovie' }" class="nav-margin">
-              <span class="badge badge-pill badge-warning">영화관리</span>
-            </router-link>
-          </b-nav-item>
+              <b-dropdown-item>
+                <router-link @click.native="logout" to="#" class="nav-margin">
+                  <button class="font-weight-bold">Logout</button>
+                </router-link>
+              </b-dropdown-item>
+            </b-nav-item-dropdown>
 
-          <b-nav-item>
-            <router-link :to="{ name: 'AdminManagement' }" class="nav-margin">
-              <span class="badge badge-pill badge-warning">회원관리</span>
-            </router-link>
-          </b-nav-item>
-        </template>
-      </b-navbar-nav>
+            <template v-if="is_admin">
+              <b-nav-item>
+                <router-link :to="{ name: 'ManageMovie' }" class="nav-margin">
+                  <span class="badge badge-pill badge-warning">영화관리</span>
+                </router-link>
+              </b-nav-item>
 
-      <b-navbar-nav class="ml-auto">
-        <template v-if="$store.state.login">
-          <b-nav-item>
-            <button @click="triggerSearch" class="font-weight-bold font-do search-btn">검색</button>
-          </b-nav-item>
+              <b-nav-item>
+                <router-link :to="{ name: 'AdminManagement' }" class="nav-margin">
+                  <span class="badge badge-pill badge-warning">회원관리</span>
+                </router-link>
+              </b-nav-item>
+            </template>
+          </b-navbar-nav>
 
-            <p class="user font-weight-bold text-truncate">해윙 {{ username }}!</p>
+          <b-navbar-nav class="ml-auto">
+            <template v-if="$store.state.login">
+              <b-nav-item>
+                <button @click="triggerSearch" class="font-weight-bold font-do search-btn">검색</button>
+              </b-nav-item>
+              <!-- <p class="user font-weight-bold text-truncate">{{ username }}</p> -->
+            </template>
 
-          <b-nav-item>
-            <router-link @click.native="logout" to="#" class="nav-margin">
-              <button class="font-weight-bold">Logout</button>
-            </router-link>
-          </b-nav-item>
-        </template>
+            <template v-else>
+              <b-nav-item>
+                <router-link :to="{ name: 'Signup' }" class="nav-margin">
+                  <button class="font-weight-bold">Signup</button>
+                </router-link>
+              </b-nav-item>
 
-        <template v-else>
-          <b-nav-item>
-            <router-link :to="{ name: 'Signup' }" class="nav-margin">
-              <button class="font-weight-bold">Signup</button>
-            </router-link>
-          </b-nav-item>
-
-          <b-nav-item>
-            <router-link :to="{ name: 'Login' }" class="nav-margin">
-              <button class="font-weight-bold">Login</button>
-            </router-link>
-          </b-nav-item>
-        </template>
-
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-  </div>
+              <b-nav-item>
+                <router-link :to="{ name: 'Login' }" class="nav-margin">
+                  <button class="font-weight-bold">Login</button>
+                </router-link>
+              </b-nav-item>
+            </template>
+          </b-navbar-nav>
+        </b-collapse>
+      </b-navbar>
+    </div>
 
     <router-view @login="login = true" />
     <div class="jumbotron font-poor mt-5" id="footerjumbo">
@@ -172,6 +177,15 @@ export default {
   min-height: 100vh;
 }
 
+.navbar-toggler {
+  color: #e8d1d9;
+  border-color: #e8d1d9;
+  padding: 8px; /* 햄버거 버튼 패딩을 8px로 수정 */
+}
+
+.navbar-toggler .fa-bars {
+  margin-right: 4px; /* 햄버거 아이콘과 텍스트 사이의 우측 마진을 4px로 설정 */
+}
 
 #nav a {
   font-weight: bold;
@@ -200,12 +214,13 @@ export default {
 /* community Mypage 네브바 속성 */
 span {
   color: #e8d1d9;
+  padding: 8px;
 }
 
 /* 네브바 속성 */
 .navbar {
   background-color: #0f2648;
-  padding: 0px;
+  padding: 8px; /* 기본 패딩을 8px로 수정 */
 }
 
 /* 네브바 토글 속성 */
@@ -217,6 +232,7 @@ span {
 /* 네브바 클릭시 나오는 item 속성 */
 .drop-item {
   color: #3c537f;
+  padding: 8px; /* 아이템 간격 조정 */
 }
 
 /* signup login 속성 */
@@ -224,7 +240,7 @@ button {
   color: #e8d1d9;
   background-color: #0f2648;
   border-color: #0f264800;
-  padding: 8px;
+  padding: 4px 8px; /* 버튼 패딩을 상하 4px, 좌우 8px로 수정 */
 }
 
 .dropdown-toggle::after {
@@ -240,8 +256,11 @@ button {
 
 .user {
   color: #e8d1d9;
-  padding: 8px;
-  margin-top: 10px;
+  padding: 8px 8px 8px 0; /* 상단, 우측, 하단 패딩은 8px, 좌측 패딩은 0으로 수정 */
+  margin: 10px 0; /* 상단 및 하단 마진은 10px로 수정 */
+  white-space: nowrap; /* 텍스트가 넘칠 경우 줄바꿈 방지 */
+  overflow: hidden; /* 텍스트가 넘칠 경우 가림 처리 */
+  text-overflow: ellipsis; /* 가림 처리된 텍스트에 대해 ...으로 표시 */
 }
 
 .appear {
