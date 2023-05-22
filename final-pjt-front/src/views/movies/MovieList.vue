@@ -140,7 +140,7 @@ export default {
   position: absolute;
   right: 15%;
   bottom: 20px;
-  left: 25% !important;
+  left: 25%;
   z-index: 10;
   padding-top: 20px;
   padding-bottom: 20px;

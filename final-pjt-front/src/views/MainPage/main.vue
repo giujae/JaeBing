@@ -4,13 +4,15 @@
     <!-- 네브바 있는 헤더 -->
     <header>
       <nav class="nav fixed-top">
-        <a href="/">Home</a>
+        <a href="/" class="home font-weight-bold">Home</a>
+        <div>
         <router-link :to="{ name: 'Signup' }" class="nav-margin">
-          <button class="font-weight-bold">Signup</button>
+          <button class="font-weight-bold">SignUp</button>
         </router-link>
         <router-link :to="{ name: 'Login' }" class="nav-margin">
           <button class="font-weight-bold">Login</button>
         </router-link>
+      </div>
       </nav>
       <router-view @login="login = true" />
     </header>
@@ -20,6 +22,7 @@
         <!-- 비디오 박스 -->
         <div class="jb-box">
           <video muted autoplay loop>
+            <source src="@/Legend.mp4" type="video/mp4" >
             <strong>Your browser does not support the video tag.</strong>
           </video>
         </div>
@@ -28,7 +31,8 @@
         <div class="message-title jb-text">
           <p class="fw-bold">내가 찾던 재미</p>
           <p>보고 싶은 콘텐츠를 발견하세요!</p>
-          <p>최신, 인기 TV프로그램, 영화, 해외시리즈, 파라마운트+ 오리지널 및 독점</p>
+          <p>최신, 인기 TV프로그램, 영화</p>
+          <p>해외시리즈, 파라마운트+ 오리지널 및 독점</p>
         </div>
       </div>
       <!-- 비디오 박스 끝 -->
@@ -207,10 +211,17 @@ export default {
 </script>
 
 <style>
+@font-face {
+    font-family: 'EF_watermelonSalad';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_watermelonSalad.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* 도화지 배경 */
 html {
   /* background-color: #0F2648; */
-  background: linear-gradient(45deg, #e8d1d9, #3c537f, #0f2648);
+  background: linear-gradient(45deg, #e8d1d9, #3c537f, #101130);
 }
 
 /* 바디 배경 */
@@ -251,8 +262,8 @@ video {
 
 /* 전체 페이지 속성 */
 #main {
-  font-family: 'Gowun Dodum', sans-serif;
-  background-color: #0f2648;
+  font-family: 'EF_watermelonSalad';
+  background-color: #101130;
   /* background: linear-gradient(45deg, #E8D1D9, #3C537F, #0f2648); */
   color: #e8d1d9;
   text-align: center;
@@ -266,19 +277,19 @@ video {
 }
 
 /* 홈 버튼 속성 */
-a {
-  margin: 10px;
+.home {
   text-decoration-line: none;
-  padding: 6px 12px;
+  padding: 8px;
   color: #e8d1d9;
+  background-color: #10113000;
   width: 70px;
   height: 40px;
 }
 
 /* 로그인 버튼 속성 */
-.btn {
+button {
   margin: 10px;
-  background-color: #d5b0c100;
+  background-color: #10113000;
   /* border-color: #E8D1D9;; */
   color: #e8d1d9;
   width: 70px;
@@ -286,7 +297,7 @@ a {
 }
 
 /* 버튼 클릭시 색변경 */
-.btn:hover,
+button:hover,
 a:hover {
   color: #d5b0c1;
 }
@@ -386,15 +397,15 @@ img {
   }
 }
 
-@keyframes rollingleft2 {
   /* 클론용 */
+/* @keyframes rollingleft2 {
   0% {
     transform: translateX(0);
   }
   100% {
     transform: translateX(-200%);
   }
-}
+} */
 
 footer {
   width: 100%;
