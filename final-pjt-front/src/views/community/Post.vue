@@ -7,9 +7,9 @@
         </div>
         <div class="create-btn-div p-0 col-9 d-flex align-items-center justify-content-end align-items-end">
           <button v-if="this.$store.state.login" @click="createPost()" class=" create-btn btn float-right">
-            글 작성하기
+            글 작성할랭
           </button>
-          <p v-else class="my-4 float-right">게시글을 작성하려면 로그인이 필요합니다.</p>
+          <p v-else class="my-4 float-right">게시글 작성하려면 로그인하구 와!</p>
         </div>
       </div>
       <div class="row">
@@ -152,6 +152,7 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   backdrop-filter: blur(10px);
+  color:#e8d1d9;
 }
 
 </style>

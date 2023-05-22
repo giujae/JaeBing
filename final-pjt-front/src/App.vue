@@ -37,7 +37,7 @@
 
               <b-dropdown-item>
                 <router-link @click.native="logout" to="#" class="nav-margin">
-                  <button class="font-weight-bold">Logout</button>
+                  <button class="font-weight-bold p-0">Logout</button>
                 </router-link>
               </b-dropdown-item>
             </b-nav-item-dropdown>
