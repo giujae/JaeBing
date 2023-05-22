@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
     <h1 class="font-do my-3">프로필</h1>
     <div v-if="profile">
-      <p><strong>회원코드:</strong> {{ profile.id }}</p>
+      <!-- <p><strong>회원코드:</strong> {{ profile.id }}</p> -->
       <p><strong>아이디:</strong> {{ profile.username }}</p>
       <p><strong>가입일:</strong> {{ formatDate(profile.date_joined) }}</p>
       <p><strong>생일:</strong> {{ profile.date_of_birth }}</p>
@@ -47,6 +49,8 @@
     </div>
     <p v-else>Loading...</p>
   </div>
+</div>
+</div>
 </template>
 
 <script>
