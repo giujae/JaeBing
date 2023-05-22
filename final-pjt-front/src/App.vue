@@ -173,16 +173,12 @@ export default {
 
 #app {
   font-family: 'NeoDunggeunmoPro-Regular';
-  /* Do Hyeon Jua Poor Story */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
   background: #101130;
-  /* background-color: #0F2648; */
-  width: 100%;
-  min-height: 100vh;
-  font-size: 20px;
+
 }
 
 .navbar-toggler {
@@ -196,6 +192,7 @@ export default {
 }
 
 #nav a {
+  font-size: 25px;
   font-weight: bold;
   color: #e8d1d9;
   text-decoration-line: none;
@@ -227,7 +224,8 @@ span {
 
 /* 네브바 속성 */
 .navbar {
-  background-color: #0f2648;
+  font-size: 25px;
+  /* background-color: #0f2648; */
   padding: 8px; /* 기본 패딩을 8px로 수정 */
 }
 
@@ -277,7 +275,7 @@ button {
 
 .jumbotron {
   background: linear-gradient(360deg, #e8d1d9, #3c537f, #101130);
-
+  flex-grow: 1; /* Add this line */
 }
 
 .fa-bars {
