@@ -138,7 +138,6 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Gothic&family=Poor+Story&family=Slabo+27px&display=swap');
-@import './assets/css/mycss.css';
 
 #app {
   font-family: 'Salbo 27px', 'Nanum Gothic', Helvetica, Arial, sans-serif;
@@ -146,7 +145,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: black;
+  color: white;
   background: #0f2648;
   /* background-color: #0F2648; */
   width: 100%;

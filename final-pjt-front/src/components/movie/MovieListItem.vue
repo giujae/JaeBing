@@ -378,7 +378,7 @@ export default {
 };
 </script>
 
-<!--<style scoped src="@/assets/css/mycss.css">-->
+
 <style scoped>
 .appear {
   display: none;

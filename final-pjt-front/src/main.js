@@ -6,7 +6,6 @@ import VueMoment from 'vue-moment';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import VModal from 'vue-js-modal';
 
-require('@/assets/css/mycss.css');
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
