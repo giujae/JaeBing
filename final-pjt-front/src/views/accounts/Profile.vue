@@ -9,10 +9,11 @@
       <p><strong>이메일:</strong> {{ profile.email }}</p>
       <p><strong>등급:</strong> {{ isAdmin ? '관리자' : '일반회원' }}</p>
       <p><strong>팔로워:</strong> {{ followersCount }}</p>
-
-      <button v-if="!isCurrentUser" @click="toggleFollow" class="btn btn-primary">
-        {{ isFollowing ? '언팔로우' : '팔로우' }}
-      </button>
+      <div v-if="!isCurrentUser">
+        <button v-if="!isCurrentUser" @click="toggleFollow" class="btn btn-primary">
+          {{ isFollowing ? '언팔로우' : '팔로우' }}
+        </button>
+      </div>
 
       <div>
         <h2>작성한 리뷰</h2>
@@ -111,13 +112,15 @@ export default {
     },
   },
   created() {
+    const currentusername = localStorage.getItem('username');
     const username = this.$route.params.username;
     axios
       .get(`${SERVER_URL}/accounts/profile/${username}/`)
       .then((res) => {
         this.profile = res.data;
-        this.isCurrentUser = this.profile.username === this.$store.state.login_user.username;
         this.followersCount = this.profile.followers_count; // 팔로워 수 설정
+        this.isCurrentUser = this.profile.username === currentusername;
+        console.log(this.isCurrentUser);
       })
       .catch((err) => {
         console.log(err);
