@@ -177,7 +177,6 @@ export default {
   text-align: center;
   color: white;
   background: #101130;
-
 }
 
 .navbar-toggler {
@@ -274,6 +273,7 @@ button {
 
 .jumbotron {
   background: linear-gradient(360deg, #e8d1d9, #3c537f, #101130);
+  flex-grow: 1; /* Add this line */
 }
 
 .fa-bars {
