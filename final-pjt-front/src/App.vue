@@ -179,7 +179,6 @@ export default {
   background: #101130;
 }
 
-
 .navbar-toggler {
   color: #e8d1d9;
   border-color: #e8d1d9;
@@ -209,7 +208,7 @@ export default {
 }
 
 #footerjumbo {
-  height: 250px;
+  height: 500px;
   margin-bottom: 0rem;
 }
 

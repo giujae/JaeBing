@@ -6,13 +6,13 @@
       <nav class="nav fixed-top">
         <a href="/" class="home font-weight-bold">Home</a>
         <div>
-        <router-link :to="{ name: 'Signup' }" class="nav-margin">
-          <button class="font-weight-bold">SignUp</button>
-        </router-link>
-        <router-link :to="{ name: 'Login' }" class="nav-margin">
-          <button class="font-weight-bold">Login</button>
-        </router-link>
-      </div>
+          <router-link :to="{ name: 'Signup' }" class="nav-margin">
+            <button class="font-weight-bold">SignUp</button>
+          </router-link>
+          <router-link :to="{ name: 'Login' }" class="nav-margin">
+            <button class="font-weight-bold">Login</button>
+          </router-link>
+        </div>
       </nav>
       <router-view @login="login = true" />
     </header>
@@ -22,7 +22,7 @@
         <!-- 비디오 박스 -->
         <div class="jb-box">
           <video muted autoplay loop>
-            <source src="@/Legend.mp4" type="video/mp4" >
+            <source src="@/Legend.mp4" type="video/mp4" />
             <strong>Your browser does not support the video tag.</strong>
           </video>
         </div>
@@ -118,7 +118,6 @@
       </div>
     </div>
     <!-- flow-scene-wrap div -->
-
   </div>
   <!-- main div -->
 </template>
@@ -201,10 +200,10 @@ export default {
 
 <style>
 @font-face {
-    font-family: 'EF_watermelonSalad';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_watermelonSalad.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'EF_watermelonSalad';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_watermelonSalad.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* 도화지 배경 */
@@ -387,7 +386,7 @@ img {
   }
 }
 
-  /* 클론용 */
+/* 클론용 */
 /* @keyframes rollingleft2 {
   0% {
     transform: translateX(0);
