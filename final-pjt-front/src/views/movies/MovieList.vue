@@ -1,5 +1,15 @@
 <template>
   <div>
+    <b-dropdown
+      id="genreDropdown"
+      :text="search || '장르 선택'"
+      variant="secondary"
+      style="width: 10%; margin-left: 80%"
+    >
+      <b-dropdown-item v-for="(genre, index) in genres" :key="index" @click="searchByGenre(genre)">
+        {{ genre }}
+      </b-dropdown-item>
+    </b-dropdown>
     <div class="mb-5" style="max-width: 370px; margin-left: auto; margin-right: 5%">
       <h1 class="font-do my-3"></h1>
       <b-row class="d-flex justify-content-end"> </b-row>
@@ -15,7 +25,6 @@
             style="text-shadow: 1px 1px 2px #333"
             @sliding-start="onSlideStart"
             @sliding-end="onSlideEnd"
-            class="font-poor"
             ref="carouselRef"
             fade
           >
@@ -51,14 +60,8 @@
     </div>
 
     <div>
-      <h1 class="font-do my-5">영화 리스트</h1>
-      <div class="container mb-4">
-        <b-dropdown id="genreDropdown" text="장르 선택" variant="secondary">
-          <b-dropdown-item v-for="(genre, index) in genres" :key="index" @click="searchByGenre(genre)">
-            {{ genre }}
-          </b-dropdown-item>
-        </b-dropdown>
-      </div>
+      <h1 v-if="movies.length" class="font-do my-5">{{ search }} 리스트</h1>
+      <div class="container mb-4"></div>
       <div class="container">
         <div class="row">
           <MovieListItem v-for="(movie, idx) in movies" :key="idx" :movie="movie" class="col-3" :search="search" />
