@@ -10,7 +10,7 @@
           <img :src="images.logo" width="50" class="mr-3" alt="..." />
           <div class="media-body text-justify">
             <h2 class="mt-0">{{ post.title }}</h2>
-            <p class="font-1-5em font-lightgray">
+            <p class="font-1-5em">
               작성자:
               <router-link :to="{ name: 'Profile', params: { username: postUsername } }">{{
                 postUsername
