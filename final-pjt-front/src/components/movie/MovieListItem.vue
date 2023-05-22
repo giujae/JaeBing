@@ -8,11 +8,12 @@
         img-top
         tag="article"
         class="my-2"
+        style="max-width: 25rem; max-height: 20rem; min-height: 20rem"
         @click="showDetail"
       >
         <!-- <b-card-text>개봉일 : {{movie.release_date}}</b-card-text> -->
         <b-card-text class="font-1-8em font-do" :style="{ 'max-width': '20rem' }">
-          👍 : {{ movie.vote_count }}</b-card-text
+          💕 : {{ movie.vote_count }}</b-card-text
         >
 
         <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
@@ -23,13 +24,13 @@
         img-alt="Image"
         img-top
         tag="article"
-        style="max-width: 25rem; max-height: 20rem; min-height: 20rem; "
+        style="max-width: 25rem; max-height: 20rem; min-height: 20rem"
         class="my-2 bg-dark"
         @click="showDetail"
       >
         <!-- <b-card-text>개봉일 : {{movie.release_date}}</b-card-text> -->
         <b-card-text class="font-1-8em font-do" :style="{ 'max-width': '20rem' }">
-          👍 : {{ movie.vote_count }}</b-card-text
+          💕 : {{ movie.vote_count }}</b-card-text
         >
 
         <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
@@ -377,7 +378,6 @@ export default {
 };
 </script>
 
-
 <style scoped>
 .appear {
   display: none;
@@ -454,5 +454,15 @@ ul {
 
 #review-rank .form-control {
   background-color: #343a40;
+}
+.card {
+  background-color: #826592 !important;
+  border: none !important;
+}
+img {
+  margin: 0 !important;
+  height: 280px !important;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 </style>
