@@ -146,7 +146,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
-  background: #0f2648;
+  background: #101130;
   /* background-color: #0F2648; */
   width: 100%;
   min-height: 100vh;
@@ -170,7 +170,7 @@ export default {
 }
 
 #footerjumbo {
-  /* background-color: #de5078; */
+
   height: 250px;
   margin-bottom: 0rem;
 }
@@ -221,6 +221,6 @@ button {
 }
 
 .jumbotron {
-  background: linear-gradient(45deg, #e8d1d9, #3c537f, #0f2648);
+  background: linear-gradient(360deg, #E8D1D9, #3C537F, #101130);
 }
 </style>
