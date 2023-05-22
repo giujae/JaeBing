@@ -10,6 +10,7 @@ import Post from '@/views/community/Post';
 import CreatePost from '@/views/community/CreatePost';
 import PostDetail from '@/views/community/PostDetail';
 import Main from '@/views/MainPage/main';
+import MovieSearch from '@/views/movies/MovieSearch';
 
 Vue.use(VueRouter);
 
@@ -48,6 +49,11 @@ const routes = [
     path: '/management',
     name: 'AdminManagement',
     component: AdminManagement,
+  },
+  {
+    path: '/moviesearch',
+    name: 'MovieSearch',
+    component: MovieSearch,
   },
   {
     path: '/post',

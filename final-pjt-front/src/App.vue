@@ -47,6 +47,8 @@
               <router-link @click.native="logout" to="#" class="nav-margin">
                 <span class="logout">Logout</span></router-link
               >
+              <!-- 검색 기능 추가 -->
+              <b-button @click="triggerSearch" :class="{ appear: !hideAdd }" class="my-5 font-do">검색 추가</b-button>
             </div>
 
             <div v-else>
@@ -91,6 +93,7 @@ export default {
         logo: require('@/assets/images/logo.png'),
         flamingo: require('@/assets/images/flamingo.png'),
       },
+      hideAdd: true,
     };
   },
   methods: {
@@ -106,6 +109,9 @@ export default {
       this.$router.push({
         name: 'Main',
       });
+    },
+    triggerSearch: function () {
+      this.$router.push({ name: 'MovieSearch' });
     },
   },
   created: function () {
@@ -170,7 +176,6 @@ export default {
 }
 
 #footerjumbo {
-
   height: 250px;
   margin-bottom: 0rem;
 }
@@ -220,7 +225,11 @@ button {
   margin: 0px;
 }
 
+.appear {
+  display: none;
+}
+
 .jumbotron {
-  background: linear-gradient(360deg, #E8D1D9, #3C537F, #101130);
+  background: linear-gradient(360deg, #e8d1d9, #3c537f, #101130);
 }
 </style>
