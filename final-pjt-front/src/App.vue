@@ -1,4 +1,3 @@
- 
 <template>
   <div id="app">
     <link
@@ -88,8 +87,7 @@
     <div class="jumbotron font-poor mt-5" id="footerjumbo">
       <div class="container">
         <div class="row">
-          <div class="col-3">
-          </div>
+          <div class="col-3"></div>
           <div class="col-9"></div>
         </div>
       </div>
@@ -165,10 +163,11 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Gothic&family=Poor+Story&family=Slabo+27px&display=swap');
 
 @font-face {
-    font-family: 'NeoDunggeunmoPro-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'NeoDunggeunmoPro-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
 #app {
@@ -275,7 +274,6 @@ button {
 
 .jumbotron {
   background: linear-gradient(360deg, #e8d1d9, #3c537f, #101130);
-  flex-grow: 1; /* Add this line */
 }
 
 .fa-bars {
