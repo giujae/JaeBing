@@ -1,12 +1,11 @@
 <template>
   <div>
     <b-container class="mb-5">
-      <b-row class="d flex justify-content-center">
+      <b-row class="d-flex justify-content-center">
         <h1 class="font-do my-3">화제작</h1>
       </b-row>
       <b-row>
-        <!-- 영화 슬라이드 넣을 공간  -->
-        <b-col>
+        <b-col class="d-flex justify-content-end">
           <b-carousel
             id="carousel-1"
             v-model="slide"
@@ -25,6 +24,7 @@
               :caption="movie.title"
               img-blank-color="dark"
               img-height="480"
+              img-width="320"
             >
               <template #img>
                 <img
@@ -33,14 +33,9 @@
                   alt="image slot"
                 />
               </template>
-              <p>{{ movie.overview | truncate(300, '...') }}</p>
+              <!-- <p>{{ movie.overview | truncate(300, '...') }}</p> -->
             </b-carousel-slide>
           </b-carousel>
-
-          <!-- <p class="mt-4">
-            Slide #: {{ slide }}<br>
-            Sliding: {{ sliding }}
-          </p> -->
         </b-col>
       </b-row>
     </b-container>
