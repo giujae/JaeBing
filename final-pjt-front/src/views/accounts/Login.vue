@@ -2,31 +2,34 @@
   <div>
     <div class="container">
       <div class="row">
-        <h1 class="font-do mt-5">안농 :)</h1>
+        <div class="col-6">
+          <h1 class="m-3">안농 :) 어서와!</h1>
+          <h2>로그인 할래yo?</h2>
+        </div>
       </div>
       <div class="row">
         <div class="col-6 d-flex justify-content-center" id="rightline">
           <div class=" mb-3 mt-5" style="max-width: 18rem">
-            <h2 class="card-header">로그인</h2>
             <div class="card-body">
               <div class="input-group-lg">
-                <h4 class="card-title font-do">아이디</h4>
-                <input type="text" id="username" class="font-poor form-control" v-model="credentials.username" />
+                <h4>아이디</h4>
+                <input type="text" placeholder="아이디 입력해!" id="username" class="form-control" v-model="credentials.username" />
               </div>
               <br />
               <br />
               <div class="input-group-lg">
-                <h4 class="card-title font-do">비밀번호</h4>
+                <h4>비밀번호</h4>
                 <input
+                  placeholder="비밀번호 입력해!"
                   type="password"
                   id="password"
-                  class="font-poor form-control"
+                  class="form-control"
                   v-model="credentials.password"
                   @keypress.enter="login"
                 />
               </div>
               <br />
-              <button @click="login" class="login-btn btn mt-3 font-1-5em btn-block">드가자</button>
+              <button @click="login" class="login-btn btn mt-3 font-1-5em btn-block">웅! 자 드가자</button>
             </div>
           </div>
         </div>
@@ -159,6 +162,18 @@ export default {
 </script>
 
 <style scoped>
+/* 로그인 멘트 */
+.container {
+  color: #e8d1d9;
+}
+
+/* 로그인 카드 속성 */
+
+
+/* 로그인 인풋 속성 */
+.form-control {
+  background-color: #e8d1d900;
+}
 
 /* 중간 점선 */
 #rightline {
@@ -169,10 +184,16 @@ export default {
   height: 50px;
 }
 
+/* 회원가입 멘트 속성 */
+.signup-ment{
+  text-decoration: none;
+
+}
 /* 회원가입 버튼 속성 */
-.signup-ment, .signup-a {
+.signup-a {
   color: #e8d1d9;
   text-decoration: none;
+  font-size: 20px;
 }
 
 /* 로그인 버튼 속성 */
