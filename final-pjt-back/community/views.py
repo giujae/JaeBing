@@ -137,13 +137,20 @@ def like_post(request, post_pk):
     post = get_object_or_404(Post, pk=post_pk)
     user = request.user
 
-    if post.likes.filter(id=user.id).exists():
-        post.likes.remove(user)
-        liked = False
-    else:
-        post.likes.add(user)
-        liked = True
-
+    if request.method == 'POST':
+        if post.likes.filter(id=user.id).exists():
+            post.likes.remove(user)
+            liked = False
+        else:
+            post.likes.add(user)
+            liked = True
+    elif request.method == 'GET':
+        if post.likes.filter(id=user.id).exists():
+            serializer = PostUserSerializer(post, context={'request': request})
+            return Response({'liked': True, 'likes_count': post.likes.count(), 'post': serializer.data})
+        else:
+            serializer = PostUserSerializer(post, context={'request': request})
+            return Response({'liked': False, 'likes_count': post.likes.count(), 'post': serializer.data})
     serializer = PostUserSerializer(post, context={'request': request})
     return Response({'liked': liked, 'likes_count': post.likes.count(), 'post': serializer.data})
 
