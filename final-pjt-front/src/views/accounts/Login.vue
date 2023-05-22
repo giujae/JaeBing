@@ -9,11 +9,17 @@
       </div>
       <div class="row">
         <div class="col-6 d-flex justify-content-center" id="rightline">
-          <div class=" mb-3 mt-5" style="max-width: 18rem">
+          <div class="mb-3 mt-5" style="max-width: 18rem">
             <div class="card-body">
               <div class="input-group-lg">
                 <h4>아이디</h4>
-                <input type="text" placeholder="아이디 입력해!" id="username" class="form-control" v-model="credentials.username" />
+                <input
+                  type="text"
+                  placeholder="아이디 입력해!"
+                  id="username"
+                  class="form-control"
+                  v-model="credentials.username"
+                />
               </div>
               <br />
               <br />
@@ -169,7 +175,6 @@ export default {
 
 /* 로그인 카드 속성 */
 
-
 /* 로그인 인풋 속성 */
 .form-control {
   background-color: #e8d1d900;
@@ -185,9 +190,8 @@ export default {
 }
 
 /* 회원가입 멘트 속성 */
-.signup-ment{
+.signup-ment {
   text-decoration: none;
-
 }
 /* 회원가입 버튼 속성 */
 .signup-a {
@@ -200,5 +204,10 @@ export default {
 .login-btn {
   color: #e8d1d9;
   font-size: 20px;
+}
+
+html {
+  /* background-color: #0F2648; */
+  background: red !important;
 }
 </style>
