@@ -251,4 +251,5 @@ button {
 .jumbotron {
   background: linear-gradient(360deg, #e8d1d9, #3c537f, #101130);
 }
+
 </style>
