@@ -52,10 +52,17 @@
 
     <div>
       <h1 class="font-do my-5">영화 리스트</h1>
-    </div>
-    <div class="container">
-      <div class="row">
-        <MovieListItem v-for="(movie, idx) in movies" :key="idx" :movie="movie" class="col-3" :search="search" />
+      <div class="container mb-4">
+        <b-dropdown id="genreDropdown" text="장르 선택" variant="secondary">
+          <b-dropdown-item v-for="(genre, index) in genres" :key="index" @click="searchByGenre(genre)">
+            {{ genre }}
+          </b-dropdown-item>
+        </b-dropdown>
+      </div>
+      <div class="container">
+        <div class="row">
+          <MovieListItem v-for="(movie, idx) in movies" :key="idx" :movie="movie" class="col-3" :search="search" />
+        </div>
       </div>
     </div>
   </div>
@@ -74,6 +81,27 @@ export default {
       sliding: null,
       search: '',
       i: 0,
+      genres: [
+        '액션',
+        '모험',
+        '애니메이션',
+        '코미디',
+        '범죄',
+        '다큐멘터리',
+        '드라마',
+        '가족',
+        '판타지',
+        '역사',
+        '공포',
+        '음악',
+        '미스터리',
+        '로맨스',
+        'SF',
+        'TV 영화',
+        '스릴러',
+        '전쟁',
+        '웨스턴',
+      ],
     };
   },
   components: {
@@ -88,25 +116,18 @@ export default {
         },
       });
     },
+    searchByGenre(genre) {
+      // console.log('찾을게~');
+      this.search = genre;
+      // console.log(this.search);
+      // console.log(genre);
+    },
     onSlideStart() {
       this.sliding = true;
     },
     onSlideEnd() {
       this.sliding = false;
     },
-    // resetCarouselHeight() {
-    //   const carousel = this.$refs.carouselRef;
-    //   if (carousel) {
-    //     const images = carousel.$el.querySelectorAll('.d-block.img-fluid');
-    //     if (images) {
-    //       let maxHeight = 0;
-    //       images.forEach((image) => {
-    //         maxHeight = Math.max(maxHeight, image.offsetHeight);
-    //       });
-    //       carousel.$el.style.height = `${maxHeight}px`;
-    //     }
-    //   }
-    // },
   },
   created: function () {
     this.i = 0;
@@ -116,10 +137,14 @@ export default {
   },
   computed: {
     ...mapState(['login', 'login_user', 'is_admin', 'movie_list', 'ordered_movie_list', 'recommend_list']),
-
     movies: function () {
       return this.movie_list.filter((movie) => {
-        if (movie.movie_no) {
+        const genreNames = movie.genre_ids.map((id) => id.name);
+        console.log(movie.movie_no);
+        console.log(genreNames.includes(this.search));
+        // console.log(movie.genre_ids.map((id) => id.name));
+        // console.log(movie.genre_ids.some((id) => id.name));
+        if (movie.movie_no && genreNames.includes(this.search)) {
           return movie;
         }
       });
@@ -138,13 +163,6 @@ export default {
     if (this.login === true && this.is_admin === false) {
       this.$store.dispatch('recommendMovie');
     }
-    window.addEventListener('resize', this.resetCarouselHeight);
-    this.$nextTick(() => {
-      this.resetCarouselHeight();
-    });
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.resetCarouselHeight);
   },
 };
 </script>
