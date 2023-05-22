@@ -7,7 +7,6 @@
         img-alt="Image"
         img-top
         tag="article"
-        style="max-width: 20rem; max-height: 25rem; min-height: 25rem"
         class="my-2"
         @click="showDetail"
       >
@@ -24,7 +23,7 @@
         img-alt="Image"
         img-top
         tag="article"
-        style="max-width: 20rem; max-height: 25rem; min-height: 25rem"
+        style="max-width: 25rem; max-height: 20rem; min-height: 20rem; "
         class="my-2 bg-dark"
         @click="showDetail"
       >

@@ -8,61 +8,75 @@
     />
 
     <div id="nav" class="main-nav" v-if="this.$route.path !== '/'">
-      <b-navbar>
-        <b-navbar-nav>
+      <b-navbar toggleable="lg">
+      <b-navbar-toggle target="navbar-nav-collapse"></b-navbar-toggle>
+
+    <b-navbar-brand href="/movies" class="font-weight-bold">Home</b-navbar-brand>
+
+    <b-collapse id="navbar-nav-collapse" is-nav>
+      <b-navbar-nav>
+        <b-nav-item-dropdown text="Community">
+          <b-dropdown-item>
+            <router-link :to="{ name: 'Post' }">Post</router-link>
+          </b-dropdown-item>
+          <b-dropdown-item>ES</b-dropdown-item>
+        </b-nav-item-dropdown>
+
+        <b-nav-item-dropdown text="My Page">
+          <b-dropdown-item>
+            <router-link :to="{ name: 'Profile', params: { username: username } }">Profile</router-link>
+          </b-dropdown-item>
+          <b-dropdown-item>Settings</b-dropdown-item>
+        </b-nav-item-dropdown>
+
+        <template v-if="is_admin">
           <b-nav-item>
-            <router-link :to="{ name: 'MovieList' }" id="logo" class="font-weight-bold"> Home </router-link>
+            <router-link :to="{ name: 'ManageMovie' }" class="nav-margin">
+              <span class="badge badge-pill badge-warning">영화관리</span>
+            </router-link>
           </b-nav-item>
 
-          <!-- Navbar dropdowns -->
-          <b-nav-item-dropdown text="Community" right>
-            <b-dropdown-item class="drop-item">
-              <router-link :to="{ name: 'Post' }">Post</router-link>
-            </b-dropdown-item>
-            <b-dropdown-item class="drop-item">ES</b-dropdown-item>
-          </b-nav-item-dropdown>
+          <b-nav-item>
+            <router-link :to="{ name: 'AdminManagement' }" class="nav-margin">
+              <span class="badge badge-pill badge-warning">회원관리</span>
+            </router-link>
+          </b-nav-item>
+        </template>
+      </b-navbar-nav>
 
-          <b-nav-item-dropdown text="My Page" right>
-            <b-dropdown-item class="drop-item">
-              <router-link :to="{ name: 'Profile', params: { username: username } }">Profile</router-link>
-            </b-dropdown-item>
-            <b-dropdown-item class="drop-item">Settings</b-dropdown-item>
-          </b-nav-item-dropdown>
+      <b-navbar-nav class="ml-auto">
+        <template v-if="$store.state.login">
+          <b-nav-item>
+            <button @click="triggerSearch" class="font-weight-bold font-do search-btn">검색</button>
+          </b-nav-item>
 
-          <b-navbar-nav>
-            <div v-if="$store.state.login">
-              <p class="user font-weight-bold">해윙 {{ username }} !</p>
-            </div>
+            <p class="user font-weight-bold text-truncate">해윙 {{ username }}!</p>
 
-            <div v-if="is_admin">
-              <router-link :to="{ name: 'ManageMovie' }" class="nav-margin">
-                <span class="badge badge-pill badge-warning">영화관리</span></router-link
-              >
-              <router-link :to="{ name: 'AdminManagement' }" class="nav-margin">
-                <span class="badge badge-pill badge-warning">회원관리</span></router-link
-              >
-            </div>
+          <b-nav-item>
+            <router-link @click.native="logout" to="#" class="nav-margin">
+              <button class="font-weight-bold">Logout</button>
+            </router-link>
+          </b-nav-item>
+        </template>
 
-            <div class="logout-box" v-if="$store.state.login">
-              <router-link @click.native="logout" to="#" class="nav-margin">
-                <span class="logout">Logout</span></router-link
-              >
-              <!-- 검색 기능 추가 -->
-              <b-button @click="triggerSearch" :class="{ appear: !hideAdd }" class="my-5 font-do">검색 추가</b-button>
-            </div>
+        <template v-else>
+          <b-nav-item>
+            <router-link :to="{ name: 'Signup' }" class="nav-margin">
+              <button class="font-weight-bold">Signup</button>
+            </router-link>
+          </b-nav-item>
 
-            <div v-else>
-              <router-link :to="{ name: 'Signup' }" class="nav-margin">
-                <button class="font-weight-bold">Signup</button>
-              </router-link>
-              <router-link :to="{ name: 'Login' }" class="nav-margin">
-                <button class="font-weight-bold">Login</button>
-              </router-link>
-            </div>
-          </b-navbar-nav>
+          <b-nav-item>
+            <router-link :to="{ name: 'Login' }" class="nav-margin">
+              <button class="font-weight-bold">Login</button>
+            </router-link>
+          </b-nav-item>
+        </template>
+
         </b-navbar-nav>
-      </b-navbar>
-    </div>
+      </b-collapse>
+    </b-navbar>
+  </div>
 
     <router-view @login="login = true" />
     <div class="jumbotron font-poor mt-5" id="footerjumbo">
@@ -158,9 +172,10 @@ export default {
   min-height: 100vh;
 }
 
+
 #nav a {
   font-weight: bold;
-  color: #3c537f;
+  color: #e8d1d9;
   text-decoration-line: none;
   /* background: linear-gradient(45deg, #E8D1D9, #3C537F, #0f2648); */
   /* color: #2c3e50; */
@@ -190,6 +205,13 @@ span {
 /* 네브바 속성 */
 .navbar {
   background-color: #0f2648;
+  padding: 0px;
+}
+
+/* 네브바 토글 속성 */
+.collapse {
+  color: #e8d1d9;
+  border-color: #e8d1d9;
 }
 
 /* 네브바 클릭시 나오는 item 속성 */
@@ -213,16 +235,13 @@ button {
 .logout {
   border-color: #0f264800;
   background-color: #0f264800;
-}
-
-.logout-box {
   padding: 8px;
 }
 
 .user {
   color: #e8d1d9;
   padding: 8px;
-  margin: 0px;
+  margin-top: 10px;
 }
 
 .appear {
