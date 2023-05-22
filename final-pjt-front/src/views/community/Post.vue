@@ -7,7 +7,7 @@
         </div>
 
         <div class="create-btn-div p-0 col-9 d-flex align-items-center justify-content-end align-items-end">
-          <button v-if="this.$store.state.login" @click="createPost()" class=" create-btn btn float-right">
+          <button v-if="this.$store.state.login" @click="createPost()" class="create-btn btn float-right">
             글 작성할랭
           </button>
           <p v-else class="my-4 float-right">게시글 작성하려면 로그인하구 와!</p>
@@ -31,7 +31,6 @@
           </tr>
         </table>
       </div>
-
     </div>
   </div>
 </template>
@@ -94,17 +93,18 @@ export default {
 
 <style>
 @font-face {
-    font-family: 'NeoDunggeunmoPro-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'NeoDunggeunmoPro-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'NeoDunggeunmo';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'NeoDunggeunmo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .article-table {
@@ -114,7 +114,6 @@ export default {
   border-style: dashed;
   /* border-color: #4c4d81b2; */
   border-color: #e8d1d969;
-
 }
 
 .create-btn-div {
@@ -145,18 +144,29 @@ export default {
 .article {
   width: 100%;
   min-height: 100vh;
-  background-image: linear-gradient(            
-            to top,
-            rgba(20, 20, 20, 0.25) 10%,
-            rgba(20, 20, 20, 0.5) 25%,
-            rgba(20, 20, 20, 0.5) 50%,
-            rgba(20, 20, 20, 0.75) 75%,
-            rgba(20, 20, 20, 1) 100%), url('https://e1.pxfuel.com/desktop-wallpaper/584/162/desktop-wallpaper-2560x1440-tokyo-cityscape-buildings-digital-retro-tokyo.jpg');
+  background-image: linear-gradient(
+      to top,
+      rgba(20, 20, 20, 0.25) 10%,
+      rgba(20, 20, 20, 0.5) 25%,
+      rgba(20, 20, 20, 0.5) 50%,
+      rgba(20, 20, 20, 0.75) 75%,
+      rgba(20, 20, 20, 1) 100%
+    ),
+    url('https://e1.pxfuel.com/desktop-wallpaper/584/162/desktop-wallpaper-2560x1440-tokyo-cityscape-buildings-digital-retro-tokyo.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   backdrop-filter: blur(10px);
-  color:#e8d1d9;
+  color: #e8d1d9;
 }
 
+.article-table {
+  font-family: 'NeoDunggeunmo';
+  font-size: 20px;
+  color: #e8d1d9 !important;
+  border-style: dashed;
+  /* border-color: #4c4d81b2; */
+  border-color: #e8d1d969;
+  background-color: #101130d1;
+}
 </style>
