@@ -84,6 +84,8 @@
     </div>
 
     <router-view @login="login = true" />
+
+    <!-- 푸터 -->
     <div class="jumbotron" id="footerjumbo">
       <div class="container">
         <div class="row">
@@ -92,6 +94,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 

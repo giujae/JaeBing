@@ -5,6 +5,7 @@
         <div class="col-3 p-0">
           <h1 class="h1-tag my-3 text-left">게시판</h1>
         </div>
+
         <div class="create-btn-div p-0 col-9 d-flex align-items-center justify-content-end align-items-end">
           <button v-if="this.$store.state.login" @click="createPost()" class=" create-btn btn float-right">
             글 작성할랭
@@ -12,6 +13,8 @@
           <p v-else class="my-4 float-right">게시글 작성하려면 로그인하구 와!</p>
         </div>
       </div>
+
+      <!-- 게시판 테이블 -->
       <div class="row">
         <table class="article-table table table-hover">
           <tr>
@@ -28,6 +31,7 @@
           </tr>
         </table>
       </div>
+
     </div>
   </div>
 </template>

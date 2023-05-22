@@ -1,56 +1,72 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col-6">
-    <h1 class="font-do my-3">프로필</h1>
+    <strong><h1 class="font-do my-3 text-left">프로필</h1></strong>
+    <h2 class="text-left">아이디: {{ profile.username }}</h2>
+    <p class="text-left"><strong>팔로워:</strong> {{ followersCount }}</p>
+    <p class="text-left"><strong>가입일:</strong> {{ formatDate(profile.date_joined) }}</p>
+    <p class="text-left"><strong>생일:</strong> {{ profile.date_of_birth }}</p>
+    <p class="text-left"><strong>이메일:</strong> {{ profile.email }}</p>
+    <p class="text-left"><strong>등급:</strong> {{ isAdmin ? '관리자' : '일반회원' }}</p>
+
     <div v-if="profile">
       <!-- <p><strong>회원코드:</strong> {{ profile.id }}</p> -->
-      <p><strong>아이디:</strong> {{ profile.username }}</p>
-      <p><strong>가입일:</strong> {{ formatDate(profile.date_joined) }}</p>
-      <p><strong>생일:</strong> {{ profile.date_of_birth }}</p>
-      <p><strong>이메일:</strong> {{ profile.email }}</p>
-      <p><strong>등급:</strong> {{ isAdmin ? '관리자' : '일반회원' }}</p>
-      <p><strong>팔로워:</strong> {{ followersCount }}</p>
+
       <div v-if="!isCurrentUser">
         <button v-if="!isCurrentUser" @click="toggleFollow" class="btn btn-primary">
           {{ isFollowing ? '언팔로우' : '팔로우' }}
         </button>
       </div>
+      
+      <!-- 버튼 넣을 div 박스 -->
+      <div class="btn-div">
+        <!-- 게시글 -->
+        <button class="created-article">작성한 게시글</button>
+        <!-- <ul>
+          <li v-for="post in posts" :key="post.id">
+            <p><strong>제목:</strong> {{ post.title }}</p>
+            <p><strong>내용:</strong> {{ post.content }}</p>
+          </li>
+        </ul> -->
 
-      <div>
-        <h2>작성한 리뷰</h2>
-        <ul>
+        <!-- 리뷰 -->
+        <button class="created-review">작성한 리뷰</button>
+        <!-- <ul>
           <li v-for="review in reviews" :key="review.id">
             <p><strong>영화:</strong> {{ review.movie.title }}</p>
             <p><strong>평점:</strong> {{ review.rate }}</p>
             <p><strong>내용:</strong> {{ review.content }}</p>
           </li>
-        </ul>
-      </div>
+        </ul> -->
 
-      <div>
-        <h2>작성한 게시글</h2>
-        <ul>
-          <li v-for="post in posts" :key="post.id">
-            <p><strong>제목:</strong> {{ post.title }}</p>
-            <p><strong>내용:</strong> {{ post.content }}</p>
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h2>작성한 댓글</h2>
-        <ul>
+        <!-- 댓글 -->
+        <button class="created-comment">작성한 댓글</button>
+        <!-- <ul>
           <li v-for="comment in comments" :key="comment.id">
             <p><strong>내용:</strong> {{ comment.content }}</p>
           </li>
-        </ul>
+        </ul> -->
       </div>
+
+      <table class="table table-hover">
+        <tr>
+          <th>No</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>작성일</th>
+        </tr>
+        <tr v-for="(post, idx) in posts" :key="idx">
+            <th>{{ post.id }}</th>
+            <th @click="postDetail(post)">{{ post.title }}</th>
+            <th>{{ post.user.username }}</th>
+            <th>{{ $moment(post.created_at).format('YYYY-MM-DD hh:mm:ss') }}</th>
+          </tr>
+      </table>
+
     </div>
+
     <p v-else>Loading...</p>
   </div>
-</div>
-</div>
+  
 </template>
 
 <script>
@@ -167,3 +183,33 @@ export default {
   },
 };
 </script>
+
+<style>
+.btn-div {
+  display: flex;
+  justify-content: flex-start;
+  /* margin-top: 20px; */
+}
+
+.created-article{
+  width: auto;
+}
+
+.created-review{
+  width: auto;
+}
+
+.created-comment{
+  width: auto;
+}
+
+table {
+  font-family: 'NeoDunggeunmo';
+  font-size: 20px;
+  color: #e8d1d9 !important;
+  border-style: dashed;
+  /* border-color: #4c4d81b2; */
+  border-color: #e8d1d969;
+
+}
+</style>
