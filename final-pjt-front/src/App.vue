@@ -30,7 +30,7 @@
               <b-dropdown-item>ES</b-dropdown-item>
             </b-nav-item-dropdown>
 
-            <b-nav-item-dropdown v-if="$store.state.login" :text="username">
+            <b-nav-item-dropdown v-if="$store.state.login && this.$route.path !== '/login'" :text="username">
               <b-dropdown-item>
                 <router-link :to="{ name: 'Profile', params: { username: username } }">Profile</router-link>
               </b-dropdown-item>
