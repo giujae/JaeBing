@@ -84,7 +84,7 @@
     </div>
 
     <router-view @login="login = true" />
-    <div class="jumbotron font-poor mt-5" id="footerjumbo">
+    <div class="jumbotron" id="footerjumbo">
       <div class="container">
         <div class="row">
           <div class="col-3"></div>
@@ -179,6 +179,7 @@ export default {
   background: #101130;
 }
 
+
 .navbar-toggler {
   color: #e8d1d9;
   border-color: #e8d1d9;
@@ -223,7 +224,7 @@ span {
 /* 네브바 속성 */
 .navbar {
   font-size: 25px;
-  /* background-color: #0f2648; */
+  background-color: #0f264800;
   padding: 8px; /* 기본 패딩을 8px로 수정 */
 }
 
@@ -272,7 +273,7 @@ button {
 }
 
 .jumbotron {
-  background: linear-gradient(360deg, #e8d1d9, #3c537f, #101130);
+  background: linear-gradient(180deg, #070512, #101130);
   flex-grow: 1; /* Add this line */
 }
 
