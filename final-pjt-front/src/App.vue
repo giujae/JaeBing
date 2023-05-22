@@ -87,9 +87,7 @@
     <div class="jumbotron font-poor mt-5" id="footerjumbo">
       <div class="container">
         <div class="row">
-          <div class="col-3">
-            <!-- <img :src="images.logo" width="190" alt="logo" /> -->
-          </div>
+          <div class="col-3"></div>
           <div class="col-9"></div>
         </div>
       </div>
@@ -164,8 +162,16 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Gothic&family=Poor+Story&family=Slabo+27px&display=swap');
 
+@font-face {
+  font-family: 'NeoDunggeunmoPro-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 #app {
-  font-family: 'Salbo 27px', 'Nanum Gothic', Helvetica, Arial, sans-serif;
+  font-family: 'NeoDunggeunmoPro-Regular';
   /* Do Hyeon Jua Poor Story */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -175,6 +181,7 @@ export default {
   /* background-color: #0F2648; */
   width: 100%;
   min-height: 100vh;
+  font-size: 20px;
 }
 
 .navbar-toggler {
