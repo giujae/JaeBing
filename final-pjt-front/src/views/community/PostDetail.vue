@@ -28,7 +28,10 @@
             <div class="d-flex justify-content-end">
               <!--작성자와 접속자가 같다면, 수정/삭제 버튼 활성화-->
               <!--단, 관리자의 경우 삭제 버튼 활성화 -->
-              <button @click="toggleLikePost" class="btn btn-primary">좋아요</button>
+              <button @click="toggleLikePost" class="btn btn-primary">
+                <span v-if="isPostLiked">좋아요 취소</span>
+                <span v-else>좋아요</span>
+              </button>
               <p>좋아요: {{ likesCount }}</p>
               <button
                 class="btn btn-warning font-do mr-3 font-1-2em"
@@ -162,6 +165,7 @@ export default {
         .then((res) => {
           this.isPostLiked = res.data.liked;
           this.likesCount = res.data.likes_count;
+          this.getLikesCount();
         })
         .catch((err) => {
           console.log(err);
@@ -172,6 +176,9 @@ export default {
       axios
         .get(`${SERVER_URL}/community/posts/${this.post.id}/like/`, config)
         .then((res) => {
+          console.log(res.data.liked);
+          console.log(res.data.likes_count);
+          this.isPostLiked = res.data.liked;
           this.likesCount = res.data.likes_count;
         })
         .catch((err) => {
