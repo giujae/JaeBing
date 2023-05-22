@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <h1 class="font-do">영화 추가</h1>
     <div class="mb-5 mt-3">
       <label for="search" class="mx-3 font-do">Search: </label>
       <input type="text" id="search" v-model.trim="search" @keypress.enter="searchMovie" />
