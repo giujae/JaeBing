@@ -1,15 +1,6 @@
 <template>
   <div>
-    <b-dropdown
-      id="genreDropdown"
-      :text="search || '장르 선택'"
-      variant="secondary"
-      style="width: 10%; margin-left: 80%"
-    >
-      <b-dropdown-item v-for="(genre, index) in genres" :key="index" @click="searchByGenre(genre)">
-        {{ genre }}
-      </b-dropdown-item>
-    </b-dropdown>
+
     <div class="mb-5" style="max-width: 370px; margin-left: auto; margin-right: 5%">
       <h1 class="font-do my-3"></h1>
       <b-row class="d-flex justify-content-end"> </b-row>
@@ -26,16 +17,14 @@
             @sliding-start="onSlideStart"
             @sliding-end="onSlideEnd"
             ref="carouselRef"
-            fade
-          >
+            fade>
             <b-carousel-slide
               v-for="(movie, idx) in ordered"
               :key="idx"
               :caption="movie.title"
               img-blank-color="dark"
               img-height="480"
-              style="width: auto"
-            >
+              style="width: auto">
               <template #img>
                 <div style="display: flex; justify-content: flex-end">
                   <img
@@ -51,24 +40,36 @@
         </b-col>
       </b-row>
     </div>
-
-    <div class="container mt-5" v-if="login && recommend_list.length > 0">
-      <h1 class="font-do my-3">당신을 위한 영화 추천!</h1>
-      <div class="row">
-        <MovieListItem v-for="(movie, idx) in recommend_list" :key="idx" :movie="movie" class="col-3" />
-      </div>
-    </div>
+    
 
     <div>
+    <div class="d-flex justify-content-end">
+      <b-dropdown id="genreBtn"
+      :text="search || '장르 선택'">
+      <b-dropdown-item v-for="(genre, index) in genres" :key="index" @click="searchByGenre(genre)">
+        {{ genre }}
+      </b-dropdown-item>
+    </b-dropdown>
+    </div>
+    
+        <div class="movie-container" v-if="login && recommend_list.length > 0">
+          <h1 class="font-do my-3">당신을 위한 영화 추천!</h1>
+          <div class="row d-flex justify-content-center">
+            <MovieListItem v-for="(movie, idx) in recommend_list" :key="idx" :movie="movie" class="col-2 p-0 " />
+          </div>
+        </div>
+    
       <h1 v-if="movies.length" class="font-do my-5">{{ search }} 리스트</h1>
+      
       <div class="container mb-4"></div>
       <div class="container">
-        <div class="row">
-          <MovieListItem v-for="(movie, idx) in movies" :key="idx" :movie="movie" class="col-3" :search="search" />
+        <div class="row d-flex justify-content-center">
+          <MovieListItem v-for="(movie, idx) in movies" :key="idx" :movie="movie" class="col-3 p-0" :search="search" />
         </div>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -186,5 +187,29 @@ export default {
 
 h1 {
   color: #e8d1d9;
+}
+
+#genreBtn button {
+  color: #e8d1d9;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0);
+  margin-right: 100px;
+}
+
+
+
+.genreDropdown{
+  background-color: #e8d1d9;
+}
+
+.movie-container {
+  margin: initial;
+}
+#genreDropdown {
+  background-color: #e8d1d9;
+}
+
+.btn-secondary {
+  background-color: #e8d1d9;
 }
 </style>

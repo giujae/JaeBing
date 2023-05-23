@@ -174,6 +174,9 @@ export default {
 .container {
   color: #e8d1d9;
   min-height: 80vh;
+  background-image: url('https://st2.depositphotos.com/14548252/47970/v/600/depositphotos_479708850-stock-illustration-evening-landscape-with-bright-fireworks.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 /* 로그인 카드 속성 */
@@ -212,13 +215,18 @@ export default {
 
 html {
   /* background-color: #0F2648; */
-  background: red !important;
+  /* background: red !important; */
 }
 
+<<<<<<< HEAD
 .card-body {
   background-image: url(./pngwing.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
 }
+=======
+
+
+>>>>>>> 0bce9d4d89afa62f14037f5485c953d66bd67ade
 </style>

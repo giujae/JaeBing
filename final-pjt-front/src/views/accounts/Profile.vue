@@ -96,6 +96,68 @@
           </tr>
         </table>
       </div>
+<<<<<<< HEAD
+=======
+
+      <!-- 작성한 게시글 테이블 -->
+      <table
+        class="created-table table table-hover"
+        v-if="selectedTab === 'posts'"
+      >
+        <tr>
+          <th>No.</th>
+          <th>TITLE</th>
+          <th>CONTENT</th>
+          <th>DATE</th>
+        </tr>
+        <tr v-for="(post, idx) in posts" :key="idx">
+          <th>{{ post.id }}</th>
+          <th>{{ post.title }}</th>
+          <th>{{ post.content }}</th>
+          <th>{{ $moment(post.created_at).format("YYYY-MM-DD hh:mm:ss") }}</th>
+        </tr>
+      </table>
+
+      <!-- 작성한 리뷰 테이블 -->
+      <table class="created-table table table-hover" v-if="selectedTab === 'reviews'">
+        <tr>
+          <th>No.</th>
+          <th>MOIVE</th>
+          <th>RATE</th>
+          <th>CONTENT</th>
+          <th>DATE</th>
+        </tr>
+        
+        
+        <tr v-for="review in reviews" :key="review.id">
+          <th>{{ review.id }}</th>
+          <th>{{ review.movie.title }}</th>
+          <th>{{ review.rate }}</th>
+          <th>{{ review.content }}</th>
+          <th>
+            {{ $moment(review.created_at).format("YYYY-MM-DD hh:mm:ss") }}
+          </th>
+        </tr>
+      </table>
+
+      <!-- 작성한 댓글 테이블 -->
+      <table class="created-table table table-hover" v-if="selectedTab === 'comments'">
+        <tr>
+          <th>No.</th>
+          <th>POST NO.</th>
+          <th>CONTENT</th>
+          <th>DATE</th>
+        </tr>
+        <tr v-for="comment in comments" :key="comment.id">
+          <th>{{ comment.id }}</th>
+          <th>{{ comment.post }}</th>
+          <th>{{ comment.content }}</th>
+          <th>
+            {{ $moment(comment.created_at).format("YYYY-MM-DD hh:mm:ss") }}
+          </th>
+        </tr>
+      </table>
+>>>>>>> 0bce9d4d89afa62f14037f5485c953d66bd67ade
     </div>
 
     <p v-else>Loading...</p>
@@ -262,7 +324,12 @@ export default {
 
 /* 작성한~ 테이블 속성 */
 .created-table {
+<<<<<<< HEAD
   font-family: 'NeoDunggeunmo';
+=======
+  
+  font-family: "NeoDunggeunmo";
+>>>>>>> 0bce9d4d89afa62f14037f5485c953d66bd67ade
   font-size: 20px;
   color: #e8d1d9 !important;
   border-style: dashed;
@@ -305,4 +372,8 @@ export default {
 th {
   padding: 2px !important;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0bce9d4d89afa62f14037f5485c953d66bd67ade
 </style>
