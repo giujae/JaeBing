@@ -15,16 +15,10 @@
           <!--작성자와 접속자가 같다면, 수정/삭제 버튼 활성화-->
           <!--단, 관리자의 경우 삭제 버튼 활성화 -->
           <button
-<<<<<<< HEAD
-            class="btn btn-pink mr-1"
-            v-if="comment.user.id === login_user && updateTrigger === false"
-            @click="updatePostForm(comment)">
-=======
             class="btn btn-danger mr-1"
             v-if="comment.user.id == login_user && updateTrigger === false"
             @click="updatePostForm(comment)"
           >
->>>>>>> 9ecbb50d16aef7338244768d01cffa6f16c2cad6
             댓글 수정
           </button>
 
@@ -37,14 +31,9 @@
 
           <button
             class="btn btn-secondary font-jua mr-1"
-<<<<<<< HEAD
-            v-else-if="comment.user.id === login_user && updateTrigger === false"
-            @click="deleteComment(comment)">
-=======
             v-else-if="comment.user.id == login_user && updateTrigger === false"
             @click="deleteComment(comment)"
           >
->>>>>>> 9ecbb50d16aef7338244768d01cffa6f16c2cad6
             댓글 삭제
           </button>
         </div>

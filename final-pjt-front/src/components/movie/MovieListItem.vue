@@ -1,5 +1,6 @@
 <template>
   <div class="col-3">
+    
     <b-col>
       <b-card
         v-if="!movie.poster_path.includes('#')"
@@ -9,14 +10,15 @@
         tag="article"
         class="my-2"
         style="max-width: 25rem; max-height: 20rem; min-height: 20rem"
-        @click="showDetail"
-      >
+        @click="showDetail">
+
         <!-- <b-card-text>개봉일 : {{movie.release_date}}</b-card-text> -->
         <b-card-text class="font-1-8em font-do" :style="{ 'max-width': '20rem' }">
           💕 : {{ movie.vote_count }}
         </b-card-text>
         <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
       </b-card>
+
       <b-card
         v-else
         img-src="https://image.tmdb.org/t/p/w185/g3gpHLUuQLGI9gRmfraSQCN1TYk.jpg"
@@ -25,8 +27,8 @@
         tag="article"
         style="max-width: 25rem; max-height: 20rem; min-height: 20rem"
         class="my-2 bg-dark"
-        @click="showDetail"
-      >
+        @click="showDetail">
+
         <!-- <b-card-text>개봉일 : {{movie.release_date}}</b-card-text> -->
         <b-card-text class="font-1-8em font-do" :style="{ 'max-width': '20rem' }">
           💕 : {{ movie.vote_count }}
