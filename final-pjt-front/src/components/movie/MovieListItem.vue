@@ -1,39 +1,39 @@
 <template>
-  <div class="col-3">
-    <b-col>
-      <b-card
+  <div>
+      <!-- <b-card
         v-if="!movie.poster_path.includes('#')"
         :img-src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`"
         img-alt="Image"
-        img-top
-        tag="article"
-        class="my-2"
-        style="max-width: 25rem; max-height: 20rem; min-height: 20rem"
-        @click="showDetail"
-      >
-        <!-- <b-card-text>개봉일 : {{movie.release_date}}</b-card-text> -->
-        <b-card-text class="font-1-8em font-do" :style="{ 'max-width': '20rem' }">
-          💕 : {{ movie.vote_count }}
-        </b-card-text>
-        <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
-      </b-card>
+        class="card-img my-2"
+        @click="showDetail"></b-card> -->
+<!-- 
       <b-card
         v-else
         img-src="https://image.tmdb.org/t/p/w185/g3gpHLUuQLGI9gRmfraSQCN1TYk.jpg"
         img-alt="Image"
         img-top
-        tag="article"
-        style="max-width: 25rem; max-height: 20rem; min-height: 20rem"
-        class="my-2 bg-dark"
-        @click="showDetail"
-      >
-        <!-- <b-card-text>개봉일 : {{movie.release_date}}</b-card-text> -->
-        <b-card-text class="font-1-8em font-do" :style="{ 'max-width': '20rem' }">
-          💕 : {{ movie.vote_count }}
-        </b-card-text>
-        <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
-      </b-card>
-    </b-col>
+        class="my-2"
+        @click="showDetail">
+      </b-card> -->
+
+      <div>
+
+        <div class="cards" v-if="!movie.poster_path.includes('#')">
+          <figure>
+            <img class="movielistitem m-0" :src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`"
+            @click="showDetail" >
+          </figure>
+        </div>
+
+        <div class="cards" v-else>
+          <figure>
+            <img class="movielistitem" src="https://image.tmdb.org/t/p/w185/g3gpHLUuQLGI9gRmfraSQCN1TYk.jpg"
+            @click="showDetail">
+          </figure>
+        </div>
+
+      </div>
+
 
     <!-- 영화눌렀을때 이게 보이게 한다 -->
     <b-modal
@@ -452,6 +452,10 @@ export default {
 </script>
 
 <style scoped>
+.card-img {
+  height: auto !important;
+}
+
 .appear {
   display: none;
 }
@@ -612,5 +616,10 @@ iframe {
   height: 225px !important; /* Adjust the height as needed */
   object-fit: cover;
   z-index: 1;
+}
+
+.movielistitem {
+  width: auto;
+  height: auto;
 }
 </style>
