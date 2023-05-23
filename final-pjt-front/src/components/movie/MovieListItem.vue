@@ -49,6 +49,9 @@
     >
       <!-- 영화디테일 부분 -->
       <div class="detail-box">
+        <div class="trailer">
+          <youtube :video-id="trailerVideoId" :player-vars="playerVars" @playing="handlePlaying"></youtube>
+        </div>
         <img
           :src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`"
           alt="movie poster"
@@ -172,15 +175,20 @@
 
 <script>
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
-
+import Vue from 'vue';
+import VueYoutube from 'vue-youtube';
 import axios from 'axios';
 import _ from 'lodash';
 import { mapState } from 'vuex';
+Vue.use(VueYoutube);
 
 export default {
   name: 'MovieListItem',
   props: {
     movie: Object,
+  },
+  components: {
+    'vue-youtube': VueYoutube,
   },
   data: function () {
     return {
@@ -193,14 +201,58 @@ export default {
       reviewId: null,
       rate_options: _.range(0, 11),
       variants: ['light', 'dark'],
+      showTrailer: false,
+      trailerVideoId: '',
+      playerVars: {
+        autoplay: 1,
+        controls: 1,
+      },
     };
   },
   methods: {
     showDetail: function () {
       this.show = true;
+      const API_Key = 'AIzaSyBtLxNlFsqSLT3GmRcCIawqcmVb90tmVAc';
+      const movieTitle = this.movie.title;
+      const query = '공식예고편 ' + movieTitle;
+      this.avgRate = this.movie.rate;
+
+      const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_Key}&q=${query}&part=snippet&type=video`;
+
+      axios
+        .get(apiUrl)
+        .then((response) => {
+          const videos = response.data;
+          console.log(response.request.status);
+          if (response.request.status === 200) {
+            // 필터링된 예고편 영상 가져오기
+            const filteredVideos = videos.items.filter((item) => {
+              const title = item.snippet.title.toLowerCase();
+              const description = item.snippet.description.toLowerCase();
+              return title.includes('예고편') || description.includes('무료');
+            });
+            if (filteredVideos.length > 0) {
+              console.log(filteredVideos);
+              this.trailerVideoId = filteredVideos[0].id.videoId;
+              console.log(this.trailerVideoId);
+            } else {
+              console.log('예고편이 없습니다.');
+            }
+          } else {
+            console.log('API 요청에 실패했습니다.');
+          }
+        })
+        .catch((error) => {
+          console.error('API 요청 중 오류 발생:', error);
+        });
+    },
+
+    handlePlaying() {
+      console.log('Video is playing');
     },
     hideDetail: function () {
       this.show = false;
+      movieNum = '';
     },
     setToken: function () {
       const token = localStorage.getItem('jwt');
@@ -395,6 +447,17 @@ export default {
   height: 500px;
 }
 
+.movie-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trailer {
+  width: 400px;
+  height: 300px;
+}
+
 #recommend-label:hover {
   color: #de5078;
 }
@@ -464,5 +527,24 @@ img {
   height: 280px !important;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+.trailer-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 비율의 높이를 유지합니다. */
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.trailer-container iframe,
+.trailer-container object,
+.trailer-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+iframe {
+  pointer-events: none;
 }
 </style>

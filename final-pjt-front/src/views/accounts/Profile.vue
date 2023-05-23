@@ -1,12 +1,14 @@
 <template>
   <div class="container">
     <strong><h1 class="font-do my-3 text-left">프로필</h1></strong>
-    <h2 class="text-left">아이디: {{ profile.username }}</h2>
-    <p class="text-left"><strong>팔로워:</strong> {{ followersCount }}</p>
-    <p class="text-left"><strong>가입일:</strong> {{ formatDate(profile.date_joined) }}</p>
-    <p class="text-left"><strong>생일:</strong> {{ profile.date_of_birth }}</p>
-    <p class="text-left"><strong>이메일:</strong> {{ profile.email }}</p>
-    <p class="text-left"><strong>등급:</strong> {{ isAdmin ? '관리자' : '일반회원' }}</p>
+    <div v-if="profile">
+      <h2 class="text-left">아이디: {{ profile.username }}</h2>
+      <p class="text-left"><strong>팔로워:</strong> {{ followersCount }}</p>
+      <p class="text-left"><strong>가입일:</strong> {{ formatDate(profile.date_joined) }}</p>
+      <p class="text-left"><strong>생일:</strong> {{ profile.date_of_birth }}</p>
+      <p class="text-left"><strong>이메일:</strong> {{ profile.email }}</p>
+      <p class="text-left"><strong>등급:</strong> {{ isAdmin ? '관리자' : '일반회원' }}</p>
+    </div>
 
     <div v-if="profile">
       <!-- <p><strong>회원코드:</strong> {{ profile.id }}</p> -->
@@ -16,20 +18,14 @@
           {{ isFollowing ? '언팔로우' : '팔로우' }}
         </button>
       </div>
-      
+
       <!-- 버튼 넣을 div 박스 -->
       <div class="btn-div">
         <!-- 게시글 -->
-        <button class="created-article">작성한 게시글</button>
-        <!-- <ul>
-          <li v-for="post in posts" :key="post.id">
-            <p><strong>제목:</strong> {{ post.title }}</p>
-            <p><strong>내용:</strong> {{ post.content }}</p>
-          </li>
-        </ul> -->
+        <button class="created-article" @click="selectedTab = 'posts'">작성한 게시글</button>
 
         <!-- 리뷰 -->
-        <button class="created-review">작성한 리뷰</button>
+        <button class="created-review" @click="selectedTab = 'reviews'">작성한 리뷰</button>
         <!-- <ul>
           <li v-for="review in reviews" :key="review.id">
             <p><strong>영화:</strong> {{ review.movie.title }}</p>
@@ -39,7 +35,7 @@
         </ul> -->
 
         <!-- 댓글 -->
-        <button class="created-comment">작성한 댓글</button>
+        <button class="created-comment" @click="selectedTab = 'comments'">작성한 댓글</button>
         <!-- <ul>
           <li v-for="comment in comments" :key="comment.id">
             <p><strong>내용:</strong> {{ comment.content }}</p>
@@ -47,26 +43,54 @@
         </ul> -->
       </div>
 
-      <table class="table table-hover">
+      <table class="table table-hover" v-if="selectedTab === 'posts'">
         <tr>
-          <th>No</th>
-          <th>제목</th>
-          <th>작성자</th>
-          <th>작성일</th>
+          <th>No.</th>
+          <th>TITLE</th>
+          <th>CONTENT</th>
+          <th>DATE</th>
         </tr>
         <tr v-for="(post, idx) in posts" :key="idx">
-            <th>{{ post.id }}</th>
-            <th @click="postDetail(post)">{{ post.title }}</th>
-            <th>{{ post.user.username }}</th>
-            <th>{{ $moment(post.created_at).format('YYYY-MM-DD hh:mm:ss') }}</th>
-          </tr>
+          <th>{{ post.id }}</th>
+          <th>{{ post.title }}</th>
+          <th>{{ post.content }}</th>
+          <th>{{ $moment(post.created_at).format('YYYY-MM-DD hh:mm:ss') }}</th>
+        </tr>
       </table>
-
+      <table class="table table-hover" v-if="selectedTab === 'reviews'">
+        <tr>
+          <th>No.</th>
+          <th>MOIVE</th>
+          <th>RATE</th>
+          <th>CONTENT</th>
+          <th>DATE</th>
+        </tr>
+        <tr v-for="review in reviews" :key="review.id">
+          <th>{{ review.id }}</th>
+          <th>{{ review.movie.title }}</th>
+          <th>{{ review.rate }}</th>
+          <th>{{ review.content }}</th>
+          <th>{{ $moment(review.created_at).format('YYYY-MM-DD hh:mm:ss') }}</th>
+        </tr>
+      </table>
+      <table class="table table-hover" v-if="selectedTab === 'comments'">
+        <tr>
+          <th>No.</th>
+          <th>POST NO.</th>
+          <th>CONTENT</th>
+          <th>DATE</th>
+        </tr>
+        <tr v-for="comment in comments" :key="comment.id">
+          <th>{{ comment.id }}</th>
+          <th>{{ comment.post }}</th>
+          <th>{{ comment.content }}</th>
+          <th>{{ $moment(comment.created_at).format('YYYY-MM-DD hh:mm:ss') }}</th>
+        </tr>
+      </table>
     </div>
 
     <p v-else>Loading...</p>
   </div>
-  
 </template>
 
 <script>
@@ -86,6 +110,7 @@ export default {
       followersCount: 0, // 팔로워 수
       isFollowing: false,
       isCurrentUser: false,
+      selectedTab: 'posts',
     };
   },
   methods: {
@@ -140,7 +165,7 @@ export default {
         this.profile = res.data;
         this.followersCount = this.profile.followers_count; // 팔로워 수 설정
         this.isCurrentUser = this.profile.username === currentusername;
-        console.log(this.isCurrentUser);
+        // console.log(this.isCurrentUser);
       })
       .catch((err) => {
         console.log(err);
@@ -176,6 +201,7 @@ export default {
       .get(`${SERVER_URL}/community/${username}/comments/`)
       .then((res) => {
         this.comments = res.data;
+        console.log(this.comments);
       })
       .catch((err) => {
         console.log(err);
@@ -191,15 +217,15 @@ export default {
   /* margin-top: 20px; */
 }
 
-.created-article{
+.created-article {
   width: auto;
 }
 
-.created-review{
+.created-review {
   width: auto;
 }
 
-.created-comment{
+.created-comment {
   width: auto;
 }
 
@@ -210,6 +236,5 @@ table {
   border-style: dashed;
   /* border-color: #4c4d81b2; */
   border-color: #e8d1d969;
-
 }
 </style>
