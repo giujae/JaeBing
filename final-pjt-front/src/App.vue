@@ -42,7 +42,7 @@
               </b-dropdown-item>
             </b-nav-item-dropdown>
 
-            <template v-if="is_admin">
+            <template v-if="is_admin === true">
               <b-nav-item>
                 <router-link :to="{ name: 'ManageMovie' }" class="nav-margin">
                   <span class="badge badge-pill badge-warning">영화관리</span>
@@ -154,7 +154,6 @@ export default {
       }
     }
   },
-
   computed: {
     ...mapState(['is_admin', 'username']),
   },
