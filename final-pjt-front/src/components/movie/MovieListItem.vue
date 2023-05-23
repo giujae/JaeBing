@@ -13,9 +13,8 @@
       >
         <!-- <b-card-text>개봉일 : {{movie.release_date}}</b-card-text> -->
         <b-card-text class="font-1-8em font-do" :style="{ 'max-width': '20rem' }">
-          💕 : {{ movie.vote_count }}</b-card-text
-        >
-
+          💕 : {{ movie.vote_count }}
+        </b-card-text>
         <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
       </b-card>
       <b-card
@@ -30,9 +29,8 @@
       >
         <!-- <b-card-text>개봉일 : {{movie.release_date}}</b-card-text> -->
         <b-card-text class="font-1-8em font-do" :style="{ 'max-width': '20rem' }">
-          💕 : {{ movie.vote_count }}</b-card-text
-        >
-
+          💕 : {{ movie.vote_count }}
+        </b-card-text>
         <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
       </b-card>
     </b-col>
@@ -42,35 +40,63 @@
       class="font-do"
       hide-footer
       v-model="show"
-      size="lg"
+      size="xl"
       title="Movie information"
       footer-bg-variant="dark"
       footer-text-variant="dark"
     >
+      <div class="modal-content" style="background-color: black">
+        <!-- ... -->
+      </div>
       <!-- 영화디테일 부분 -->
       <div class="detail-box">
-        <div class="trailer">
-          <youtube :video-id="trailerVideoId" :player-vars="playerVars" @playing="handlePlaying"></youtube>
+        <div
+          class="modal-backdrop"
+          :style="`background-image: url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`"
+        ></div>
+
+        <div class="detail-content">
+          <div class="trailer">
+            <!-- <youtube :video-id="trailerVideoId" :player-vars="playerVars" @playing="handlePlaying"></youtube> -->
+            <!-- <iframe
+              id="player"
+              type="text/html"
+              width="400"
+              height="250"
+              :src="`http://www.youtube.com/embed/${trailerVideoId}`"
+              frameborder="0"
+            ></iframe> -->
+          </div>
+
+          <!-- Poster -->
+          <div class="poster">
+            <img
+              :src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`"
+              alt="movie poster"
+              v-if="!movie.poster_path.includes('#')"
+            />
+            <img src="https://image.tmdb.org/t/p/w185/g3gpHLUuQLGI9gRmfraSQCN1TYk.jpg" alt="movie poster" v-else />
+          </div>
+
+          <div class="details text-right">
+            <!-- Title -->
+            <h2 class="font-do">{{ movie.title }}</h2>
+
+            <!-- Release Date -->
+            <h5 class="font-do">{{ movie.release_date }}</h5>
+
+            <!-- Adult Rating -->
+            <h5 class="font-do" v-if="movie.adult">19세 관람가</h5>
+
+            <br />
+
+            <!-- Overview -->
+            <h4 class="font-poor">줄거리: {{ movie.overview | truncate(100, '...') }}</h4>
+
+            <!-- Vote Average -->
+            <h4 class="font-poor">평점: {{ movie.vote_average }}</h4>
+          </div>
         </div>
-        <img
-          :src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`"
-          alt="movie poster"
-          id="movie-poster"
-          v-if="!movie.poster_path.includes('#')"
-        />
-        <img
-          src="https://image.tmdb.org/t/p/w185/g3gpHLUuQLGI9gRmfraSQCN1TYk.jpg"
-          alt="movie poster"
-          id="movie-poster"
-          v-else
-        />
-        <h2 class="font-do">{{ movie.title }}</h2>
-        <h5 class="font-do">{{ movie.release_date }}</h5>
-        <h5 class="font-do" v-if="movie.adult">19세 관람가</h5>
-        <br />
-        <h4 class="font-poor">줄거리: {{ movie.overview | truncate(100, '...') }}</h4>
-        <h4 class="font-poor">평점: {{ movie.vote_average }}</h4>
-        <hr />
       </div>
       <br />
 
@@ -78,6 +104,7 @@
       <div v-if="is_admin === false && login === true" :class="{ appear: showForm }">
         <h2 class="font-do">리뷰 작성하기</h2>
         <div id="reviewForm">
+          <!-- 리뷰 작성 폼 내용 -->
           <div>
             <label for="rate" class="float-left font-jua font-1-5em">별점</label>
             <p class="float-left font-jua font-1-5em mr-3">: {{ selected_rate }}점</p>
@@ -143,9 +170,10 @@
       <hr />
       <ul>
         <li v-for="(review, idx) in review_list" :key="idx">
-          <div v-if="review.movie.id === movie.id || review.id === movie.id">
+          <div v-if="review.movie.id == movie.id || review.id == movie.id">
             <div class="row review-dottedline mt-5">
               <div class="col-3" id="review-rank">
+                <!-- 리뷰 별점 부분 -->
                 <div>
                   <b-form-rating color="#DE5078" inline size="sm" :value="review.rate | half()" readonly no-border>
                   </b-form-rating>
@@ -153,11 +181,13 @@
               </div>
 
               <div class="col-6" id="review-content" style="word-break: break-all">
+                <!-- 리뷰 내용 부분 -->
                 <p>{{ review.content }}</p>
                 <p>작성자 : {{ review.user.username }} | {{ $moment(review.created_at).format('YYYY-MM-DD') }}</p>
               </div>
 
-              <div class="col-3" id="review-button" v-if="review.user.id === login_user">
+              <div class="col-3" id="review-button" v-if="review.user.id == login_user">
+                <!-- 리뷰 수정, 삭제 버튼 -->
                 <button @click="updateReady(review)" :class="{ appear: showAdd }" class="btn btn-pink mr-1 ml-1">
                   수정
                 </button>
@@ -212,7 +242,7 @@ export default {
   methods: {
     showDetail: function () {
       this.show = true;
-      const API_Key = 'AIzaSyBtLxNlFsqSLT3GmRcCIawqcmVb90tmVAc';
+      const API_Key = 'AIzaSyDLytfpo-su6xYpTZ8OgrfNf941SBQzBiY';
       const movieTitle = this.movie.title;
       const query = '공식예고편 ' + movieTitle;
       this.avgRate = this.movie.rate;
@@ -226,20 +256,10 @@ export default {
           console.log(response.request.status);
           if (response.request.status === 200) {
             // 필터링된 예고편 영상 가져오기
-            const filteredVideos = videos.items.filter((item) => {
-              const title = item.snippet.title.toLowerCase();
-              const description = item.snippet.description.toLowerCase();
-              return title.includes('예고편') || description.includes('무료');
-            });
-            if (filteredVideos.length > 0) {
-              console.log(filteredVideos);
-              this.trailerVideoId = filteredVideos[0].id.videoId;
-              console.log(this.trailerVideoId);
-            } else {
-              console.log('예고편이 없습니다.');
-            }
+            this.trailerVideoId = videos.items[0].id.videoId;
+            console.log(this.trailerVideoId);
           } else {
-            console.log('API 요청에 실패했습니다.');
+            console.log('예고편이 없습니다.');
           }
         })
         .catch((error) => {
@@ -423,6 +443,7 @@ export default {
       this.showForm = true;
     }
     this.avgRate = this.movie.rate;
+    console.log(this.movie);
   },
   computed: {
     ...mapState(['login', 'login_user', 'is_admin', 'user_movie', 'movie_list', 'review_list', 'total']),
@@ -435,35 +456,89 @@ export default {
   display: none;
 }
 
-#movie-poster {
-  width: 300px;
-  min-height: 400px;
-  max-height: 500px;
-  float: left;
+.detail-box {
+  position: relative;
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.detail-content {
+  /* position: relative;
+  z-index: 1;
+  display: flex;
+  height: 100%; */
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  z-index: 2;
+}
+.modal-content {
+  background-color: #826592 !important;
+}
+.modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 0 !important;
+  filter: blur(3px);
+}
+
+.poster {
+  flex: 0 0 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-right: 20px;
 }
 
-.detail-box {
-  height: 500px;
+.poster img {
+  width: 100%;
+  height: 120%;
+  border-radius: 4px;
 }
 
-.movie-list-item {
+.details {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: flex-end;
+  align-self: flex-end;
+  position: absolute;
 }
 
-.trailer {
-  width: 400px;
-  height: 300px;
+.modal-xl {
+  max-width: 1000px;
 }
-
-#recommend-label:hover {
-  color: #de5078;
+/* .trailer-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  max-width: 100%;
+  flex-grow: 1;
 }
+.trailer-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+} */
 
-ul {
-  list-style: none;
+.appear {
+  display: none;
 }
 
 .review-dottedline {
@@ -515,36 +590,27 @@ ul {
   font-size: 1.8em;
 }
 
-#review-rank .form-control {
-  background-color: #343a40;
-}
 .card {
   background-color: #826592 !important;
   border: none !important;
 }
-img {
-  margin: 0 !important;
-  height: 280px !important;
+
+.img-top {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-.trailer-container {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 비율의 높이를 유지합니다. */
-  overflow: hidden;
-  max-width: 100%;
-}
 
-.trailer-container iframe,
-.trailer-container object,
-.trailer-container embed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
 iframe {
   pointer-events: none;
+}
+
+.trailer {
+  position: absolute;
+  top: 20px; /* Adjust the top position as needed */
+  right: 20px; /* Adjust the right position as needed */
+  width: 400px !important; /* Adjust the width as needed */
+  height: 225px !important; /* Adjust the height as needed */
+  object-fit: cover;
+  z-index: 1;
 }
 </style>

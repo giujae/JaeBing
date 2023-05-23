@@ -17,8 +17,8 @@
           <!--작성자와 접속자가 같다면, 수정/삭제 버튼 활성화-->
           <!--단, 관리자의 경우 삭제 버튼 활성화 -->
           <button
-            class="btn btn-pink mr-1"
-            v-if="comment.user.id === login_user && updateTrigger === false"
+            class="btn btn-danger mr-1"
+            v-if="comment.user.id == login_user && updateTrigger === false"
             @click="updatePostForm(comment)"
           >
             댓글 수정
@@ -33,7 +33,7 @@
           </button>
           <button
             class="btn btn-secondary font-jua mr-1"
-            v-else-if="comment.user.id === login_user && updateTrigger === false"
+            v-else-if="comment.user.id == login_user && updateTrigger === false"
             @click="deleteComment(comment)"
           >
             댓글 삭제

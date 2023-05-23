@@ -84,6 +84,7 @@ export default {
       sliding: null,
       search: '',
       i: 0,
+      j: false,
       genres: [
         '액션',
         '모험',
@@ -143,8 +144,8 @@ export default {
     movies: function () {
       return this.movie_list.filter((movie) => {
         const genreNames = movie.genre_ids.map((id) => id.name);
-        console.log(movie.movie_no);
-        console.log(genreNames.includes(this.search));
+        // console.log(movie.movie_no);
+        // console.log(genreNames.includes(this.search));
         // console.log(movie.genre_ids.map((id) => id.name));
         // console.log(movie.genre_ids.some((id) => id.name));
         if (movie.movie_no && genreNames.includes(this.search)) {
