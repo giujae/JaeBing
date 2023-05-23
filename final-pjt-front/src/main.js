@@ -6,7 +6,6 @@ import VueMoment from 'vue-moment';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import VModal from 'vue-js-modal';
 
-
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(VModal);
@@ -32,8 +31,12 @@ Vue.filter('half', halfStar);
 const username = localStorage.getItem('username');
 const jwt = localStorage.getItem('jwt');
 const login_user = localStorage.getItem('login_user');
+const is_admin = localStorage.getItem('is_admin');
 if (username && jwt) {
   store.dispatch('login', { username, jwt, login_user });
+}
+if (is_admin && jwt) {
+  store.dispatch('isAdmin', { is_admin });
 }
 
 new Vue({
