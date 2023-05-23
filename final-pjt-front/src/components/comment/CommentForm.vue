@@ -47,10 +47,12 @@ export default {
       const commentItem = {
         content: this.content,
       };
+      //console.log(this.post)
       const postId = this.post.id;
       axios
         .post(`${SERVER_URL}/community/${postId}/comment_create/`, commentItem, config)
         .then((res) => {
+          //console.log(res)
           this.$store.state.comments.unshift(res.data);
           this.content = '';
         })

@@ -152,7 +152,11 @@ export default {
       rgba(20, 20, 20, 0.75) 75%,
       rgba(20, 20, 20, 1) 100%
     ),
+<<<<<<< HEAD
     url('https://png.pngtree.com/thumb_back/fh260/background/20221111/pngtree-nobody-interface-of-pixel-game-platform-image_1456637.jpg');
+=======
+    url('https://e1.pxfuel.com/desktop-wallpaper/584/162/desktop-wallpaper-2560x1440-tokyo-cityscape-buildings-digital-retro-tokyo.jpg');
+>>>>>>> 9ecbb50d16aef7338244768d01cffa6f16c2cad6
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div class="profile-container">
 
 
@@ -21,6 +22,18 @@
       </div>
     </div>
     <!-- 프로필 카드 끝 -->
+=======
+  <div class="container">
+    <strong><h1 class="font-do my-3 text-left">프로필</h1></strong>
+    <div v-if="profile">
+      <h2 class="text-left">아이디: {{ profile.username }}</h2>
+      <p class="text-left"><strong>팔로워:</strong> {{ followersCount }}</p>
+      <p class="text-left"><strong>가입일:</strong> {{ formatDate(profile.date_joined) }}</p>
+      <p class="text-left"><strong>생일:</strong> {{ profile.date_of_birth }}</p>
+      <p class="text-left"><strong>이메일:</strong> {{ profile.email }}</p>
+      <p class="text-left"><strong>등급:</strong> {{ isAdmin ? '관리자' : '일반회원' }}</p>
+    </div>
+>>>>>>> 9ecbb50d16aef7338244768d01cffa6f16c2cad6
 
     <div v-if="profile">
       <!-- <p><strong>회원코드:</strong> {{ profile.id }}</p> -->
@@ -35,6 +48,7 @@
         </button>
       </div>
 
+<<<<<<< HEAD
       <!-- 전체적인 작성한 디브 -->
       <div class="created-div">
       <!-- 버튼 넣을 div 박스 -->
@@ -60,6 +74,33 @@
         class="created-table table table-hover"
         v-if="selectedTab === 'posts'"
       >
+=======
+      <!-- 버튼 넣을 div 박스 -->
+      <div class="btn-div">
+        <!-- 게시글 -->
+        <button class="created-article" @click="selectedTab = 'posts'">작성한 게시글</button>
+
+        <!-- 리뷰 -->
+        <button class="created-review" @click="selectedTab = 'reviews'">작성한 리뷰</button>
+        <!-- <ul>
+          <li v-for="review in reviews" :key="review.id">
+            <p><strong>영화:</strong> {{ review.movie.title }}</p>
+            <p><strong>평점:</strong> {{ review.rate }}</p>
+            <p><strong>내용:</strong> {{ review.content }}</p>
+          </li>
+        </ul> -->
+
+        <!-- 댓글 -->
+        <button class="created-comment" @click="selectedTab = 'comments'">작성한 댓글</button>
+        <!-- <ul>
+          <li v-for="comment in comments" :key="comment.id">
+            <p><strong>내용:</strong> {{ comment.content }}</p>
+          </li>
+        </ul> -->
+      </div>
+
+      <table class="table table-hover" v-if="selectedTab === 'posts'">
+>>>>>>> 9ecbb50d16aef7338244768d01cffa6f16c2cad6
         <tr>
           <th>No.</th>
           <th>TITLE</th>
@@ -70,6 +111,7 @@
           <th>{{ post.id }}</th>
           <th>{{ post.title }}</th>
           <th>{{ post.content }}</th>
+<<<<<<< HEAD
           <th>{{ $moment(post.created_at).format("YYYY-MM-DD hh:mm:ss") }}</th>
         </tr>
       </table>
@@ -113,6 +155,41 @@
           </th>
         </tr>
       </table>
+=======
+          <th>{{ $moment(post.created_at).format('YYYY-MM-DD hh:mm:ss') }}</th>
+        </tr>
+      </table>
+      <table class="table table-hover" v-if="selectedTab === 'reviews'">
+        <tr>
+          <th>No.</th>
+          <th>MOIVE</th>
+          <th>RATE</th>
+          <th>CONTENT</th>
+          <th>DATE</th>
+        </tr>
+        <tr v-for="review in reviews" :key="review.id">
+          <th>{{ review.id }}</th>
+          <th>{{ review.movie.title }}</th>
+          <th>{{ review.rate }}</th>
+          <th>{{ review.content }}</th>
+          <th>{{ $moment(review.created_at).format('YYYY-MM-DD hh:mm:ss') }}</th>
+        </tr>
+      </table>
+      <table class="table table-hover" v-if="selectedTab === 'comments'">
+        <tr>
+          <th>No.</th>
+          <th>POST NO.</th>
+          <th>CONTENT</th>
+          <th>DATE</th>
+        </tr>
+        <tr v-for="comment in comments" :key="comment.id">
+          <th>{{ comment.id }}</th>
+          <th>{{ comment.post }}</th>
+          <th>{{ comment.content }}</th>
+          <th>{{ $moment(comment.created_at).format('YYYY-MM-DD hh:mm:ss') }}</th>
+        </tr>
+      </table>
+>>>>>>> 9ecbb50d16aef7338244768d01cffa6f16c2cad6
     </div>
   </div>
 
@@ -137,7 +214,11 @@ export default {
       followersCount: 0, // 팔로워 수
       isFollowing: false,
       isCurrentUser: false,
+<<<<<<< HEAD
       selectedTab: "posts",
+=======
+      selectedTab: 'posts',
+>>>>>>> 9ecbb50d16aef7338244768d01cffa6f16c2cad6
     };
   },
   methods: {
@@ -275,12 +356,17 @@ export default {
   /* margin-top: 20px; */
 }
 
+<<<<<<< HEAD
 /* 작성한 게시글 */
 .created-btn {
+=======
+.created-article {
+>>>>>>> 9ecbb50d16aef7338244768d01cffa6f16c2cad6
   width: auto;
   padding-left: 0px;
 }
 
+<<<<<<< HEAD
 /* 버튼 클릭시 테두리 삭제 */
 .created-btn:focus {
   outline: none;
@@ -290,11 +376,24 @@ export default {
 .created-table {
   
   font-family: "NeoDunggeunmo";
+=======
+.created-review {
+  width: auto;
+}
+
+.created-comment {
+  width: auto;
+}
+
+table {
+  font-family: 'NeoDunggeunmo';
+>>>>>>> 9ecbb50d16aef7338244768d01cffa6f16c2cad6
   font-size: 20px;
   color: #e8d1d9 !important;
   border-style: dashed;
   /* border-color: #4c4d81b2; */
   border-color: #e8d1d969;
+<<<<<<< HEAD
   background-color: #101130d1;
   /* margin: 2px; */
 }
@@ -333,4 +432,7 @@ th {
   padding: 2px !important;
 }
 
+=======
+}
+>>>>>>> 9ecbb50d16aef7338244768d01cffa6f16c2cad6
 </style>
