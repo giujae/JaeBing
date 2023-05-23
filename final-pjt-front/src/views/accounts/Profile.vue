@@ -1,22 +1,18 @@
 <template>
   <div class="profile-container">
-
-
     <!-- 프로필 카드 -->
     <div class="profile-card">
       <strong><h1 class="my-4 text-left">프로필</h1></strong>
       <div v-if="profile">
         <h2 class="text-left my-3">
           <span class="username pr-2 pl-0">{{ profile.username }}</span>
-          <span class="follower">Follower: {{ followersCount }}</span> 
-          <span class="grade">Grade: {{ isAdmin ? "관리자" : "일반회원" }}</span>
+          <span class="follower">Follower: {{ followersCount }}</span>
+          <span class="grade">Grade: {{ isAdmin ? '관리자' : '일반회원' }}</span>
         </h2>
         <!-- <p class="text-left">
           <strong>가입일:</strong> {{ formatDate(profile.date_joined) }}
         </p> -->
-        <p class="text-left p-auto my-1">
-          <strong>생일:</strong> {{ profile.date_of_birth }}
-        </p>
+        <p class="text-left p-auto my-1"><strong>생일:</strong> {{ profile.date_of_birth }}</p>
         <p class="text-left"><strong>이메일:</strong> {{ profile.email }}</p>
       </div>
     </div>
@@ -26,107 +22,93 @@
       <!-- <p><strong>회원코드:</strong> {{ profile.id }}</p> -->
 
       <div v-if="!isCurrentUser">
-        <button
-          v-if="!isCurrentUser"
-          @click="toggleFollow"
-          class="btn btn-primary"
-        >
-          {{ isFollowing ? "언팔로우" : "팔로우" }}
+        <button v-if="!isCurrentUser" @click="toggleFollow" class="btn btn-primary">
+          {{ isFollowing ? '언팔로우' : '팔로우' }}
         </button>
       </div>
 
       <!-- 전체적인 작성한 디브 -->
       <div class="created-div">
-      <!-- 버튼 넣을 div 박스 -->
-      <div class="btn-div">
-        <!-- 게시글 -->
-        <button class="created-btn" @click="selectedTab = 'posts'">
-          작성한 게시글
-        </button>
+        <!-- 버튼 넣을 div 박스 -->
+        <div class="btn-div">
+          <!-- 게시글 -->
+          <button class="created-btn" @click="selectedTab = 'posts'">작성한 게시글</button>
 
-        <!-- 리뷰 -->
-        <button class="created-btn" @click="selectedTab = 'reviews'">
-          작성한 리뷰
-        </button>
+          <!-- 리뷰 -->
+          <button class="created-btn" @click="selectedTab = 'reviews'">작성한 리뷰</button>
 
-        <!-- 댓글 -->
-        <button class="created-btn" @click="selectedTab = 'comments'">
-          작성한 댓글
-        </button>
+          <!-- 댓글 -->
+          <button class="created-btn" @click="selectedTab = 'comments'">작성한 댓글</button>
+        </div>
+
+        <!-- 작성한 게시글 테이블 -->
+        <table class="created-table table table-hover" v-if="selectedTab === 'posts'">
+          <tr>
+            <th>No.</th>
+            <th>TITLE</th>
+            <th>CONTENT</th>
+            <th>DATE</th>
+          </tr>
+          <tr v-for="(post, idx) in posts" :key="idx">
+            <th>{{ post.id }}</th>
+            <th>{{ post.title }}</th>
+            <th>{{ post.content }}</th>
+            <th>{{ $moment(post.created_at).format('YYYY-MM-DD hh:mm:ss') }}</th>
+          </tr>
+        </table>
+
+        <!-- 작성한 리뷰 테이블 -->
+        <table class="created-table table table-hover" v-if="selectedTab === 'reviews'">
+          <tr>
+            <th>No.</th>
+            <th>MOIVE</th>
+            <th>RATE</th>
+            <th>CONTENT</th>
+            <th>DATE</th>
+          </tr>
+
+          <tr v-for="review in reviews" :key="review.id">
+            <th>{{ review.id }}</th>
+            <th>{{ review.movie.title }}</th>
+            <th>{{ review.rate }}</th>
+            <th>{{ review.content }}</th>
+            <th>
+              {{ $moment(review.created_at).format('YYYY-MM-DD hh:mm:ss') }}
+            </th>
+          </tr>
+        </table>
+
+        <!-- 작성한 댓글 테이블 -->
+        <table class="created-table table table-hover" v-if="selectedTab === 'comments'">
+          <tr>
+            <th>No.</th>
+            <th>POST NO.</th>
+            <th>CONTENT</th>
+            <th>DATE</th>
+          </tr>
+          <tr v-for="comment in comments" :key="comment.id">
+            <th>{{ comment.id }}</th>
+            <th>{{ comment.post }}</th>
+            <th>{{ comment.content }}</th>
+            <th>
+              {{ $moment(comment.created_at).format('YYYY-MM-DD hh:mm:ss') }}
+            </th>
+          </tr>
+        </table>
       </div>
-
-      <!-- 작성한 게시글 테이블 -->
-      <table
-        class="created-table table table-hover"
-        v-if="selectedTab === 'posts'"
-      >
-        <tr>
-          <th>No.</th>
-          <th>TITLE</th>
-          <th>CONTENT</th>
-          <th>DATE</th>
-        </tr>
-        <tr v-for="(post, idx) in posts" :key="idx">
-          <th>{{ post.id }}</th>
-          <th>{{ post.title }}</th>
-          <th>{{ post.content }}</th>
-          <th>{{ $moment(post.created_at).format("YYYY-MM-DD hh:mm:ss") }}</th>
-        </tr>
-      </table>
-
-      <!-- 작성한 리뷰 테이블 -->
-      <table class="created-table table table-hover" v-if="selectedTab === 'reviews'">
-        <tr>
-          <th>No.</th>
-          <th>MOIVE</th>
-          <th>RATE</th>
-          <th>CONTENT</th>
-          <th>DATE</th>
-        </tr>
-        
-        
-        <tr v-for="review in reviews" :key="review.id">
-          <th>{{ review.id }}</th>
-          <th>{{ review.movie.title }}</th>
-          <th>{{ review.rate }}</th>
-          <th>{{ review.content }}</th>
-          <th>
-            {{ $moment(review.created_at).format("YYYY-MM-DD hh:mm:ss") }}
-          </th>
-        </tr>
-      </table>
-
-      <!-- 작성한 댓글 테이블 -->
-      <table class="created-table table table-hover" v-if="selectedTab === 'comments'">
-        <tr>
-          <th>No.</th>
-          <th>POST NO.</th>
-          <th>CONTENT</th>
-          <th>DATE</th>
-        </tr>
-        <tr v-for="comment in comments" :key="comment.id">
-          <th>{{ comment.id }}</th>
-          <th>{{ comment.post }}</th>
-          <th>{{ comment.content }}</th>
-          <th>
-            {{ $moment(comment.created_at).format("YYYY-MM-DD hh:mm:ss") }}
-          </th>
-        </tr>
-      </table>
     </div>
-  </div>
 
     <p v-else>Loading...</p>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: "Profile",
+  name: 'Profile',
   data() {
     return {
       profile: null,
@@ -142,7 +124,7 @@ export default {
   },
   methods: {
     setToken() {
-      const token = localStorage.getItem("jwt");
+      const token = localStorage.getItem('jwt');
 
       const config = {
         headers: {
@@ -152,7 +134,7 @@ export default {
       return config;
     },
     formatDate(date) {
-      return this.$moment(date).format("YYYY-MM-DD");
+      return this.$moment(date).format('YYYY-MM-DD');
     },
     toggleFollow() {
       const username = this.$route.params.username;
@@ -160,30 +142,22 @@ export default {
 
       if (this.isFollowing) {
         axios
-          .post(
-            `${SERVER_URL}/accounts/profile/${username}/unfollow/`,
-            {},
-            config
-          )
+          .post(`${SERVER_URL}/accounts/profile/${username}/unfollow/`, {}, config)
           .then((res) => {
             this.isFollowing = false;
             this.followersCount--; // 팔로워 수 감소
-            alert("언팔로우되었습니다."); // 알림 표시
+            alert('언팔로우되었습니다.'); // 알림 표시
           })
           .catch((err) => {
             console.log(err);
           });
       } else {
         axios
-          .post(
-            `${SERVER_URL}/accounts/profile/${username}/follow/`,
-            {},
-            config
-          )
+          .post(`${SERVER_URL}/accounts/profile/${username}/follow/`, {}, config)
           .then((res) => {
             this.isFollowing = true;
             this.followersCount++; // 팔로워 수 증가
-            alert("팔로우되었습니다."); // 알림 표시
+            alert('팔로우되었습니다.'); // 알림 표시
           })
           .catch((err) => {
             console.log(err);
@@ -192,7 +166,7 @@ export default {
     },
   },
   created() {
-    const currentusername = localStorage.getItem("username");
+    const currentusername = localStorage.getItem('username');
     const username = this.$route.params.username;
     axios
       .get(`${SERVER_URL}/accounts/profile/${username}/`)
@@ -288,8 +262,7 @@ export default {
 
 /* 작성한~ 테이블 속성 */
 .created-table {
-  
-  font-family: "NeoDunggeunmo";
+  font-family: 'NeoDunggeunmo';
   font-size: 20px;
   color: #e8d1d9 !important;
   border-style: dashed;
@@ -299,8 +272,8 @@ export default {
   /* margin: 2px; */
 }
 
-.created-div{
-  padding: 0px 20px 20px 20px;;
+.created-div {
+  padding: 0px 20px 20px 20px;
 }
 
 /* 프로필 카드 */
@@ -332,5 +305,4 @@ export default {
 th {
   padding: 2px !important;
 }
-
 </style>

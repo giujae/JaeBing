@@ -1,6 +1,5 @@
 <template>
   <div class="col-3">
-    
     <b-col>
       <b-card
         v-if="!movie.poster_path.includes('#')"
@@ -10,8 +9,8 @@
         tag="article"
         class="my-2"
         style="max-width: 25rem; max-height: 20rem; min-height: 20rem"
-        @click="showDetail">
-
+        @click="showDetail"
+      >
         <!-- <b-card-text>개봉일 : {{movie.release_date}}</b-card-text> -->
         <b-card-text class="font-1-8em font-do" :style="{ 'max-width': '20rem' }">
           💕 : {{ movie.vote_count }}
@@ -27,8 +26,8 @@
         tag="article"
         style="max-width: 25rem; max-height: 20rem; min-height: 20rem"
         class="my-2 bg-dark"
-        @click="showDetail">
-
+        @click="showDetail"
+      >
         <!-- <b-card-text>개봉일 : {{movie.release_date}}</b-card-text> -->
         <b-card-text class="font-1-8em font-do" :style="{ 'max-width': '20rem' }">
           💕 : {{ movie.vote_count }}
@@ -60,14 +59,14 @@
         <div class="detail-content">
           <div class="trailer">
             <!-- <youtube :video-id="trailerVideoId" :player-vars="playerVars" @playing="handlePlaying"></youtube> -->
-            <!-- <iframe
+            <iframe
               id="player"
               type="text/html"
               width="400"
               height="250"
-              :src="`http://www.youtube.com/embed/${trailerVideoId}`"
+              :src="`http://www.youtube.com/embed/${trailerVideoId}?autoplay=1&mute=1`"
               frameborder="0"
-            ></iframe> -->
+            ></iframe>
           </div>
 
           <!-- Poster -->
@@ -171,7 +170,7 @@
       <h2 class="font-do">리뷰 목록</h2>
       <hr />
       <ul>
-        <li v-for="(review, idx) in review_list" :key="idx">
+        <li v-for="(review, idx) in reviews" :key="idx">
           <div v-if="review.movie.id == movie.id || review.id == movie.id">
             <div class="row review-dottedline mt-5">
               <div class="col-3" id="review-rank">
@@ -239,10 +238,13 @@ export default {
         autoplay: 1,
         controls: 1,
       },
+      reviews: [],
     };
   },
   methods: {
     showDetail: function () {
+      // console.log('얘두');
+      // console.log(this.review_list);
       this.show = true;
       const API_Key = 'AIzaSyDLytfpo-su6xYpTZ8OgrfNf941SBQzBiY';
       const movieTitle = this.movie.title;
@@ -250,7 +252,15 @@ export default {
       this.avgRate = this.movie.rate;
 
       const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_Key}&q=${query}&part=snippet&type=video`;
-
+      axios
+        .get(`${SERVER_URL}/movies/${this.movie.id}/reviews/`)
+        .then((res) => {
+          // console.log(res.data, 'data');
+          this.reviews = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       axios
         .get(apiUrl)
         .then((response) => {
@@ -274,7 +284,6 @@ export default {
     },
     hideDetail: function () {
       this.show = false;
-      movieNum = '';
     },
     setToken: function () {
       const token = localStorage.getItem('jwt');
@@ -293,7 +302,6 @@ export default {
         rate: this.selected_rate,
         like: this.like,
       };
-
       axios
         .post(`${SERVER_URL}/movies/${movie.id}/review/`, reviewInfo, config)
         .then((res) => {
@@ -305,7 +313,7 @@ export default {
           this.$store.state.review_list.unshift(res.data);
           let acount = 0;
           for (const review of this.review_list) {
-            if (review.movie.id === this.movie.id) {
+            if (review.movie.id == this.movie.id) {
               acount++;
             }
           }
@@ -323,6 +331,7 @@ export default {
           this.selected_rate = null;
           this.like = false;
           this.showForm = true;
+          this.showDetail();
         })
         .catch((err) => {
           console.log(err);
@@ -367,6 +376,16 @@ export default {
 
             this.showForm = false;
             this.showAdd = false;
+            this.showDetail();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        axios
+          .get(`${SERVER_URL}/movies/${this.movie.id}/reviews/`)
+          .then((res) => {
+            // console.log(res.data, 'data');
+            this.reviews = res.data;
           })
           .catch((err) => {
             console.log(err);
@@ -434,6 +453,7 @@ export default {
 
           this.$store.state.movie_list[this.movie.id - 1].rate = this.total[this.movie.id] / ucount;
           console.log('평균', this.$store.state.movie_list[this.movie.id - 1].rate);
+          this.showDetail();
         })
         .catch((err) => {
           console.log(err);
@@ -445,7 +465,6 @@ export default {
       this.showForm = true;
     }
     this.avgRate = this.movie.rate;
-    console.log(this.movie);
   },
   computed: {
     ...mapState(['login', 'login_user', 'is_admin', 'user_movie', 'movie_list', 'review_list', 'total']),

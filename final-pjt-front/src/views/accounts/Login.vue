@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="container">
-
       <div class="row">
         <div class="col-6">
           <h1 class="m-3">안농 :) 어서와!</h1>
@@ -37,12 +36,7 @@
                 />
               </div>
               <br />
-              <button
-                @click="login"
-                class="login-btn btn mt-3 font-1-5em btn-block"
-              >
-                웅! 자 드가자
-              </button>
+              <button @click="login" class="login-btn btn mt-3 font-1-5em btn-block">웅! 자 드가자</button>
             </div>
           </div>
         </div>
@@ -51,9 +45,7 @@
           <div>
             <h3 class="signup-ment">이걸 아직도 가입 안 했어?!</h3>
             <div class="emptydiv"></div>
-            <router-link class="signup-a" :to="{ name: 'Signup' }"
-              >당장 가입 해.</router-link
-            >
+            <router-link class="signup-a" :to="{ name: 'Signup' }">당장 가입 해.</router-link>
             <div class="emptydiv"></div>
           </div>
         </div>
@@ -63,23 +55,23 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: "Login",
+  name: 'Login',
   data: function () {
     return {
       credentials: {
-        username: "",
-        password: "",
+        username: '',
+        password: '',
       },
     };
   },
   methods: {
     setToken: function () {
-      const token = localStorage.getItem("jwt");
+      const token = localStorage.getItem('jwt');
 
       const config = {
         headers: {
@@ -94,8 +86,8 @@ export default {
         .post(`${SERVER_URL}/accounts/api-token-auth/`, this.credentials)
         .then((res) => {
           // console.log(res)
-          localStorage.setItem("jwt", res.data.token);
-          this.$emit("login");
+          localStorage.setItem('jwt', res.data.token);
+          this.$emit('login');
           this.$store.state.login = true;
 
           // console.log(res)
@@ -107,10 +99,10 @@ export default {
               const id = res.data;
               this.$store.state.login_user = id;
               this.$store.state.username = this.credentials.username;
-              localStorage.setItem("username", this.credentials.username);
-              localStorage.setItem("login_user", id);
-              this.$store.dispatch("recommendMovie", id);
-              this.$store.dispatch("getMovie");
+              localStorage.setItem('username', this.credentials.username);
+              localStorage.setItem('login_user', id);
+              this.$store.dispatch('recommendMovie', id);
+              this.$store.dispatch('getMovie');
               // console.log(this.$store.state.login_user)
             })
             .catch((err) => {
@@ -120,7 +112,8 @@ export default {
           axios
             .post(`${SERVER_URL}/accounts/is-admin/`, this.credentials)
             .then((res) => {
-              this.$store.dispatch("isAdmin", res.data);
+              this.$store.dispatch('isAdmin', res.data);
+              localStorage.setItem('is_admin', res.data);
             })
             .catch((err) => {
               console.log(err);
@@ -128,23 +121,23 @@ export default {
           this.$store.state.username = this.credentials.username;
           if (this.flag) {
             this.$router.push({
-              name: "AdminManagement",
+              name: 'AdminManagement',
             });
           } else {
             this.$router.push({
-              name: "MovieList",
+              name: 'MovieList',
             });
           }
         })
         .catch((err) => {
           console.log(err);
-          alert("로그인 정보가 일치하지 않습니다.");
+          alert('로그인 정보가 일치하지 않습니다.');
         });
     },
   },
   mounted() {
     window.scrollTo(0, 0);
-    const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem('jwt');
     if (token) {
       const config = this.setToken();
 
@@ -155,9 +148,9 @@ export default {
           const id = res.data;
           this.$store.state.login_user = id;
           this.$store.state.username = this.credentials.username;
-          localStorage.setItem("username", this.credentials.username);
-          localStorage.setItem("login_user", id);
-          this.$store.dispatch("recommendMovie", id);
+          localStorage.setItem('username', this.credentials.username);
+          localStorage.setItem('login_user', id);
+          this.$store.dispatch('recommendMovie', id);
 
           // 로그인 상태를 설정
           this.$store.state.login = true;
@@ -228,5 +221,4 @@ html {
   background-position: center center;
   background-size: cover;
 }
-
 </style>
