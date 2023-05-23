@@ -1,17 +1,20 @@
 <template>
   <div class="profile-container">
-    <strong><h1 class="my-3 text-left">프로필</h1></strong>
+
+
+    <!-- 프로필 카드 -->
     <div class="profile-card">
+      <strong><h1 class="my-4 text-left">프로필</h1></strong>
       <div v-if="profile">
-        <h2 class="text-left">
+        <h2 class="text-left my-3">
           <span class="username pr-2 pl-0">{{ profile.username }}</span>
-          <span class="follower">팔로워: {{ followersCount }}</span>
-          <span class="grade">등급:{{ isAdmin ? "관리자" : "일반회원" }}</span>
+          <span class="follower">Follower: {{ followersCount }}</span> 
+          <span class="grade">Grade: {{ isAdmin ? "관리자" : "일반회원" }}</span>
         </h2>
         <!-- <p class="text-left">
           <strong>가입일:</strong> {{ formatDate(profile.date_joined) }}
         </p> -->
-        <p class="text-left p-auto">
+        <p class="text-left p-auto my-1">
           <strong>생일:</strong> {{ profile.date_of_birth }}
         </p>
         <p class="text-left"><strong>이메일:</strong> {{ profile.email }}</p>
@@ -32,36 +35,27 @@
         </button>
       </div>
 
+      <!-- 전체적인 작성한 디브 -->
+      <div class="created-div">
       <!-- 버튼 넣을 div 박스 -->
       <div class="btn-div">
         <!-- 게시글 -->
-        <button class="created-article" @click="selectedTab = 'posts'">
+        <button class="created-btn" @click="selectedTab = 'posts'">
           작성한 게시글
         </button>
 
         <!-- 리뷰 -->
-        <button class="created-review" @click="selectedTab = 'reviews'">
+        <button class="created-btn" @click="selectedTab = 'reviews'">
           작성한 리뷰
         </button>
-        <!-- <ul>
-          <li v-for="review in reviews" :key="review.id">
-            <p><strong>영화:</strong> {{ review.movie.title }}</p>
-            <p><strong>평점:</strong> {{ review.rate }}</p>
-            <p><strong>내용:</strong> {{ review.content }}</p>
-          </li>
-        </ul> -->
 
         <!-- 댓글 -->
-        <button class="created-comment" @click="selectedTab = 'comments'">
+        <button class="created-btn" @click="selectedTab = 'comments'">
           작성한 댓글
         </button>
-        <!-- <ul>
-          <li v-for="comment in comments" :key="comment.id">
-            <p><strong>내용:</strong> {{ comment.content }}</p>
-          </li>
-        </ul> -->
       </div>
 
+      <!-- 작성한 게시글 테이블 -->
       <table
         class="created-table table table-hover"
         v-if="selectedTab === 'posts'"
@@ -79,7 +73,9 @@
           <th>{{ $moment(post.created_at).format("YYYY-MM-DD hh:mm:ss") }}</th>
         </tr>
       </table>
-      <table class="table table-hover" v-if="selectedTab === 'reviews'">
+
+      <!-- 작성한 리뷰 테이블 -->
+      <table class="created-table table table-hover" v-if="selectedTab === 'reviews'">
         <tr>
           <th>No.</th>
           <th>MOIVE</th>
@@ -87,6 +83,8 @@
           <th>CONTENT</th>
           <th>DATE</th>
         </tr>
+        
+        
         <tr v-for="review in reviews" :key="review.id">
           <th>{{ review.id }}</th>
           <th>{{ review.movie.title }}</th>
@@ -97,7 +95,9 @@
           </th>
         </tr>
       </table>
-      <table class="table table-hover" v-if="selectedTab === 'comments'">
+
+      <!-- 작성한 댓글 테이블 -->
+      <table class="created-table table table-hover" v-if="selectedTab === 'comments'">
         <tr>
           <th>No.</th>
           <th>POST NO.</th>
@@ -114,6 +114,7 @@
         </tr>
       </table>
     </div>
+  </div>
 
     <p v-else>Loading...</p>
   </div>
@@ -245,11 +246,26 @@ export default {
 </script>
 
 <style>
+/* 전체적인 프로필 디브 */
 .profile-container {
   color: #e8d1d9;
   min-height: 100vh;
   width: 100%;
   padding: 0 10%;
+  background-image: linear-gradient(
+      to top,
+      rgba(20, 20, 20, 0.25) 10%,
+      rgba(20, 20, 20, 0.5) 25%,
+      rgba(20, 20, 20, 0.5) 50%,
+      rgba(20, 20, 20, 0.75) 75%,
+      rgba(20, 20, 20, 1) 100%
+    ),
+    url('https://png.pngtree.com/thumb_back/fh260/background/20221111/pngtree-nobody-interface-of-pixel-game-platform-image_1456637.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(20px);
+  color: #e8d1d9;
 }
 
 /* 작성한~ 버튼 디브 */
@@ -260,23 +276,19 @@ export default {
 }
 
 /* 작성한 게시글 */
-.created-article {
+.created-btn {
   width: auto;
   padding-left: 0px;
 }
 
-/* 작성한 리뷰 */
-.created-review {
-  width: auto;
-}
-
-/* 작성한 댓글 */
-.created-comment {
-  width: auto;
+/* 버튼 클릭시 테두리 삭제 */
+.created-btn:focus {
+  outline: none;
 }
 
 /* 작성한~ 테이블 속성 */
 .created-table {
+  
   font-family: "NeoDunggeunmo";
   font-size: 20px;
   color: #e8d1d9 !important;
@@ -284,26 +296,41 @@ export default {
   /* border-color: #4c4d81b2; */
   border-color: #e8d1d969;
   background-color: #101130d1;
-  margin: 2px;
+  /* margin: 2px; */
+}
+
+.created-div{
+  padding: 0px 20px 20px 20px;;
 }
 
 /* 프로필 카드 */
-/* .profile-card {
-  background-color: beige;
-  color: black;
-} */
+.profile-card {
+  /* background-color: #101130; */
+  color: white;
+  padding: 20px;
+}
 
+/* 팔로워 속성 */
 .follower {
   font-size: 16px;
 }
 
+/* 회원 등급 속성 */
 .grade {
   font-size: 16px;
 }
 
+/* 유저 이름 속성 */
 .username {
   padding-right: 8px;
   padding-left: 4px;
   margin: auto;
+  font-size: 40px;
 }
+
+/* 테이블 요소 속성 */
+th {
+  padding: 2px !important;
+}
+
 </style>

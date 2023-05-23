@@ -1,12 +1,14 @@
 <template>
   <div>
     <div class="container">
+
       <div class="row">
         <div class="col-6">
           <h1 class="m-3">안농 :) 어서와!</h1>
           <h2>로그인 할래yo?</h2>
         </div>
       </div>
+
       <div class="row">
         <div class="col-6 d-flex justify-content-center" id="rightline">
           <div class="mb-3 mt-5" style="max-width: 18rem">
@@ -178,6 +180,7 @@ export default {
 /* 로그인 멘트 */
 .container {
   color: #e8d1d9;
+  min-height: 80vh;
 }
 
 /* 로그인 카드 속성 */
@@ -218,4 +221,12 @@ html {
   /* background-color: #0F2648; */
   background: red !important;
 }
+
+.card-body {
+  background-image: url(./pngwing.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
 </style>

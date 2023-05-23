@@ -1,15 +1,15 @@
 <template>
-  <div class="container">
+  <div class="comment-container">
     <form v-on:submit.prevent="createComment">
       <div class="row">
-        <div class="col-2 d-flex align-items-center">
-          <label for="content" class="font-1-5em">댓글달기: </label>
+        <div class="col-2 d-flex align-items-center m-0">
+          <label for="content" class="m-0">댓글달기: </label>
         </div>
-        <div class="col-6 d-flex align-items-center">
+        <div class="col-6 position-relative">
           <input type="text" class="form-control" id="content" v-model="content" />
         </div>
         <div class="col-4 d-flex align-items-center">
-          <button type="submit" class="btn btn-pink font-1-2em">등록</button>
+          <button type="submit" class="comment-create-btn">등록</button>
         </div>
       </div>
     </form>
@@ -66,4 +66,40 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.comment-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.comment-container .row {
+  display: flex;
+  align-items: flex-end;
+}
+
+.comment-container .col-2,
+.comment-container .col-6,
+.comment-container .col-4 {
+  flex: 1;
+}
+
+.comment-container .col-2 label {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: ellipsis;
+  display: inline-block;
+  width: 100%;
+}
+
+.comment-container .col-6 input[type="text"] {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.comment-container .col-4 {
+  display: flex;
+  align-items: flex-end;
+}
+</style>

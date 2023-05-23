@@ -2,7 +2,7 @@
   <div class="container">
     <h1 class="my-3">Sign up</h1>
 
-    <div class="form-group mt-5 font-poor font-1-2em">
+    <div class="signup-form-group mt-5 font-1-2em">
       <label for="username">사용자 이름: </label>
       <input
         placeholder="키미노 나마에와"
@@ -13,7 +13,7 @@
       />
     </div>
 
-    <div class="form-group mt-5 font-poor font-1-2em">
+    <div class="signup-form-group mt-5 font-1-2em">
       <label for="password">비밀번호: </label>
       <input
         placeholder="1차 비밀번호"
@@ -24,7 +24,7 @@
       />
     </div>
 
-    <div class="form-group mt-5 font-poor font-1-2em">
+    <div class="signup-form-group mt-5 font-1-2em">
       <label for="passwordConfirmation">비밀번호 확인: </label>
       <input
         placeholder="2차 비밀번호"
@@ -36,7 +36,7 @@
       />
     </div>
 
-    <div class="form-group mt-5">
+    <div class="signup-form-group mt-5">
       <label for="email">이메일: </label>
       <input
         placeholder="이메일 적어잉"
@@ -50,7 +50,7 @@
       >
     </div>
 
-    <div class="form-group mt-5 font-1-2em">
+    <div class="signup-form-group mt-5 font-1-2em">
       <label for="date_of_birth">생년월일: </label>
       <input
         type="date"
@@ -84,7 +84,7 @@
     </div>
     <br />
 
-    <div class="form-group mt-5 font-poor font-1-2em">
+    <div class="signup-form-group mt-5 font-poor font-1-2em">
       <button @click="signup" id="signupbtn">회원가입</button>
     </div>
   </div>

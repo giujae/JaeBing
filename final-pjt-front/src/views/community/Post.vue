@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-3 p-0">
-          <h1 class="h1-tag my-3 text-left">게시판</h1>
+          <h1 class="h1-tag mt-5 mt-2 text-left">게시판</h1>
         </div>
 
         <div class="create-btn-div p-0 col-9 d-flex align-items-center justify-content-end align-items-end">
@@ -152,7 +152,7 @@ export default {
       rgba(20, 20, 20, 0.75) 75%,
       rgba(20, 20, 20, 1) 100%
     ),
-    url('https://e1.pxfuel.com/desktop-wallpaper/584/162/desktop-wallpaper-2560x1440-tokyo-cityscape-buildings-digital-retro-tokyo.jpg');
+    url('https://png.pngtree.com/thumb_back/fh260/background/20221111/pngtree-nobody-interface-of-pixel-game-platform-image_1456637.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

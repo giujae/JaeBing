@@ -45,7 +45,7 @@
 
               <b-dropdown-item>
                 <router-link @click.native="logout" to="#" class="nav-margin">
-                  <button class="font-weight-bold p-0">Logout</button>
+                  <button class="logout-btn font-weight-bold p-0">Logout</button>
                 </router-link>
               </b-dropdown-item>
             </b-nav-item-dropdown>
@@ -105,8 +105,8 @@
     <div class="jumbotron" id="footerjumbo">
       <div class="container">
         <div class="row">
-          <div class="col-3"></div>
-          <div class="col-9"></div>
+          <div class="col-12">
+          </div>
         </div>
       </div>
     </div>
@@ -195,7 +195,9 @@ export default {
   text-align: center;
   color: black;
   background: #101130;
+  min-height: 100vh;
 }
+
 
 .navbar-toggler {
   color: #e8d1d9;
@@ -226,7 +228,7 @@ export default {
 }
 
 #footerjumbo {
-  height: 500px;
+  height: 200px;
   margin-bottom: 0rem;
 }
 
@@ -270,6 +272,7 @@ button {
   margin: -5px;
 }
 
+/* 로그아웃 버튼 */
 .logout {
   border-color: #0f264800;
   background-color: #0f264800;
@@ -297,4 +300,22 @@ button {
 .fa-bars {
   color: #e8d1d9;
 }
+
+.dropdown-menu {
+  background-color: #3c537f50 !important;
+}
+
+.dropdown-menu:active{
+  outline: none;
+}
+
+.dropdown-item > a.logout-btn{
+
+  color: #f5a6c1 !important;
+}
+
+.dropdown-item {
+    text-align: center !important;
+}
+
 </style>

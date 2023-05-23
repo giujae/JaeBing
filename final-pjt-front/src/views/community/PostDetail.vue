@@ -1,80 +1,85 @@
 <template>
-  <div>
-    <div class="container">
-      <div class="row">
-        <h1 class="font-do my-5">글 상세보기</h1>
+  <div class="post-detail-container">
+    <div class="row justify-content-center">
+      <div>
+        <h1 class="my-5">글 상세보기</h1>
       </div>
       <!-- <img :src="require(`@/assets/images/stooges/${item.img}.jpg`)" /> -->
-      <div class="row d-flex font-poor">
         <div class="media" style="width: 100%; word-break: break-all">
-          <img :src="images.logo" width="50" class="mr-3" alt="..." />
           <div class="media-body text-justify">
-            <h2 class="mt-0">{{ post.title }}</h2>
+            <h2 class="mt-0">Title: {{ post.title }} <p>좋아요: {{ likesCount }}</p></h2>
+
             <p class="font-1-5em">
-              작성자:
-              <router-link :to="{ name: 'Profile', params: { username: postUsername } }">{{
-                postUsername
-              }}</router-link>
+              작성자:<router-link :to="{ name: 'Profile', params: { username: postUsername } }">
+                {{postUsername}}</router-link>
             </p>
+            
             <p>
               작성: {{ $moment(post.created_at).format('YYYY-MM-DD hh:mm:ss') }} | 최근수정:
               {{ $moment(post.updated_at).format('YYYY-MM-DD hh:mm:ss') }}
             </p>
+
             <p class="font-2em">
-              {{ post.content }}
+              Content: {{ post.content }}
             </p>
+
             <hr :style="{ margin: '5px 30px' }" />
             <hr :style="{ margin: '5px 30px' }" />
+
             <div class="d-flex justify-content-end">
               <!--작성자와 접속자가 같다면, 수정/삭제 버튼 활성화-->
               <!--단, 관리자의 경우 삭제 버튼 활성화 -->
-              <button @click="toggleLikePost" class="btn btn-primary">
+              <!-- 좋아요 버튼 -->
+              <button class="post-detail-btn" @click="toggleLikePost">
                 <span v-if="isPostLiked">좋아요 취소</span>
                 <span v-else>좋아요</span>
               </button>
-              <p>좋아요: {{ likesCount }}</p>
+
+              <!-- 글 수정 버튼 -->
               <button
-                class="btn btn-warning font-do mr-3 font-1-2em"
+                class="post-detail-btn mr-3"
                 v-if="postUsername === this.$store.state.username"
-                @click="updatePostForm(post)"
-              >
-                글 수정
+                @click="updatePostForm(post)">
+                수정하기
               </button>
 
+              <!-- 관리자 글 삭제 버튼 -->
               <button
-                class="btn btn-danger font-do mr-3 font-1-2em"
+                class="post-detail-btn mr-3 "
                 v-if="this.$store.state.is_admin"
-                @click="deletePost(post)"
-              >
-                글 삭제
+                @click="deletePost(post)">
+                삭제하기
               </button>
+
+              <!-- 유저 글 삭제 버튼 -->
               <button
                 v-else-if="postUsername === this.$store.state.username"
                 @click="deletePost(post)"
-                class="btn btn-danger font-do mr-3 font-1-2em"
-              >
+                class="post-detail-btn mr-3">
                 글 삭제
               </button>
             </div>
-            <hr />
-            <hr />
-            <div>
-              <button @click="backToPost" class="btn btn-pink">목록으로 가기</button>
+
+            <!-- 목록으로 가기 버튼 -->
+            <div class="d-flex justify-content-end">
+              <button @click="backToPost" class="postpage-btn">목록으로 가기</button>
             </div>
-            <div class="mt-5">
+            
+            <!-- 댓글 -->
+            <div class="create-comment-btn mt-5">
               <CommentForm v-if="this.$store.state.login" :post="post" />
               <p v-else>댓글을 작성하려면 로그인이 필요합니다.</p>
             </div>
-
             <br />
+
 
             <hr :style="{ margin: '5px 30px' }" />
             <CommentList :post="post" />
+
           </div>
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -207,4 +212,23 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+.post-detail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  color: aliceblue;
+  margin: 0px 20px;
+  min-height: 90vh;
+}
+
+.post-detail-btn,
+.postpage-btn,
+.create-comment-btn {
+  width: auto;
+  min-width: 120px; /* 폭이 최소한 120px 이상 유지되도록 설정 */
+  padding: 0px;
+  margin: 0px;
+}
+</style>
