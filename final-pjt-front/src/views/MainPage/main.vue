@@ -45,7 +45,9 @@
             <li class="first-li-1">
               <picture class="pic">
                 <source
-                  srcset="https://image.tving.com/upload/cms/caip/CAIP1500/P000643144.jpg/dims/resize/F_webp,1024"
+                  srcset="
+                    https://image.tving.com/upload/cms/caip/CAIP1500/P000643144.jpg/dims/resize/F_webp,1024
+                  "
                   type="image/webp"
                   class="src"
                 />
@@ -59,7 +61,9 @@
             <li class="first-li-1">
               <picture class="pic">
                 <source
-                  srcset="https://image.tving.com/upload/cms/caip/CAIP1500/P001706762.jpg/dims/resize/F_webp,1024"
+                  srcset="
+                    https://image.tving.com/upload/cms/caip/CAIP1500/P001706762.jpg/dims/resize/F_webp,1024
+                  "
                   type="image/webp"
                   class="src"
                 />
@@ -73,7 +77,9 @@
             <li class="first-li-1">
               <picture class="pic">
                 <source
-                  srcset="https://image.tving.com/upload/cms/caip/CAIP1500/P001693843.jpg/dims/resize/F_webp,1024"
+                  srcset="
+                    https://image.tving.com/upload/cms/caip/CAIP1500/P001693843.jpg/dims/resize/F_webp,1024
+                  "
                   type="image/webp"
                   class="src"
                 />
@@ -87,7 +93,9 @@
             <li class="first-li-1">
               <picture class="pic">
                 <source
-                  srcset="https://image.tving.com/upload/cms/caip/CAIP1500/P001691763.jpg/dims/resize/F_webp,1024"
+                  srcset="
+                    https://image.tving.com/upload/cms/caip/CAIP1500/P001691763.jpg/dims/resize/F_webp,1024
+                  "
                   type="image/webp"
                   class="src"
                 />
@@ -101,7 +109,9 @@
             <li class="first-li-1">
               <picture class="pic">
                 <source
-                  srcset="https://image.tving.com/upload/cms/caip/CAIP1500/P001710496.jpg/dims/resize/F_webp,1024"
+                  srcset="
+                    https://image.tving.com/upload/cms/caip/CAIP1500/P001710496.jpg/dims/resize/F_webp,1024
+                  "
                   type="image/webp"
                   class="src"
                 />
@@ -127,23 +137,26 @@ export default {
   mounted() {
     var originalID, cloneID; //인터벌 포인터
     //롤링 배너 복제본 생성
-    let roller = document.querySelector('.flow-scene-first');
-    roller.id = 'roller1';
+    let roller = document.querySelector(".flow-scene-first");
+    roller.id = "roller1";
 
     let clone = roller.cloneNode(true);
-    clone.id = 'roller2';
-    document.querySelector('.flow-scene-wrap').appendChild(clone); //부착
+    clone.id = "roller2";
+    document.querySelector(".flow-scene-wrap").appendChild(clone); //부착
 
     //원본, 복제본 배너 위치 지정
-    document.querySelector('#roller1').style.left = '0px';
-    document.querySelector('#roller2').style.left = document.querySelector('.flow-scene-first ul').offsetWidth + 'px';
+    document.querySelector("#roller1").style.left = "0px";
+    document.querySelector("#roller2").style.left =
+      document.querySelector(".flow-scene-first ul").offsetWidth + "px";
 
     //클래스 할당
-    roller.classList.add('original');
-    clone.classList.add('clone');
+    roller.classList.add("original");
+    clone.classList.add("clone");
 
     //인터벌 메서드로 애니메이션 생성
-    let rollerWidth = document.querySelector('.flow-scene-first ul').offsetWidth; //회전 배너 너비값
+    let rollerWidth = document.querySelector(
+      ".flow-scene-first ul"
+    ).offsetWidth; //회전 배너 너비값
     let betweenDistance = 1; //이동 크기 - 정수여야 함
 
     //롤링 시작
@@ -152,13 +165,13 @@ export default {
         betweenRollCallback,
         parseInt(1000 / 100),
         betweenDistance,
-        document.querySelector('#roller1')
+        document.querySelector("#roller1")
       );
       cloneID = window.setInterval(
         betweenRollCallback,
         parseInt(1000 / 100),
         betweenDistance,
-        document.querySelector('#roller2')
+        document.querySelector("#roller2")
       );
     }
 
@@ -170,26 +183,26 @@ export default {
     }
 
     //마우스 호버시 롤링이 멈추었다 벗어나면 다시 롤링이 되도록 처리
-    document.getElementById('roller1').addEventListener('mouseover', () => {
+    document.getElementById("roller1").addEventListener("mouseover", () => {
       stopRoller();
     });
-    document.getElementById('roller2').addEventListener('mouseover', () => {
+    document.getElementById("roller2").addEventListener("mouseover", () => {
       stopRoller();
     });
-    document.getElementById('roller1').addEventListener('mouseout', () => {
+    document.getElementById("roller1").addEventListener("mouseout", () => {
       startRoller();
     });
-    document.getElementById('roller2').addEventListener('mouseout', () => {
+    document.getElementById("roller2").addEventListener("mouseout", () => {
       startRoller();
     });
 
     //인터벌 애니메이션 함수(공용)
     function betweenRollCallback(d, roller) {
       let left = parseInt(roller.style.left);
-      roller.style.left = left - d + 'px'; //이동
+      roller.style.left = left - d + "px"; //이동
       //조건부 위치 리셋
       if (rollerWidth + (left - d) <= 0) {
-        roller.style.left = rollerWidth + 'px';
+        roller.style.left = rollerWidth + "px";
       }
     }
 
@@ -200,8 +213,17 @@ export default {
 
 <style>
 @font-face {
-  font-family: 'EF_watermelonSalad';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_watermelonSalad.woff2') format('woff2');
+  font-family: "DungGeunMo";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EF_watermelonSalad";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_watermelonSalad.woff2")
+    format("woff2");
   font-weight: normal;
   font-style: normal;
 }
@@ -245,13 +267,13 @@ video {
 .jb-text p {
   margin-top: -24px;
   text-align: center;
-  font-size: 48px;
+  font-size: 40px;
   color: #e8d1d9;
 }
 
 /* 전체 페이지 속성 */
 #main {
-  font-family: 'EF_watermelonSalad';
+  font-family: "DungGeunMo";
   background-color: #101130;
   /* background: linear-gradient(45deg, #E8D1D9, #3C537F, #0f2648); */
   color: #e8d1d9;
@@ -263,6 +285,7 @@ video {
   color: #e8d1d9;
   display: flex;
   justify-content: space-between;
+  font-size: 20px;
 }
 
 /* 홈 버튼 속성 */
@@ -275,9 +298,9 @@ video {
   height: 40px;
 }
 
-/* 로그인 버튼 속성 */
+/* 로그인, 회원가입 버튼 속성 */
 button {
-  margin: 10px;
+  margin: 15px;
   background-color: #10113000;
   /* border-color: #E8D1D9;; */
   color: #e8d1d9;
@@ -286,9 +309,14 @@ button {
 }
 
 /* 버튼 클릭시 색변경 */
-button:hover,
-a:hover {
+button:hover {
   color: #d5b0c1;
+}
+
+/* 여기 다시 건들기 */
+a:active {
+  color: #d5b0c1;
+  text-decoration: none;
 }
 
 /* 각 태그들 점 없애기 */

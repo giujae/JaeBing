@@ -1,25 +1,24 @@
 <template>
-  <div>
-    <h1 v-if="this.purpose == 'create'" class="font-do my-3">글 작성하기</h1>
-    <h1 v-else-if="this.purpose == 'update'" class="font-do my-3">글 수정하기</h1>
-
-    <div class="container">
+    <div class="create-post-container my-5">
+      <div class="htag mt-5">
+        <h1 v-if="this.purpose == 'create'" class="my-4">글 작성하기</h1>
+        <h1 v-else-if="this.purpose == 'update'" class="my-3">글 수정하기</h1>
+      </div>  
+      
       <div class="row justify-content-center">
-        <form v-if="this.purpose == 'create'" v-on:submit.prevent="createPostForm" class="font-poor font-1-2em">
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label" for="title">Title: </label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" id="title" v-model.trim="title" />
+        <form v-if="this.purpose == 'create'" v-on:submit.prevent="createPostForm">
+          <div class="post-form-group my-4">
+            <label for="title">Title: </label>
+            <div>
+              <input type="text" class="form-control create-form-control" id="title" v-model.trim="title" />
             </div>
           </div>
 
-          <div class="form-group row">
-            <label for="content" class="col-sm-3 col-form-label">Content: </label>
-            <div class="col-sm-9">
-              <textarea class="form-control" id="content" v-model="content"></textarea>
-            </div>
+          <div class="post-form-group my-3">
+            <label for="content">Content: </label>
+              <textarea class="form-control create-form-control" id="content" v-model="content"></textarea>
           </div>
-          <button type="submit" class="btn btn-pink">등록하기</button>
+          <button class="submit-btn" type="submit">등록하기</button>
         </form>
 
         <form v-if="this.purpose == 'update'" v-on:submit.prevent="updatePost">
@@ -31,11 +30,10 @@
             <label for="content">Content: </label>
             <input type="text" id="content" v-model="content" />
           </div>
-          <button type="submit">등록하기</button>
+          <button type="submit-btn">등록하기</button>
         </form>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -122,4 +120,21 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.create-post-container
+{
+  width: 100%;
+  min-height: 70vh;
+  color:#e8d1d9;
+  font-size: 20px;
+}
+
+.submit-btn {
+  width: 100%;
+}
+
+.create-form-control{
+  /* background-color: #e8d1d986 !important; */
+}
+
+</style>
