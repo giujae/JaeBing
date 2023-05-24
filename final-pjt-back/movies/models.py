@@ -9,7 +9,7 @@ class Movie(models.Model):
   title = models.CharField(max_length=100)
   original_title = models.CharField(max_length=100)
   release_date = models.DateField(null=True)
-  poster_path = models.CharField(max_length=200)
+  poster_path = models.CharField(max_length=200, null=True)
   backdrop_path = models.CharField(max_length=255, null=True)
   adult = models.BooleanField(default=False)
   video = models.BooleanField(default=False)

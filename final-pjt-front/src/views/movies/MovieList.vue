@@ -26,15 +26,19 @@
               style="width: auto"
             >
               <template #img>
-                <div class="popluar-text" style="background-color: #e8d1d900; color:#e8d1d9; font-size: 30px; ">Movie Hit</div>
-                <div style="display: flex; justify-content: flex-end; background-color: #e8d1d900;" class="slide-card-div">
+                <div class="popluar-text" style="background-color: #e8d1d900; color: #e8d1d9; font-size: 30px">
+                  Movie Hit
+                </div>
+                <div
+                  style="display: flex; justify-content: flex-end; background-color: #e8d1d900"
+                  class="slide-card-div"
+                >
                   <img
                     class="d-block img-fluid"
                     :src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`"
                     alt="image slot"
-                    style="max-height: 480px; margin: 0px 10px 10px;"
+                    style="max-height: 480px; margin: 0px 10px 10px"
                   />
-
                 </div>
               </template>
             </b-carousel-slide>
