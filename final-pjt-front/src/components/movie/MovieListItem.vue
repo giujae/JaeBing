@@ -16,26 +16,15 @@
         @click="showDetail">
       </b-card> -->
 
-    <div>
-      <div class="cards" v-if="!movie.poster_path.includes('#')">
-        <figure>
-          <img
-            class="movielistitem m-0"
-            :src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`"
-            @click="showDetail"
-          />
-        </figure>
-      </div>
-
-      <div class="cards" v-else>
-        <figure>
-          <img
-            class="movielistitem"
-            src="https://image.tmdb.org/t/p/w185/g3gpHLUuQLGI9gRmfraSQCN1TYk.jpg"
-            @click="showDetail"
-          />
-        </figure>
-      </div>
+    <div class="carocard" v-if="!movie.poster_path.includes('#')">
+      <img class="movielistitem m-0" :src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`" @click="showDetail" />
+    </div>
+    <div class="carocard" v-else>
+      <img
+        class="movielistitem"
+        src="https://image.tmdb.org/t/p/w185/g3gpHLUuQLGI9gRmfraSQCN1TYk.jpg"
+        @click="showDetail"
+      />
     </div>
 
     <!-- 영화눌렀을때 이게 보이게 한다 -->
@@ -645,5 +634,8 @@ iframe {
 .movielistitem {
   width: auto;
   height: auto;
+}
+.carocard {
+  width: 200px !important;
 }
 </style>
