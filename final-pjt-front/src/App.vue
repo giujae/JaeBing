@@ -15,20 +15,20 @@
 
     <div id="nav" class="main-nav" v-if="this.$route.path !== '/'">
       <b-navbar toggleable="lg">
-        <b-navbar-toggle target="navbar-nav-collapse">
+        <b-navbar-toggle target="navbar-nav-collapse hambuger">
           <i class="fas fa-bars"></i>
         </b-navbar-toggle>
 
-        <b-navbar-brand href="/movies" class="font-weight-bold">Home</b-navbar-brand>
+        <b-navbar-brand href="/movies" class="font-weight-bold">
+          <img class="Logo" src="./Logo.png" alt="">
+        </b-navbar-brand>
 
         <b-collapse id="navbar-nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item-dropdown text="Community">
-              <b-dropdown-item>
-                <router-link :to="{ name: 'Post' }">Post</router-link>
-              </b-dropdown-item>
-              <b-dropdown-item>ES</b-dropdown-item>
-            </b-nav-item-dropdown>
+            <!-- Remove the dropdown and its items -->
+            <b-nav-item>
+              <router-link :to="{ name: 'Post' }">Community</router-link>
+            </b-nav-item>
 
             <b-nav-item-dropdown v-if="$store.state.login && this.$route.path !== '/login'" :text="username">
               <b-dropdown-item>
@@ -68,13 +68,13 @@
             <template v-else>
               <b-nav-item>
                 <router-link :to="{ name: 'Signup' }" class="nav-margin">
-                  <button class="font-weight-bold">Signup</button>
+                  <button class="nav-btn font-weight-bold">Signup</button>
                 </router-link>
               </b-nav-item>
 
               <b-nav-item>
                 <router-link :to="{ name: 'Login' }" class="nav-margin">
-                  <button class="font-weight-bold">Login</button>
+                  <button class="nav-btn font-weight-bold">Login</button>
                 </router-link>
               </b-nav-item>
             </template>
@@ -172,6 +172,7 @@ export default {
   font-style: normal;
 }
 
+/* 전체 div */
 #app {
   font-family: 'NeoDunggeunmoPro-Regular';
   -webkit-font-smoothing: antialiased;
@@ -182,16 +183,26 @@ export default {
   min-height: 100vh;
 }
 
+/* 로고 이미지 */
+.Logo{
+  width: 70px;
+  height: auto;
+  margin: 0px;
+}
+
+/* 햄버거 버튼 */
 .navbar-toggler {
   color: #e8d1d9;
   border-color: #e8d1d9;
   padding: 8px; /* 햄버거 버튼 패딩을 8px로 수정 */
 }
 
+/* 햄버거 버튼, 텍스트 */
 .navbar-toggler .fa-bars {
   margin-right: 4px; /* 햄버거 아이콘과 텍스트 사이의 우측 마진을 4px로 설정 */
 }
 
+/* 네브바의 a링크들 */
 #nav a {
   font-size: 25px;
   font-weight: bold;
@@ -201,15 +212,22 @@ export default {
   /* color: #2c3e50; */
 }
 
+/* 네브바 버튼 클릭시 */
+.nav-btn:focus{
+  outline: none;
+}
+
+
+.hambuger:focus{
+  outline: none;
+}
+
 #nav a.router-link-exact-active {
   /* color: #D44C7F; */
   color: #e8d1d9;
 }
 
-#logo {
-  /* color: #de5078 !important; */
-}
-
+/* 푸터 */
 #footerjumbo {
   height: 100px;
   margin-bottom: 0rem;
@@ -262,6 +280,7 @@ button {
   padding: 8px;
 }
 
+/* 유저 이름 */
 .user {
   color: #e8d1d9;
   padding: 8px 8px 8px 0; /* 상단, 우측, 하단 패딩은 8px, 좌측 패딩은 0으로 수정 */
