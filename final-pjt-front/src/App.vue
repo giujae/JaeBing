@@ -181,6 +181,10 @@ export default {
   color: black;
   background: #101130;
   min-height: 100vh;
+  /* background-image: url('Image Pasted at 2023-5-24 12-53.png'); */
+  /* background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; */
 }
 
 /* 로고 이미지 */

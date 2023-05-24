@@ -25,7 +25,7 @@
               style="width: auto">
               <template #img>
                 <div style="display: flex; justify-content: flex-end" class="slide-card-div">
-                  <!-- <p class="d-flex justify-content-">test</p> -->
+                  <div>dasd</div>
                   <img
                     class="d-block img-fluid"
                     :src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`"
@@ -199,7 +199,7 @@ h1 {
 /* 캐러셀 카드 박스 */
 .slide-card-div{
   background-color: #e8d1d9;
-  padding-bottom: 50px;
+  /* padding-bottom: 50px; */
 }
 
 /* 장르 선택 버튼 */
@@ -232,6 +232,10 @@ h1 {
   background-color: #e8d1d941;;
 }
 
+/* 장르 선택 옆 세모 버튼 */
+#genreBtn__BV_toggle_.dropdown-toggle::after{
+  padding: 1px;
+}
 
 .genreDropdown {
   background-color: #e8d1d9;
