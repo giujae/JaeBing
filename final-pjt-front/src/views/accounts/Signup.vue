@@ -7,7 +7,7 @@
       <input
         placeholder="키미노 나마에와"
         type="text"
-        class="form-control"
+        class="form-control2"
         id="username"
         v-model="credentials.username"
       />
@@ -18,7 +18,7 @@
       <input
         placeholder="1차 비밀번호"
         type="password"
-        class="form-control"
+        class="form-control2"
         id="password"
         v-model="credentials.password"
       />
@@ -32,7 +32,7 @@
         id="passwordConfirmation"
         v-model="credentials.passwordConfirmation"
         @keypress.enter="signup"
-        class="form-control"
+        class="form-control2"
       />
     </div>
 
@@ -41,7 +41,7 @@
       <input
         placeholder="이메일 적어잉"
         type="email"
-        class="form-control"
+        class="form-control2"
         id="email"
         v-model="credentials.email"
       />
@@ -54,7 +54,7 @@
       <label for="date_of_birth">생년월일: </label>
       <input
         type="date"
-        class="form-control"
+        class="form-control2"
         id="date_of_birth"
         v-model="credentials.date_of_birth"
       />
@@ -153,12 +153,13 @@ input {
 /* 회원가입 버튼 */
 #signupbtn {
   font-size: 2em !important;
-  width: 200px !important;
+  width: 300px;
   height: 40px;
   margin-bottom: 40px;
   background-image: url('startbtn.png');
-  background-size: cover;
+  /* background-size: cover; */
   background-position: center;
+  background-repeat: no-repeat;
   border: none;
   outline: none;
   cursor: pointer;

@@ -144,19 +144,12 @@ export default {
 .article {
   width: 100%;
   min-height: 100vh;
-  background-image: linear-gradient(
-      to top,
-      rgba(20, 20, 20, 0.25) 10%,
-      rgba(20, 20, 20, 0.5) 25%,
-      rgba(20, 20, 20, 0.5) 50%,
-      rgba(20, 20, 20, 0.75) 75%,
-      rgba(20, 20, 20, 1) 100%
-    ),
-    url('https://png.pngtree.com/thumb_back/fh260/background/20221111/pngtree-nobody-interface-of-pixel-game-platform-image_1456637.jpg');
+  background-image:
+    url('profilefixtemp.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  backdrop-filter: blur(10px);
+  /* backdrop-filter: blur(10px); */
   color: #e8d1d9;
 }
 

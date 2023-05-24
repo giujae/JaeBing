@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="movie-main">
     <div class="mb-5" style="max-width: 370px; margin-left: auto; margin-right: 5%">
       <h1 class="font-do my-3"></h1>
       <b-row class="d-flex justify-content-end"> </b-row>

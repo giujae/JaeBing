@@ -96,63 +96,7 @@
           </tr>
         </table>
       </div>
-
-      <!-- 작성한 게시글 테이블 -->
-      <table class="created-table table table-hover" v-if="selectedTab === 'posts'">
-        <tr>
-          <th>No.</th>
-          <th>TITLE</th>
-          <th>CONTENT</th>
-          <th>DATE</th>
-        </tr>
-        <tr v-for="(post, idx) in posts" :key="idx">
-          <th>{{ post.id }}</th>
-          <th>{{ post.title }}</th>
-          <th>{{ post.content }}</th>
-          <th>{{ $moment(post.created_at).format('YYYY-MM-DD hh:mm:ss') }}</th>
-        </tr>
-      </table>
-
-      <!-- 작성한 리뷰 테이블 -->
-      <table class="created-table table table-hover" v-if="selectedTab === 'reviews'">
-        <tr>
-          <th>No.</th>
-          <th>MOIVE</th>
-          <th>RATE</th>
-          <th>CONTENT</th>
-          <th>DATE</th>
-        </tr>
-
-        <tr v-for="review in reviews" :key="review.id">
-          <th>{{ review.id }}</th>
-          <th>{{ review.movie.title }}</th>
-          <th>{{ review.rate }}</th>
-          <th>{{ review.content }}</th>
-          <th>
-            {{ $moment(review.created_at).format('YYYY-MM-DD hh:mm:ss') }}
-          </th>
-        </tr>
-      </table>
-
-      <!-- 작성한 댓글 테이블 -->
-      <table class="created-table table table-hover" v-if="selectedTab === 'comments'">
-        <tr>
-          <th>No.</th>
-          <th>POST NO.</th>
-          <th>CONTENT</th>
-          <th>DATE</th>
-        </tr>
-        <tr v-for="comment in comments" :key="comment.id">
-          <th>{{ comment.id }}</th>
-          <th>{{ comment.post }}</th>
-          <th>{{ comment.content }}</th>
-          <th>
-            {{ $moment(comment.created_at).format('YYYY-MM-DD hh:mm:ss') }}
-          </th>
-        </tr>
-      </table>
     </div>
-
     <p v-else>Loading...</p>
   </div>
 </template>
@@ -281,19 +225,11 @@ export default {
   min-height: 100vh;
   width: 100%;
   padding: 0 10%;
-  background-image: linear-gradient(
-      to top,
-      rgba(20, 20, 20, 0.25) 10%,
-      rgba(20, 20, 20, 0.5) 25%,
-      rgba(20, 20, 20, 0.5) 50%,
-      rgba(20, 20, 20, 0.75) 75%,
-      rgba(20, 20, 20, 1) 100%
-    ),
-    url('https://png.pngtree.com/thumb_back/fh260/background/20221111/pngtree-nobody-interface-of-pixel-game-platform-image_1456637.jpg');
+  background-image:
+    url('profilefixtemp.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  backdrop-filter: blur(20px);
   color: #e8d1d9;
 }
 
@@ -317,7 +253,6 @@ export default {
 
 /* 작성한~ 테이블 속성 */
 .created-table {
-
   font-family: 'NeoDunggeunmo';
   font-size: 20px;
   color: #e8d1d9 !important;

@@ -1,6 +1,5 @@
 <template>
   <div class="login-div">
-    div
     <div class="container">
       <div class="row">
         <div class="col-6">
@@ -19,7 +18,7 @@
                   type="text"
                   placeholder="아이디 입력해!"
                   id="username"
-                  class="form-control"
+                  class="form-control1 "
                   v-model="credentials.username"
                 />
               </div>
@@ -31,13 +30,15 @@
                   placeholder="비밀번호 입력해!"
                   type="password"
                   id="password"
-                  class="form-control"
+                  class="form-control1"
                   v-model="credentials.password"
                   @keypress.enter="login"
                 />
               </div>
               <br />
-              <button @click="login" class="login-btn btn mt-3 font-1-5em btn-block">웅! 자 드가자</button>
+              <button @click="login" class="login-btn btn mt-3 font-1-5em btn-block">
+                <img src="./startbtn.png" alt="웅 이미지" class="login-image" />
+              </button>
             </div>
           </div>
         </div>
@@ -175,21 +176,25 @@ export default {
 
 <style scoped>
 .login-div {
-  background-image: url('https://st2.depositphotos.com/14548252/47970/v/600/depositphotos_479708850-stock-illustration-evening-landscape-with-bright-fireworks.jpg');
+  background-image: url('loginpagefix2 (1).png');
   background-size: cover;
   background-position: center;
-  /* opacity: 0.4 */
-  ;
+  background-repeat: no-repeat;
 }
 
 .container {
   color: #e8d1d9;
-  min-height: 80vh;
+  min-height: 90vh;
   background-color: #e8d1d900;
 }
 
-.form-control {
+.form-control1 {
   background-color: #e8d1d900;
+  border: dashed;
+  width: 100%;
+  height: 40px;
+  border-radius: 15px;
+  border-color: #e8d1d969;
 }
 
 #rightline {
@@ -224,5 +229,15 @@ export default {
 .login-btn {
   color: #e8d1d9;
   font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-image {
+  margin-right: 10px;
+  width: auto;
+  height: auto;
+  /* Add any additional styles for the image */
 }
 </style>

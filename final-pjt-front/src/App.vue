@@ -211,7 +211,7 @@ export default {
 }
 
 #footerjumbo {
-  height: 200px;
+  height: 100px;
   margin-bottom: 0rem;
 }
 
