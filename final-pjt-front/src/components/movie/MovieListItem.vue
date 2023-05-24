@@ -53,7 +53,7 @@
               id="player"
               type="text/html"
               width="400"
-              height="250"
+              height="225"
               :src="`http://www.youtube.com/embed/${trailerVideoId}?autoplay=1&mute=1&controls=0&cc_load_policy=1`"
               frameborder="0"
               allowfullscreen
