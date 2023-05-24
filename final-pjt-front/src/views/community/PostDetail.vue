@@ -14,7 +14,7 @@
           
           <!-- 작성자 -->
           <p>
-          작성자:<router-link :to="{ name: 'Profile', params: { username: postUsername } }">
+          작성자:<router-link class="router-user" :to="{ name: 'Profile', params: { username: postUsername } }">
             {{postUsername}}</router-link>
           </p>
             
@@ -266,5 +266,14 @@ export default {
 .post-detail-dates {
   display: flex;
   justify-content: flex-end;
+}
+
+.router-user{
+  color:#e8d1d9;
+}
+
+.router-user:hover {
+  text-decoration-line: none;
+  color: #e8d1d9;
 }
 </style>
