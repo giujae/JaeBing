@@ -120,6 +120,7 @@ export default {
       localStorage.removeItem('username');
       localStorage.removeItem('login_user');
       localStorage.removeItem('is_admin');
+      localStorage.removeItem('user_movie');
       this.login = false;
       this.$store.state.login = false;
       this.$store.state.is_admin = false;

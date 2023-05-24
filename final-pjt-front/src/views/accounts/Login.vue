@@ -102,6 +102,7 @@ export default {
               const id = res.data;
               this.$store.state.login_user = id;
               this.$store.state.username = this.credentials.username;
+              localStorage.setItem('user_movie', JSON.stringify(this.$store.state.user_movie));
               localStorage.setItem('username', this.credentials.username);
               localStorage.setItem('login_user', id);
               this.$store.dispatch('recommendMovie', id);

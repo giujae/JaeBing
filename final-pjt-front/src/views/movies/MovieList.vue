@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div class="mb-5" style="max-width: 370px; margin-left: auto; margin-right: 5%">
       <h1 class="font-do my-3"></h1>
       <b-row class="d-flex justify-content-end"> </b-row>
@@ -17,14 +16,16 @@
             @sliding-start="onSlideStart"
             @sliding-end="onSlideEnd"
             ref="carouselRef"
-            fade>
+            fade
+          >
             <b-carousel-slide
               v-for="(movie, idx) in ordered"
               :key="idx"
               :caption="movie.title"
               img-blank-color="dark"
               img-height="480"
-              style="width: auto">
+              style="width: auto"
+            >
               <template #img>
                 <div style="display: flex; justify-content: flex-end">
                   <img
@@ -40,27 +41,26 @@
         </b-col>
       </b-row>
     </div>
-    
 
     <div>
-    <div class="d-flex justify-content-end">
-      <b-dropdown id="genreBtn"
-      :text="search || '장르 선택'">
-      <b-dropdown-item v-for="(genre, index) in genres" :key="index" @click="searchByGenre(genre)">
-        {{ genre }}
-      </b-dropdown-item>
-    </b-dropdown>
-    </div>
-    
-        <div class="movie-container" v-if="login && recommend_list.length > 0">
-          <h1 class="font-do my-3">당신을 위한 영화 추천!</h1>
-          <div class="row d-flex justify-content-center">
-            <MovieListItem v-for="(movie, idx) in recommend_list" :key="idx" :movie="movie" class="col-2 p-0 " />
-          </div>
+      <div class="d-flex justify-content-end">
+        <b-dropdown id="genreBtn" :text="search || '장르 선택'">
+          <b-dropdown-item v-for="(genre, index) in genres" :key="index" @click="searchByGenre(genre)">
+            {{ genre }}
+          </b-dropdown-item>
+        </b-dropdown>
+      </div>
+      <h1>{{ login }}</h1>
+      <h1>{{ recommend_list.length > 0 }}</h1>
+      <div class="movie-container" v-if="login && recommend_list.length > 0">
+        <h1 class="font-do my-3">당신을 위한 영화 추천!</h1>
+        <div class="row d-flex justify-content-center">
+          <MovieListItem v-for="(movie, idx) in recommend_list" :key="idx" :movie="movie" class="col-2 p-0" />
         </div>
-    
+      </div>
+
       <h1 v-if="movies.length" class="font-do my-5">{{ search }} 리스트</h1>
-      
+
       <div class="container mb-4"></div>
       <div class="container">
         <div class="row d-flex justify-content-center">
@@ -69,7 +69,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -136,8 +135,9 @@ export default {
   },
   created: function () {
     this.i = 0;
-    if (this.login === true && this.is_admin === false) {
+    if (this.login === true && this.is_admin == false) {
       this.$store.dispatch('recommendMovie');
+      console.log('실행');
     }
   },
   computed: {
@@ -196,9 +196,7 @@ h1 {
   margin-right: 100px;
 }
 
-
-
-.genreDropdown{
+.genreDropdown {
   background-color: #e8d1d9;
 }
 
