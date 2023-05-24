@@ -50,8 +50,6 @@
           </b-dropdown-item>
         </b-dropdown>
       </div>
-      <h1>{{ login }}</h1>
-      <h1>{{ recommend_list.length > 0 }}</h1>
       <div class="movie-container" v-if="login && recommend_list.length > 0">
         <h1 class="font-do my-3">당신을 위한 영화 추천!</h1>
         <div class="row d-flex justify-content-center">

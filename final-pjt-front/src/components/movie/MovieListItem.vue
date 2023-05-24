@@ -1,14 +1,23 @@
 <template>
   <div>
     <!-- <b-card
+<<<<<<< HEAD
       <b-card
+=======
+>>>>>>> 93478c133ba8492c00f65751a59eecd5633226b8
         v-if="!movie.poster_path.includes('#')"
         :img-src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`"
         img-alt="Image"
         class="card-img my-2"
+<<<<<<< HEAD
         @click="showDetail"></b-card> -->
 
       <!-- <b-card
+=======
+        @click="showDetail"></b-card>
+
+      <b-card
+>>>>>>> 93478c133ba8492c00f65751a59eecd5633226b8
         v-else
         img-src="https://image.tmdb.org/t/p/w185/g3gpHLUuQLGI9gRmfraSQCN1TYk.jpg"
         img-alt="Image"
@@ -105,9 +114,6 @@
       <br />
 
       <!-- 리뷰부분 -->
-      <h1>{{ is_admin }}</h1>
-      <h1>{{ login }}</h1>
-      <h1>{{ showForm }}</h1>
       <div v-if="login === true" :class="{ appear: showForm }">
         <h2 class="font-do">리뷰 작성하기</h2>
         <div id="reviewForm">
@@ -252,7 +258,7 @@ export default {
       // console.log('얘두');
       // console.log(this.review_list);
       this.show = true;
-      const API_Key = 'AIzaSyDLytfpo-su6xYpTZ8OgrfNf941SBQzBiY';
+      const API_Key = 'AIzaSyA6w5yAn6ZwQBz_uR-iJfDl8Mj1PJ_8QtE';
       const movieTitle = this.movie.title;
       const query = '공식예고편 ' + movieTitle;
       this.avgRate = this.movie.rate;
@@ -467,8 +473,6 @@ export default {
     },
   },
   created: function () {
-    console.log(this.user_movie[this.login_user], '체크');
-    console.log(this.user_movie[this.login_user].includes(this.movie.id));
     if (this.user_movie[this.login_user] && this.user_movie[this.login_user].includes(this.movie.id)) {
       this.showForm = true;
       console.log(this.showForm, '보여줘');

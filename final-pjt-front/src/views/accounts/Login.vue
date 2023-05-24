@@ -179,7 +179,11 @@ export default {
   background-image: url('loginpagefix2 (1).png');
   background-size: cover;
   background-position: center;
+<<<<<<< HEAD
   background-repeat: no-repeat;
+=======
+  /* opacity: 0.4 */
+>>>>>>> 93478c133ba8492c00f65751a59eecd5633226b8
 }
 
 .container {
@@ -233,6 +237,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
+<<<<<<< HEAD
 
 .login-image {
   margin-right: 10px;
@@ -240,4 +245,6 @@ export default {
   height: auto;
   /* Add any additional styles for the image */
 }
+=======
+>>>>>>> 93478c133ba8492c00f65751a59eecd5633226b8
 </style>
