@@ -26,7 +26,18 @@
             </h2>
           </div>
 
+<<<<<<< HEAD
           <div style="width: 100%; height: 100%; border-style: dashed none; border-color: #e8d1d969">
+=======
+          <div
+            style="
+              width: 100%;
+              height: 100%;
+              border-style: dashed none;
+              border-color: #e8d1d969;
+            "
+          >
+>>>>>>> 823bbfe311327874dd77754fc2e45daf272ee8fa
             <!-- 작성자 -->
 
             <!-- 내용 -->

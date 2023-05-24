@@ -75,9 +75,9 @@
                 <b-nav-item>
                   <button
                     @click="triggerSearch"
-                    class="font-weight-bold font-do search-btn"
+                    class="font-weight-bold search-btn p-0 mr-3"
                   >
-                    검색
+                    Search
                   </button>
                 </b-nav-item>
                 <!-- <p class="user font-weight-bold text-truncate">{{ username }}</p> -->
@@ -203,7 +203,7 @@ export default {
 }
 
 .main-img {
-  background-image: url("제목없음.png");
+  background-image: url("moviemain.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -303,6 +303,11 @@ button {
   border-color: #0f264800;
   background-color: #0f264800;
   padding: 8px;
+}
+
+/* 검색 버튼 아웃라인 없이 */
+.search-btn:focus {
+  outline: none;
 }
 
 /* 유저 이름 */

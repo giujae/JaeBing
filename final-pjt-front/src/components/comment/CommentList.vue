@@ -1,7 +1,11 @@
 <template>
   <div>
-    <h2 class="mt-5 font-do">Comment List</h2>
-
+    <div class="mt-5">
+      <span style="font-size: 35px; padding: 0px 10px 0px 0px"
+        >Comment List</span
+      >
+      <span style="font-size: 20px">Comment Count : {{ comments.length }}</span>
+    </div>
     <div v-for="(comment, idx) in comments" :key="idx" class="media px-0">
       <div class="media-body">
         <h4 class="mt-0">[ {{ comment.user.username }} ] {{ comment.content }}</h4>
@@ -10,7 +14,14 @@
           {{ $moment(comment.created_at).format('YYYY-MM-DD hh:mm:ss') }}
         </p>
         |
+<<<<<<< HEAD
         <p class="ml-0">수정: {{ $moment(comment.created_at).format('YYYY-MM-DD hh:mm:ss') }}</p>
+=======
+        <p class="ml-0">
+          Edit Date :
+          {{ $moment(comment.created_at).format("YYYY-MM-DD hh:mm:ss") }}
+        </p>
+>>>>>>> 823bbfe311327874dd77754fc2e45daf272ee8fa
 
         <div v-if="updateTrigger === comment.id">
           <UpdateForm :updateCommentItem="updateCommentItem" :post="post" @trigger="changeTrigger" />

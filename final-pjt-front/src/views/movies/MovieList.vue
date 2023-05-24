@@ -26,11 +26,22 @@
               style="width: auto"
             >
               <template #img>
-                <div class="popluar-text" style="background-color: #e8d1d900; color: #e8d1d9; font-size: 30px">
+                <div
+                  class="popluar-text"
+                  style="
+                    background-color: #e8d1d900;
+                    color: #e8d1d9;
+                    font-size: 30px;
+                  "
+                >
                   Movie Hit
                 </div>
                 <div
-                  style="display: flex; justify-content: flex-end; background-color: #e8d1d900"
+                  style="
+                    display: flex;
+                    justify-content: flex-end;
+                    background-color: #e8d1d900;
+                  "
                   class="slide-card-div"
                 >
                   <img
@@ -65,15 +76,20 @@
 
     <!-- 추천한 장르 토대로 랜덤 4개 추천 -->
     <div class="movie-container" v-if="login && recommend_list.length > 0">
-      <h1 class="font-do my-3">당신을 위한 영화 추천!</h1>
+      <h1 class="font-do my-3">Movie Recommendations For You!</h1>
       <div class="row d-flex justify-content-center">
-        <MovieListItem v-for="(movie, idx) in recommend_list" :key="idx" :movie="movie" class="col-2 p-0" />
+        <MovieListItem
+          v-for="(movie, idx) in recommend_list"
+          :key="idx"
+          :movie="movie"
+          class="col-2 p-0"
+        />
       </div>
     </div>
 
     <!-- 장르 선택시 나타나는 리스트 -->
     <div>
-      <h1 v-if="movies.length" class="font-do my-5">{{ search }} 리스트</h1>
+      <h1 v-if="movies.length" class="font-do my-5">{{ search }} List</h1>
       <carousel class="custom-carousel" :perPage="8">
         <slide v-for="(movie, idx) in movies" :key="idx">
           <MovieListItem :movie="movie" class="pick" :search="search" />
@@ -84,40 +100,40 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
-import MovieListItem from '@/components/movie/MovieListItem';
-import { Carousel, Slide } from 'vue-carousel';
+import MovieListItem from "@/components/movie/MovieListItem";
+import { Carousel, Slide } from "vue-carousel";
 
 export default {
-  name: 'MovieList',
+  name: "MovieList",
   data: function () {
     return {
       slide: 0,
       sliding: null,
-      search: '',
+      search: "",
       i: 0,
       j: false,
       genres: [
-        '액션',
-        '모험',
-        '애니메이션',
-        '코미디',
-        '범죄',
-        '다큐멘터리',
-        '드라마',
-        '가족',
-        '판타지',
-        '역사',
-        '공포',
-        '음악',
-        '미스터리',
-        '로맨스',
-        'SF',
-        'TV 영화',
-        '스릴러',
-        '전쟁',
-        '웨스턴',
+        "액션",
+        "모험",
+        "애니메이션",
+        "코미디",
+        "범죄",
+        "다큐멘터리",
+        "드라마",
+        "가족",
+        "판타지",
+        "역사",
+        "공포",
+        "음악",
+        "미스터리",
+        "로맨스",
+        "SF",
+        "TV 영화",
+        "스릴러",
+        "전쟁",
+        "웨스턴",
       ],
     };
   },
@@ -129,7 +145,7 @@ export default {
   methods: {
     movieDetail: function (movie) {
       this.$router.push({
-        name: 'MovieDetail',
+        name: "MovieDetail",
         params: {
           movie: movie,
         },
@@ -151,12 +167,19 @@ export default {
   created: function () {
     this.i = 0;
     if (this.login === true && this.is_admin == false) {
-      this.$store.dispatch('recommendMovie');
-      console.log('실행');
+      this.$store.dispatch("recommendMovie");
+      console.log("실행");
     }
   },
   computed: {
-    ...mapState(['login', 'login_user', 'is_admin', 'movie_list', 'ordered_movie_list', 'recommend_list']),
+    ...mapState([
+      "login",
+      "login_user",
+      "is_admin",
+      "movie_list",
+      "ordered_movie_list",
+      "recommend_list",
+    ]),
     movies: function () {
       return this.movie_list.filter((movie) => {
         const genreNames = movie.genre_ids.map((id) => id.name);
@@ -181,7 +204,7 @@ export default {
   mounted() {
     window.scrollTo(0, 0);
     if (this.login === true && this.is_admin === false) {
-      this.$store.dispatch('recommendMovie');
+      this.$store.dispatch("recommendMovie");
     }
   },
 };
