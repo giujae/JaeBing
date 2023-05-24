@@ -119,6 +119,7 @@ export default {
       isFollowing: false,
       isCurrentUser: false,
       selectedTab: 'posts',
+      followtrial: 0,
     };
   },
   methods: {
@@ -143,9 +144,25 @@ export default {
         axios
           .post(`${SERVER_URL}/accounts/profile/${username}/unfollow/`, {}, config)
           .then((res) => {
-            this.isFollowing = false;
-            this.followersCount--; // 팔로워 수 감소
             alert('언팔로우되었습니다.'); // 알림 표시
+            this.followtrial = 0;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        axios
+          .get(`${SERVER_URL}/accounts/profile/${username}/followers/`)
+          .then((res) => {
+            this.followersCount = res.data.length - 1;
+            // console.log(res.data, '어디 함 볼까1');
+            // console.log(this.$store.state.login_user, '유저');
+            // console.log(res.data.includes(this.$store.state.login_user));
+            // this.followersCount = res.data.length; // 팔로워 수 설정
+            console.log(res.data, '언팔로우');
+            if (res.data.includes(this.$store.state.login_user)) {
+              // console.log('있네');
+              this.isFollowing = false;
+            }
           })
           .catch((err) => {
             console.log(err);
@@ -154,9 +171,31 @@ export default {
         axios
           .post(`${SERVER_URL}/accounts/profile/${username}/follow/`, {}, config)
           .then((res) => {
-            this.isFollowing = true;
-            this.followersCount++; // 팔로워 수 증가
+            // this.isFollowing = true;
+            // console.log(res.data, '팔로우');
+            // this.followersCount = res.data.followers_count;
+            this.followtrial++;
             alert('팔로우되었습니다.'); // 알림 표시
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        axios
+          .get(`${SERVER_URL}/accounts/profile/${username}/followers/`)
+          .then((res) => {
+            // console.log(res.data, '어디 함 볼까2');
+            // console.log(this.$store.state.login_user, '유저');
+            // console.log(res.data.includes(this.$store.state.login_user));
+            console.log(this.followtrial, '몇번 눌렀니');
+            console.log(res.data, '팔로우');
+            this.followersCount = res.data.length + 1;
+            if (res.data.includes(this.$store.state.login_user)) {
+              // console.log('있네');
+              this.isFollowing = true;
+            }
+            if (this.followtrial === 0) {
+              this.isFollowing = true;
+            }
           })
           .catch((err) => {
             console.log(err);
@@ -171,7 +210,7 @@ export default {
       .get(`${SERVER_URL}/accounts/profile/${username}/`)
       .then((res) => {
         this.profile = res.data;
-        this.followersCount = this.profile.followers_count; // 팔로워 수 설정
+        // this.followersCount = this.profile.followers_count; // 팔로워 수 설정
         this.isCurrentUser = this.profile.username === currentusername;
         // console.log(this.isCurrentUser);
       })
@@ -183,7 +222,19 @@ export default {
     axios
       .get(`${SERVER_URL}/accounts/profile/${username}/followers/`)
       .then((res) => {
-        this.followersCount = res.data.length; // 팔로워 수 설정
+        // console.log(res.data, '어디 함 볼까2');
+        // console.log(this.$store.state.login_user, '유저');
+        // console.log(res.data.includes(this.$store.state.login_user));
+        this.followersCount = res.data.length;
+        if (res.data.includes(this.$store.state.login_user)) {
+          // console.log('있네');
+          if (res.data.includes(this.$store.state.login_user)) {
+            // console.log('있네');
+            this.isFollowing = true;
+          } else {
+            this.isFollowing = false;
+          }
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -225,8 +276,7 @@ export default {
   min-height: 100vh;
   width: 100%;
   padding: 0 10%;
-  background-image:
-    url('profilefixtemp.jpg');
+  background-image: url('profilefixtemp.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
