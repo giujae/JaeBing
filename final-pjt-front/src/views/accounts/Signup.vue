@@ -3,6 +3,7 @@
   <div class="container">
     <h1 class="my-4">Sign up</h1>
 
+    <!-- 유저 네임 -->
     <div class="signup-form-group mt-4">
       <label for="username">USERNAME</label>
       <input
@@ -14,6 +15,7 @@
       />
     </div>
 
+    <!-- 비밀번호 -->
     <div class="signup-form-group mt-4">
       <label for="password mb-1">PASSWORD</label>
       <input
@@ -25,6 +27,7 @@
       />
     </div>
 
+    <!-- 비밀번호 확인 -->
     <div class="signup-form-group mt-4">
       <label for="passwordConfirmation">CONFIRM PASSWORD</label>
       <input
@@ -37,6 +40,7 @@
       />
     </div>
 
+    <!-- 이메일 -->
     <div class="signup-form-group mt-4">
       <label for="email">E-MAIL</label>
       <input
@@ -51,6 +55,7 @@
       >
     </div>
 
+    <!-- 생년월일 -->
     <div class="signup-form-group mt-4">
       <label for="date_of_birth">BIRTH</label>
       <input
@@ -176,6 +181,7 @@ input {
 input:focus{
   padding: 10px;
   color:#e8d1d9;
+  background-color: #0f264859 !important;
 }
 
 /* 회원가입 버튼 */
@@ -194,9 +200,10 @@ input:focus{
 }
 
 /* input 속성 */
-.form-control {
+.form-control2 {
   background-color: #e8d1d900;
 }
+
 
 /* 개인정보약관 */
 .form-check-label {

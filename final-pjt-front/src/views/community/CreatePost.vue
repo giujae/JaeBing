@@ -1,4 +1,5 @@
 <template>
+  <div class="post-detail-div">
     <div class="create-post-container my-5">
       <div class="htag mt-5">
         <h1 v-if="this.purpose == 'create'" class="my-4">글 작성하기</h1>
@@ -34,6 +35,7 @@
         </form>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -121,8 +123,7 @@ export default {
 </script>
 
 <style>
-.create-post-container
-{
+.create-post-container{
   width: 100%;
   min-height: 70vh;
   color:#e8d1d9;
