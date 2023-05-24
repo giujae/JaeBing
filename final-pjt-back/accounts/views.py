@@ -118,6 +118,7 @@ def unfollow(request, username):
 @api_view(['GET'])
 def get_followers(request, username):
     user = get_object_or_404(get_user_model(), username=username)
-    followers = user.following.all()
-    serializer = UserSerializer(followers, many=True)
-    return Response(serializer.data)
+    followers = user.followers.all()
+    follower_ids = [follower.id for follower in followers]  # 팔로워의 ID 목록 추출
+    return Response(follower_ids)
+

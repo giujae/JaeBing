@@ -1,23 +1,13 @@
 <template>
   <div>
     <!-- <b-card
-<<<<<<< HEAD
-      <b-card
-=======
->>>>>>> 93478c133ba8492c00f65751a59eecd5633226b8
         v-if="!movie.poster_path.includes('#')"
         :img-src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`"
         img-alt="Image"
         class="card-img my-2"
-<<<<<<< HEAD
-        @click="showDetail"></b-card> -->
-
-      <!-- <b-card
-=======
         @click="showDetail"></b-card>
 
       <b-card
->>>>>>> 93478c133ba8492c00f65751a59eecd5633226b8
         v-else
         img-src="https://image.tmdb.org/t/p/w185/g3gpHLUuQLGI9gRmfraSQCN1TYk.jpg"
         img-alt="Image"
@@ -70,14 +60,14 @@
 
         <div class="detail-content">
           <div class="trailer">
-            <!-- <youtube :video-id="trailerVideoId" :player-vars="playerVars" @playing="handlePlaying"></youtube> -->
             <iframe
               id="player"
               type="text/html"
               width="400"
               height="250"
-              :src="`http://www.youtube.com/embed/${trailerVideoId}?autoplay=1&mute=1`"
+              :src="`http://www.youtube.com/embed/${trailerVideoId}?autoplay=1&mute=1&controls=0&cc_load_policy=1`"
               frameborder="0"
+              allowfullscreen
             ></iframe>
           </div>
 
@@ -219,20 +209,20 @@
 <script>
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 import Vue from 'vue';
-import VueYoutube from 'vue-youtube';
+// import VueYoutube from 'vue-youtube';
 import axios from 'axios';
 import _ from 'lodash';
 import { mapState } from 'vuex';
-Vue.use(VueYoutube);
+// Vue.use(VueYoutube);
 
 export default {
   name: 'MovieListItem',
   props: {
     movie: Object,
   },
-  components: {
-    'vue-youtube': VueYoutube,
-  },
+  // components: {
+  //   'vue-youtube': VueYoutube,
+  // },
   data: function () {
     return {
       selected_rate: null,
@@ -246,10 +236,10 @@ export default {
       variants: ['light', 'dark'],
       showTrailer: false,
       trailerVideoId: '',
-      playerVars: {
-        autoplay: 1,
-        controls: 1,
-      },
+      // playerVars: {
+      //   autoplay: 1,
+      //   controls: 1,
+      // },
       reviews: [],
     };
   },
