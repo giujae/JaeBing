@@ -1,38 +1,38 @@
 <template>
   <div class="post-detail-container">
     <div class="row justify-content-center">
-
-      <div class="post-detail ">
+      <div class="post-detail">
         <div>
           <h1 class="my-5">글 상세보기</h1>
         </div>
-        
-        <div class="col media text-justify" style="width: 100%; word-break: break-all"  >
-          <!-- 제목, 좋아요 -->
-          <h2 class="mt-0">Title: {{ post.title }}<p>좋아요: {{ likesCount }}</p></h2>
 
-          
+        <div class="col media text-justify" style="width: 100%; word-break: break-all">
+          <!-- 제목, 좋아요 -->
+          <h2 class="mt-0">
+            Title: {{ post.title }}
+            <p>좋아요: {{ likesCount }}</p>
+          </h2>
+
           <!-- 작성자 -->
           <p>
-          작성자:<router-link class="router-user" :to="{ name: 'Profile', params: { username: postUsername } }">
-            {{postUsername}}</router-link>
+            작성자:<router-link class="router-user" :to="{ name: 'Profile', params: { username: postUsername } }">
+              {{ postUsername }}</router-link
+            >
           </p>
-            
+
           <!-- 내용 -->
-          <p class="font-2em">
-            Content: {{ post.content }}
-          </p>
+          <p class="font-2em">Content: {{ post.content }}</p>
 
           <div>
             <!-- 작성일, 수정일 -->
-            <p style="text-align: left;">
+            <p style="text-align: left">
               작성: {{ $moment(post.created_at).format('YYYY-MM-DD hh:mm:ss') }} | 최근수정:
               {{ $moment(post.updated_at).format('YYYY-MM-DD hh:mm:ss') }}
             </p>
           </div>
-          
+
           <div class="btn-div d-flex justify-content-end">
-            <div class="row ">
+            <div class="row">
               <div>
                 <!--작성자와 접속자가 같다면, 수정/삭제 버튼 활성화-->
                 <!--단, 관리자의 경우 삭제 버튼 활성화 -->
@@ -41,58 +41,55 @@
                   <span v-if="isPostLiked">좋아요 취소</span>
                   <span v-else>좋아요</span>
                 </button>
-  
+
                 <!-- 글 수정 버튼 -->
                 <button
                   class="post-detail-btn mr-3"
                   v-if="postUsername === this.$store.state.username"
-                  @click="updatePostForm(post)">
+                  @click="updatePostForm(post)"
+                >
                   수정하기
                 </button>
-  
+
                 <!-- 관리자 글 삭제 버튼 -->
-                <button
-                  class="post-detail-btn mr-3 "
-                  v-if="this.$store.state.is_admin"
-                  @click="deletePost(post)">
+                <button class="post-detail-btn mr-3" v-if="this.$store.state.is_admin" @click="deletePost(post)">
                   삭제하기
                 </button>
-  
+
                 <!-- 유저 글 삭제 버튼 -->
                 <button
                   v-else-if="postUsername === this.$store.state.username"
                   @click="deletePost(post)"
-                  class="post-detail-btn mr-3">
+                  class="post-detail-btn mr-3"
+                >
                   글 삭제
                 </button>
               </div>
             </div>
-          </div> <!-- btn-div 끝 -->
-
+          </div>
+          <!-- btn-div 끝 -->
         </div>
 
-
-          <!-- 목록으로 가기 버튼 -->
-          <div class="d-flex justify-content-end">
-            <button @click="backToPost" class="postpage-btn">목록으로 가기</button>
-          </div>
-
-
-          <div>
-            <!-- 댓글 -->
-            <div class="create-comment-btn mt-5">
-              <CommentForm v-if="this.$store.state.login" :post="post" />
-              <p v-else>댓글을 작성하려면 로그인이 필요합니다.</p>
-            </div>
-            <br />
-
-            <hr :style="{ margin: '5px 30px' }" />
-            <CommentList :post="post" />
-            </div> <!-- create-comment-btn 끝 -->
-          </div>
-
+        <!-- 목록으로 가기 버튼 -->
+        <div class="d-flex justify-content-end">
+          <button @click="backToPost" class="postpage-btn">목록으로 가기</button>
         </div>
+
+        <div>
+          <!-- 댓글 -->
+          <div class="create-comment-btn mt-5">
+            <CommentForm v-if="this.$store.state.login" :post="post" />
+            <p v-else>댓글을 작성하려면 로그인이 필요합니다.</p>
+          </div>
+          <br />
+
+          <hr :style="{ margin: '5px 30px' }" />
+          <CommentList :post="post" />
+        </div>
+        <!-- create-comment-btn 끝 -->
       </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -259,7 +256,7 @@ export default {
   margin: 0px;
 }
 
-.postpage-btn{
+.postpage-btn {
   width: auto;
 }
 
@@ -268,8 +265,8 @@ export default {
   justify-content: flex-end;
 }
 
-.router-user{
-  color:#e8d1d9;
+.router-user {
+  color: #e8d1d9;
 }
 
 .router-user:hover {

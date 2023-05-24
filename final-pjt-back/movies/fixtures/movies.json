@@ -820,25 +820,6 @@
     "model": "movies.movie",
     "fields": {
       "adult": false,
-      "backdrop_path": "/j9ijjTr4CU1koghXjxoEbCl8Yba.jpg",
-      "genre_ids": [35, 18],
-      "original_language": "ar",
-      "original_title": "\u0639\u0635\u0641\u0648\u0631 \u0627\u0644\u0633\u0637\u062d",
-      "overview": "Twelve-year-old Noura dangles uncertainly in that difficult netherworld between childhood and adulthood. His growing libido has gotten him banned from the women's baths, where his mother took him when he was younger, but he's not yet old enough to participate in grown-up discussions with the men of his Tunisian village. Noura's only real friend is a troublemaker named Salih -- the village political outcast.",
-      "popularity": 496.923,
-      "poster_path": "/14lvkOnU9dfDKp6PE2TFeCCzVU5.jpg",
-      "release_date": "1990-09-14",
-      "title": "Halfaouine: Boy of the Terraces",
-      "video": false,
-      "vote_average": 6.8,
-      "vote_count": 33,
-      "movie_no": 44281
-    }
-  },
-  {
-    "model": "movies.movie",
-    "fields": {
-      "adult": false,
       "backdrop_path": "/wD2kUCX1Bb6oeIb2uz7kbdfLP6k.jpg",
       "genre_ids": [27, 53],
       "original_language": "en",
@@ -1181,25 +1162,6 @@
     "model": "movies.movie",
     "fields": {
       "adult": false,
-      "backdrop_path": "/6UQZkEA9WIj73LChP4wdPP9xHo6.jpg",
-      "genre_ids": [18],
-      "original_language": "ko",
-      "original_title": "\uc2a4\uc640\ud551: \ub450 \ubd80\ubd80\uc758 \uc774\ud63c\uc5ec\ud589",
-      "overview": "Yong-ho and Seong-ho decide to organize their marriage and leave the last memories. He decides to go on a trip to the sea where four people went together at the beginning of the wedding. In fact, they liked each other's opponents. In the open sea, each person begins to exude their hidden emotions...\u200b",
-      "popularity": 376.602,
-      "poster_path": "/wESfP4ZeBbwjjFw2tql4Bqx101Q.jpg",
-      "release_date": "2020-08-28",
-      "title": "Swapping: A Divorce Trip Between Two Couples",
-      "video": false,
-      "vote_average": 8.5,
-      "vote_count": 2,
-      "movie_no": 747355
-    }
-  },
-  {
-    "model": "movies.movie",
-    "fields": {
-      "adult": false,
       "backdrop_path": "/bKWFetR4injOJXOGHeLuTD7wHI4.jpg",
       "genre_ids": [27, 53, 14],
       "original_language": "es",
@@ -1295,25 +1257,6 @@
     "model": "movies.movie",
     "fields": {
       "adult": false,
-      "backdrop_path": "/ryQbb26wl1ggtypXiZW0kjKZCrP.jpg",
-      "genre_ids": [18, 12, 10749, 28, 36],
-      "original_language": "cn",
-      "original_title": "3D\u8089\u84b2\u5718\u4e4b\u6975\u6a02\u5bf6\u9451",
-      "overview": "Loosely based on a 17th century erotic Chinese story named The Carnal Prayer Mat, the story follows a young scholar named Yangsheng who gets married to the beautiful daughter of a local merchant. When their sex life proves unsatisfactory, Yangsheng leaves home and journeys to the Pavilion of Ultimate Bliss.",
-      "popularity": 356.66,
-      "poster_path": "/mmvFokJgpFmNt522Hfpq3Zfs2Ra.jpg",
-      "release_date": "2011-04-14",
-      "title": "3-D Sex and Zen: Extreme Ecstasy",
-      "video": false,
-      "vote_average": 4.8,
-      "vote_count": 90,
-      "movie_no": 67308
-    }
-  },
-  {
-    "model": "movies.movie",
-    "fields": {
-      "adult": false,
       "backdrop_path": "/2Eewgp7o5AU1xCataDmiIL2nYxd.jpg",
       "genre_ids": [18, 36],
       "original_language": "en",
@@ -1403,25 +1346,6 @@
       "vote_average": 6.4,
       "vote_count": 815,
       "movie_no": 758009
-    }
-  },
-  {
-    "model": "movies.movie",
-    "fields": {
-      "adult": false,
-      "backdrop_path": "/ql4PnvKYKaMtdx9Ck4fHY2wJphT.jpg",
-      "genre_ids": [35, 18, 10749],
-      "original_language": "cn",
-      "original_title": "\u91d1\u74f6\u68852 \u611b\u7684\u5974\u96b8",
-      "overview": "Rich and powerful Simon Qing has been schooled in the ways of sex by his virile father, but is still a virgin. That is, until he meets his first love Violetta who has fun with him all over his father\u2019s estate. Their love does not last, so Simon embarks on a journey. Along the way he meets the comely nun Moon whom Simon deflowers and then marries. He then becomes enamored of Golden Lotus but she is married to dwarf Wu Da-Lang.",
-      "popularity": 339.195,
-      "poster_path": "/A1yymig7S0FTWv9cTtOwdI1cH5V.jpg",
-      "release_date": "2009-03-04",
-      "title": "The Forbidden Legend: Sex & Chopsticks 2",
-      "video": false,
-      "vote_average": 6.2,
-      "vote_count": 79,
-      "movie_no": 32516
     }
   },
   {

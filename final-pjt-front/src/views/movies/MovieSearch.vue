@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="search-container">
     <div class="mb-5 mt-3">
       <label for="search" class="mx-3 font-do">Search: </label>
       <input type="text" id="search" v-model.trim="search" @keypress.enter="searchMovie" />
@@ -77,5 +77,14 @@ export default {
   width: 100%;
   height: 30vw;
   object-fit: cover;
+}
+.search-container {
+  min-height: 100vh;
+  width: 100%;
+  padding: 0 10%;
+  background-image: url('post33.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 </style>
