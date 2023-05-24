@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div class="main-img">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -94,6 +95,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -181,10 +183,13 @@ export default {
   color: black;
   background: #101130;
   min-height: 100vh;
-  /* background-image: url('Image Pasted at 2023-5-24 12-53.png'); */
-  /* background-size: cover;
+}
+
+.main-img {
+  background-image: url('제목없음.png');
+  background-size: cover;
   background-position: center;
-  background-repeat: no-repeat; */
+  background-repeat: no-repeat;
 }
 
 /* 로고 이미지 */
