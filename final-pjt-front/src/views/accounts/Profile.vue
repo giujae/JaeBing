@@ -96,7 +96,6 @@
           </tr>
         </table>
       </div>
-<<<<<<< HEAD
 
       <!-- 작성한 게시글 테이블 -->
       <table
@@ -156,8 +155,6 @@
           </th>
         </tr>
       </table>
-=======
->>>>>>> f79f0d8acd63af4b8a2e9f9b55b30d5e0a01181f
     </div>
 
     <p v-else>Loading...</p>
@@ -324,12 +321,8 @@ export default {
 
 /* 작성한~ 테이블 속성 */
 .created-table {
-<<<<<<< HEAD
   
-  font-family: "NeoDunggeunmo";
-=======
   font-family: 'NeoDunggeunmo';
->>>>>>> f79f0d8acd63af4b8a2e9f9b55b30d5e0a01181f
   font-size: 20px;
   color: #e8d1d9 !important;
   border-style: dashed;
@@ -372,8 +365,4 @@ export default {
 th {
   padding: 2px !important;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> f79f0d8acd63af4b8a2e9f9b55b30d5e0a01181f
 </style>

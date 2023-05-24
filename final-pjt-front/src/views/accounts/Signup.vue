@@ -84,8 +84,8 @@
     </div>
     <br />
 
-    <div class="signup-form-group mt-5 font-poor font-1-2em">
-      <button @click="signup" id="signupbtn">회원가입</button>
+    <div class="signup-form-group font-1-2em">
+      <button @click="signup" id="signupbtn"></button>
     </div>
   </div>
 </template>
@@ -154,6 +154,14 @@ input {
 #signupbtn {
   font-size: 2em !important;
   width: 200px !important;
+  height: 40px;
+  margin-bottom: 40px;
+  background-image: url('startbtn.png');
+  background-size: cover;
+  background-position: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 /* input 속성 */
