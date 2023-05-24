@@ -16,18 +16,16 @@
             @sliding-start="onSlideStart"
             @sliding-end="onSlideEnd"
             ref="carouselRef"
-            fade
-          >
+            fade>
             <b-carousel-slide
               v-for="(movie, idx) in ordered"
               :key="idx"
-              :caption="movie.title"
               img-blank-color="dark"
               img-height="480"
-              style="width: auto"
-            >
+              style="width: auto">
               <template #img>
-                <div style="display: flex; justify-content: flex-end">
+                <div style="display: flex; justify-content: flex-end" class="slide-card-div">
+                  <!-- <p class="d-flex justify-content-">test</p> -->
                   <img
                     class="d-block img-fluid"
                     :src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`"
@@ -42,14 +40,17 @@
       </b-row>
     </div>
 
+    <!-- 장르 선택 버튼 -->
     <div>
       <div class="d-flex justify-content-end">
         <b-dropdown id="genreBtn" :text="search || '장르 선택'">
-          <b-dropdown-item v-for="(genre, index) in genres" :key="index" @click="searchByGenre(genre)">
+          <b-dropdown-item class="genreBtn-item" v-for="(genre, index) in genres" :key="index" @click="searchByGenre(genre)">
             {{ genre }}
           </b-dropdown-item>
         </b-dropdown>
       </div>
+
+      <!-- 추천한 장르 토대로 랜덤 4개 추천 -->
       <div class="movie-container" v-if="login && recommend_list.length > 0">
         <h1 class="font-do my-3">당신을 위한 영화 추천!</h1>
         <div class="row d-flex justify-content-center">
@@ -57,6 +58,7 @@
         </div>
       </div>
 
+      <!-- 장르 선택시 나타나는 리스트 -->
       <h1 v-if="movies.length" class="font-do my-5">{{ search }} 리스트</h1>
 
       <div class="container mb-4"></div>
@@ -179,20 +181,57 @@ export default {
   z-index: 10;
   padding-top: 20px;
   padding-bottom: 20px;
-  color: #fff;
+  color: #e8d1d9 !important;
   /* text-align: center; */
 }
+
+/* .carousel-caption h3 {
+  background-color: #101130a2 !important;
+  border-radius: 20px;
+  font-size: 20px;
+  vertical-align: top;
+} */
 
 h1 {
   color: #e8d1d9;
 }
 
+/* 캐러셀 카드 박스 */
+.slide-card-div{
+  background-color: #e8d1d9;
+  padding-bottom: 50px;
+}
+
+/* 장르 선택 버튼 */
 #genreBtn button {
+  width: auto;
+  height: auto;
   color: #e8d1d9;
   background-color: rgba(0, 0, 0, 0);
   border-color: rgba(0, 0, 0, 0);
   margin-right: 100px;
+  font-size: 20px;
 }
+
+/* 장르 선택시 나타나는 드롭다운 메뉴 박스 */
+#genreBtn ul {
+  margin-right: 75px;
+  background-color: #101130e8 !important;
+  border: dashed #e8d1d9de ;
+  border-radius: 10px;
+  outline: none;
+}
+
+/* 장르 선택시 나타나는 드롭다운 메뉴 박스 아이템 */ 
+#genreBtn ul a{
+  color: #e8d1d9 !important;
+}
+
+/* 장르 선택시 나타나는 드롭다운 메뉴 박스 아이템 버튼 올려놨을 때 */ 
+#genreBtn ul a:hover{
+  background-color: #e8d1d941;;
+}
+
 
 .genreDropdown {
   background-color: #e8d1d9;

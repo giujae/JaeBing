@@ -1,12 +1,12 @@
 <template>
   <div class="sign-img">
   <div class="container">
-    <h1 class="my-3">Sign up</h1>
+    <h1 class="my-4">Sign up</h1>
 
-    <div class="signup-form-group mt-5 font-1-2em">
-      <label for="username">사용자 이름: </label>
+    <div class="signup-form-group mt-4">
+      <label for="username">USERNAME</label>
       <input
-        placeholder="키미노 나마에와"
+        placeholder="Enter Your USERNAME"
         type="text"
         class="form-control2"
         id="username"
@@ -14,10 +14,10 @@
       />
     </div>
 
-    <div class="signup-form-group mt-5 font-1-2em">
-      <label for="password">비밀번호: </label>
+    <div class="signup-form-group mt-4">
+      <label for="password mb-1">PASSWORD</label>
       <input
-        placeholder="1차 비밀번호"
+        placeholder="Enter Your PASSWORD"
         type="password"
         class="form-control2"
         id="password"
@@ -25,10 +25,10 @@
       />
     </div>
 
-    <div class="signup-form-group mt-5 font-1-2em">
-      <label for="passwordConfirmation">비밀번호 확인: </label>
+    <div class="signup-form-group mt-4">
+      <label for="passwordConfirmation">CONFIRM PASSWORD</label>
       <input
-        placeholder="2차 비밀번호"
+        placeholder="Confirm PASSWORD"
         type="password"
         id="passwordConfirmation"
         v-model="credentials.passwordConfirmation"
@@ -37,10 +37,10 @@
       />
     </div>
 
-    <div class="signup-form-group mt-5">
-      <label for="email">이메일: </label>
+    <div class="signup-form-group mt-4">
+      <label for="email">E-MAIL</label>
       <input
-        placeholder="이메일 적어잉"
+        placeholder="Enter Your E-MAIL"
         type="email"
         class="form-control2"
         id="email"
@@ -51,8 +51,8 @@
       >
     </div>
 
-    <div class="signup-form-group mt-5 font-1-2em">
-      <label for="date_of_birth">생년월일: </label>
+    <div class="signup-form-group mt-4">
+      <label for="date_of_birth">BIRTH</label>
       <input
         type="date"
         class="form-control2"
@@ -87,6 +87,7 @@
 
     <div class="signup-form-group font-1-2em">
       <button @click="signup" id="signupbtn"></button>
+      <h5 class="m-0">Do You Want To Start The Game?</h5>
     </div>
   </div>
 </div>
@@ -152,12 +153,29 @@ export default {
 
 }
 
+.signup-form-group{
+  font-size: 20px;
+}
+
 /*  */
 input {
+  padding: 10px;
   width: 200px;
   height: 40px;
   display: block;
   margin: 0 auto;
+  border: dashed;
+  border-color: #e8d1d969;
+  border-radius: 15px;
+  background-color: #0f264859;
+  outline: none;
+  color:#e8d1d9;
+  font-size: 18px;
+}
+
+input:focus{
+  padding: 10px;
+  color:#e8d1d9;
 }
 
 /* 회원가입 버튼 */
@@ -165,7 +183,7 @@ input {
   font-size: 2em !important;
   width: 300px;
   height: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 0px;
   background-image: url('startbtn.png');
   /* background-size: cover; */
   background-position: center;

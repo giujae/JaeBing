@@ -2,9 +2,9 @@
   <div class="login-div">
     <div class="container">
       <div class="row">
-        <div class="col-6">
-          <h1 class="m-3">안농 :) 어서와!</h1>
-          <h2>로그인 할래yo?</h2>
+        <div class="col-6 welcome-div">
+          <h1 class="m-3">Welcome</h1>
+          <h2>To The New Game :)</h2>
         </div>
       </div>
 
@@ -13,10 +13,10 @@
           <div class="mb-3 mt-5" style="max-width: 18rem">
             <div class="card-body">
               <div class="input-group-lg">
-                <h4>아이디</h4>
+                <h3>ID</h3>
                 <input
                   type="text"
-                  placeholder="아이디 입력해!"
+                  placeholder="Enter Your ID!"
                   id="username"
                   class="form-control1 "
                   v-model="credentials.username"
@@ -25,9 +25,9 @@
               <br />
               <br />
               <div class="input-group-lg">
-                <h4>비밀번호</h4>
+                <h3>PASSWORD</h3>
                 <input
-                  placeholder="비밀번호 입력해!"
+                  placeholder="Enter Your PASSWORD!"
                   type="password"
                   id="password"
                   class="form-control1"
@@ -45,7 +45,7 @@
 
         <div class="col-6 d-flex align-items-center justify-content-center">
           <div>
-            <h3 class="signup-ment">이걸 아직도 가입 안 했어?!</h3>
+            <h3 class="signup-ment ml-4 mb-0">Want a new game?</h3>
             <div class="emptydiv"></div>
             <router-link class="signup-a" :to="{ name: 'Signup' }">
               <img src="./signup-btn.png" alt="가입 이미지" class="signup-image" />
@@ -188,13 +188,28 @@ export default {
   background-color: #e8d1d900;
 }
 
+.welcome-div{
+  margin-top: 90px;
+}
+
+/* input 속성 */
 .form-control1 {
-  background-color: #e8d1d900;
-  border: dashed;
+  padding: 10px;
   width: 100%;
   height: 40px;
+  border: dashed;
   border-radius: 15px;
   border-color: #e8d1d969;
+  outline: none;
+  background-color: #0f264859;
+  color:#e8d1d9;
+  font-size: 20px;
+}
+
+/* input 클릭시 */
+.form-control1:focus{
+  padding: 10px;
+  color:#e8d1d9;
 }
 
 #rightline {
@@ -207,6 +222,7 @@ export default {
 
 .signup-ment {
   text-decoration: none;
+  font-size: 50px;
 }
 
 .signup-a {
