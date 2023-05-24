@@ -179,7 +179,6 @@ export default {
   background-size: cover;
   background-position: center;
   /* opacity: 0.4 */
-  ;
 }
 
 .container {
@@ -225,13 +224,4 @@ export default {
   color: #e8d1d9;
   font-size: 20px;
 }
-<<<<<<< HEAD
-
-html {
-  /* background-color: #0F2648; */
-  /* background: red !important; */
-}
 </style>
-=======
-</style>
->>>>>>> 044fe919fbb4ec30becf61243ea81d694f317c7b

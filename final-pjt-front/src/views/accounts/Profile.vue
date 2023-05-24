@@ -317,10 +317,6 @@ export default {
 
 /* 작성한~ 테이블 속성 */
 .created-table {
-<<<<<<< HEAD
-=======
-  
->>>>>>> 044fe919fbb4ec30becf61243ea81d694f317c7b
   font-family: 'NeoDunggeunmo';
   font-size: 20px;
   color: #e8d1d9 !important;

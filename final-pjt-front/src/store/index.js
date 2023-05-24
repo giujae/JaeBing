@@ -114,7 +114,12 @@ export default new Vuex.Store({
       localStorage.setItem('jwt', jwt);
       localStorage.setItem('login_user', login_user);
     },
-
+    isAdmin: function ({ commit }) {
+      commit('setAdmin');
+    },
+    setMOVIE: function ({ commit }) {
+      commit('setMovie');
+    },
     getMovie: function ({ commit }) {
       commit('GET_MOVIE');
     },
