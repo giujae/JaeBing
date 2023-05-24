@@ -104,7 +104,10 @@
       <br />
 
       <!-- 리뷰부분 -->
-      <div v-if="is_admin === false && login === true" :class="{ appear: showForm }">
+      <h1>{{ is_admin }}</h1>
+      <h1>{{ login }}</h1>
+      <h1>{{ showForm }}</h1>
+      <div v-if="login === true" :class="{ appear: showForm }">
         <h2 class="font-do">리뷰 작성하기</h2>
         <div id="reviewForm">
           <!-- 리뷰 작성 폼 내용 -->
@@ -463,8 +466,11 @@ export default {
     },
   },
   created: function () {
+    console.log(this.user_movie[this.login_user], '체크');
+    console.log(this.user_movie[this.login_user].includes(this.movie.id));
     if (this.user_movie[this.login_user] && this.user_movie[this.login_user].includes(this.movie.id)) {
       this.showForm = true;
+      console.log(this.showForm, '보여줘');
     }
     this.avgRate = this.movie.rate;
   },

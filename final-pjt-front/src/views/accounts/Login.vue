@@ -99,6 +99,7 @@ export default {
               const id = res.data;
               this.$store.state.login_user = id;
               this.$store.state.username = this.credentials.username;
+              localStorage.setItem('user_movie', JSON.stringify(this.$store.state.user_movie));
               localStorage.setItem('username', this.credentials.username);
               localStorage.setItem('login_user', id);
               this.$store.dispatch('recommendMovie', id);
@@ -217,16 +218,4 @@ html {
   /* background-color: #0F2648; */
   /* background: red !important; */
 }
-
-<<<<<<< HEAD
-.card-body {
-  background-image: url(./pngwing.png);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-}
-=======
-
-
->>>>>>> 0bce9d4d89afa62f14037f5485c953d66bd67ade
 </style>

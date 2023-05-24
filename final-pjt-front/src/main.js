@@ -30,13 +30,12 @@ Vue.filter('half', halfStar);
 // 로그인 사용자 정보 가져오기
 const username = localStorage.getItem('username');
 const jwt = localStorage.getItem('jwt');
-const login_user = localStorage.getItem('login_user');
-const is_admin = localStorage.getItem('is_admin');
+const login_user = Number(localStorage.getItem('login_user'));
+const is_admin = JSON.parse(localStorage.getItem('is_admin'));
+const user_movie = JSON.parse(localStorage.getItem('user_movie'));
+
 if (username && jwt) {
-  store.dispatch('login', { username, jwt, login_user });
-}
-if (is_admin && jwt) {
-  store.dispatch('isAdmin', { is_admin });
+  store.dispatch('login', { username, jwt, login_user, user_movie, is_admin });
 }
 
 new Vue({
