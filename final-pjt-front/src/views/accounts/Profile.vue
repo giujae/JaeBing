@@ -2,22 +2,29 @@
   <div class="profile-container">
     <!-- 프로필 카드 -->
     <div class="profile-card">
-      <strong><h1 class="my-4 text-left">Profile</h1></strong>
-      <div v-if="profile">
+      <strong><h1 class="mt-4 text-left">Profile</h1></strong>
+      <div class="profile-div" v-if="profile">
         <h2 class="text-left my-3">
-          <span class="username pr-2 pl-0">{{ profile.username }}</span>
-          <span class="follower">Follower: {{ followersCount }}</span>
-          <span class="grade"
+          <span class="username pr-2 pl-0">[ {{ profile.username }} ]</span>
+          <span style="font-size: 16px" class="follower"
+            >Follower: {{ followersCount }}</span
+          >
+          <span style="font-size: 16px" class="grade"
             >Grade: {{ isAdmin ? "관리자" : "일반회원" }}</span
           >
         </h2>
         <!-- <p class="text-left">
           <strong>가입일:</strong> {{ formatDate(profile.date_joined) }}
         </p> -->
-        <p class="text-left p-auto my-1">
-          <strong>Birth :</strong> {{ profile.date_of_birth }}
+        <p
+          style="color: #e8d1d9; font-size: 18px"
+          class="text-left p-auto my-1"
+        >
+          Birth :{{ profile.date_of_birth }}
         </p>
-        <p class="text-left"><strong>Email :</strong> {{ profile.email }}</p>
+        <p style="color: #e8d1d9; font-size: 18px" class="text-left">
+          Email :{{ profile.email }}
+        </p>
       </div>
     </div>
     <!-- 프로필 카드 끝 -->
@@ -38,20 +45,32 @@
       <!-- 전체적인 작성한 디브 -->
       <div class="created-div">
         <!-- 버튼 넣을 div 박스 -->
-        <div class="btn-div">
+        <div class="btn-div mt-4">
           <!-- 게시글 -->
-          <button class="created-btn" @click="selectedTab = 'posts'">
-            작성한 게시글
+          <button
+            style="font-size: 18px"
+            class="created-btn"
+            @click="selectedTab = 'posts'"
+          >
+            Created Posts
           </button>
 
           <!-- 리뷰 -->
-          <button class="created-btn" @click="selectedTab = 'reviews'">
-            작성한 리뷰
+          <button
+            style="font-size: 18px"
+            class="created-btn"
+            @click="selectedTab = 'reviews'"
+          >
+            Created Review
           </button>
 
           <!-- 댓글 -->
-          <button class="created-btn" @click="selectedTab = 'comments'">
-            작성한 댓글
+          <button
+            style="font-size: 18px"
+            class="created-btn"
+            @click="selectedTab = 'comments'"
+          >
+            Created Comments
           </button>
         </div>
 
@@ -316,6 +335,13 @@ export default {
   color: #e8d1d9;
 }
 
+/* 프로필 정보 */
+.profile-div {
+  border-style: dashed none;
+  border-color: #e8d1d969;
+  background-color: #101130b3;
+}
+
 /* 작성한~ 버튼 디브 */
 .btn-div {
   display: flex;
@@ -354,7 +380,7 @@ export default {
 .profile-card {
   /* background-color: #101130; */
   color: white;
-  padding: 20px;
+  padding: 20px 20px 0px;
 }
 
 /* 팔로워 속성 */

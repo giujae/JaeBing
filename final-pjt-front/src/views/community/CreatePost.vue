@@ -2,9 +2,7 @@
   <div class="post-detail-div">
     <div class="create-post-container">
       <div class="htag mt-5">
-        <h1 v-if="this.purpose == 'create'" style="margin-top: 100px">
-          Create Post
-        </h1>
+        <h1 v-if="this.purpose == 'create'">Create Post</h1>
         <h1 v-else-if="this.purpose == 'update'" class="my-3">Create Post</h1>
       </div>
 
@@ -146,6 +144,11 @@ export default {
   min-height: 100vh;
   color: #e8d1d9;
   font-size: 20px;
+
+  background-image: url("postdetailback.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .submit-btn {
@@ -156,7 +159,8 @@ export default {
   /* background-color: #e8d1d986 !important; */
 }
 
-input {
+input,
+textarea {
   padding: 10px;
   width: auto;
   height: 40px;
@@ -169,5 +173,20 @@ input {
   outline: none;
   color: #e8d1d9;
   font-size: 18px;
+}
+
+/* 왜 아웃라인 안 없어짐? + 배경 경계 맞추기 */
+input:hover,
+textarea:hover {
+  border-color: #e8d1d9;
+  outline: none;
+}
+
+input:focus,
+textarea:focus,
+input:active,
+textarea:active {
+  background-color: #0f264859;
+  outline: none;
 }
 </style>
