@@ -1,4 +1,5 @@
 <template>
+  <div class="sign-img">
   <div class="container">
     <h1 class="my-3">Sign up</h1>
 
@@ -88,6 +89,7 @@
       <button @click="signup" id="signupbtn"></button>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -138,8 +140,16 @@ export default {
 </script>
 
 <style scoped>
+
+.sign-img {
+  background-image: url('loginpagefix2 (1).png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .container {
   color: #d5b0c1;
+
 }
 
 /*  */
