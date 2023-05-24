@@ -6,28 +6,19 @@
           <h1 class="my-5">View Article Details</h1>
         </div>
 
+        <button class="post-detail-btn heart-btn" @click="toggleLikePost">
+          <span v-if="isPostLiked"><img class="heart-img" src="./fullheart.png" alt="" /></span>
+          <span v-else><img class="heart-img" src="./emptyheart.png" alt="" /></span>
+        </button>
+        <span class="likes-span" style="font-size: 20px">Likes : {{ likesCount }}</span>
+
         <div class="col media text-justify" style="width: 100%; word-break: break-all">
-          <!-- 제목, 좋아요 -->
-          <h2 class="mt-0">
-            Title: {{ post.title }}
-            <p>좋아요: {{ likesCount }}</p>
-          </h2>
-
-          <!-- 작성자 -->
-          <p>
-            작성자:<router-link class="router-user" :to="{ name: 'Profile', params: { username: postUsername } }">
-              {{ postUsername }}</router-link
-            >
-          </p>
-
-          <!-- 내용 -->
-          <p class="font-2em">Content: {{ post.content }}</p>
-
-          <div>
-            <!-- 작성일, 수정일 -->
-            <p style="text-align: left">
-              작성: {{ $moment(post.created_at).format('YYYY-MM-DD hh:mm:ss') }} | 최근수정:
-              {{ $moment(post.updated_at).format('YYYY-MM-DD hh:mm:ss') }}
+          <div class="col media text-justify p-0" style="width: 100%; word-break: break-all">
+            <p style="font-size: 28px; margin: 0px">
+              Writer :
+              <router-link class="router-user" :to="{ name: 'Profile', params: { username: postUsername } }">
+                [ {{ postUsername }} ]</router-link
+              >
             </p>
             <!-- 제목-->
             <h2 class="mt-0" style="display: flex; align-items: center">
@@ -35,64 +26,75 @@
             </h2>
           </div>
 
-          <div class="btn-div d-flex justify-content-end">
-            <div class="row">
-              <div>
-                <!--작성자와 접속자가 같다면, 수정/삭제 버튼 활성화-->
-                <!--단, 관리자의 경우 삭제 버튼 활성화 -->
-                <!-- 좋아요 버튼 -->
-                <button class="post-detail-btn" @click="toggleLikePost">
-                  <span v-if="isPostLiked">좋아요 취소</span>
-                  <span v-else>좋아요</span>
-                </button>
+          <div style="width: 100%; height: 100%; border-style: dashed none; border-color: #e8d1d969">
+            <!-- 작성자 -->
 
-                <!-- 글 수정 버튼 -->
-                <button
-                  class="post-detail-btn mr-3"
-                  v-if="postUsername === this.$store.state.username"
-                  @click="updatePostForm(post)"
-                >
-                  수정하기
-                </button>
+            <!-- 내용 -->
+            <div style="font-size: 25px">
+              <span style="display: block" class="pb-3 px-0">Content</span>
+              <span style="display: block" class="p-0">{{ post.content }}</span>
+            </div>
 
-                <!-- 관리자 글 삭제 버튼 -->
-                <button class="post-detail-btn mr-3" v-if="this.$store.state.is_admin" @click="deletePost(post)">
-                  삭제하기
-                </button>
-
-                <!-- 유저 글 삭제 버튼 -->
-                <button
-                  v-else-if="postUsername === this.$store.state.username"
-                  @click="deletePost(post)"
-                  class="post-detail-btn mr-3"
-                >
-                  글 삭제
-                </button>
-              </div>
+            <div>
+              <!-- 작성일, 수정일 -->
+              <span style="text-align: right; display: block">
+                <span style="display: inline-block; text-align: left">
+                  Create :
+                  {{ $moment(post.created_at).format('YYYY-MM-DD hh:mm:ss') }}
+                </span>
+                |
+                <span style="display: inline-block; text-align: left">
+                  Current Edit Date :
+                  {{ $moment(post.updated_at).format('YYYY-MM-DD hh:mm:ss') }}
+                </span>
+              </span>
             </div>
           </div>
-          <!-- btn-div 끝 -->
-        </div>
 
-        <!-- 목록으로 가기 버튼 -->
-        <div class="d-flex justify-content-end">
-          <button @click="backToPost" class="postpage-btn">목록으로 가기</button>
-        </div>
+          <div class="detail-btns">
+            <button
+              class="modify-btn post-detail-btn mr-3"
+              v-if="postUsername === this.$store.state.username"
+              @click="updatePostForm(post)"
+            >
+              Edit
+            </button>
 
-        <div>
-          <!-- 댓글 -->
-          <div class="create-comment-btn mt-5">
-            <CommentForm v-if="this.$store.state.login" :post="post" />
-            <p v-else>댓글을 작성하려면 로그인이 필요합니다.</p>
+            <!-- 관리자 글 삭제 버튼 -->
+            <button
+              class="modify-btn-admin post-detail-btn mr-3"
+              v-if="this.$store.state.is_admin"
+              @click="deletePost(post)"
+            >
+              Delete
+            </button>
+
+            <!-- 유저 글 삭제 버튼 -->
+            <button
+              v-else-if="postUsername === this.$store.state.username"
+              @click="deletePost(post)"
+              class="delete-post-btn post-detail-btn mr-3"
+            >
+              Delete
+            </button>
+            <!-- 목록으로 가기 버튼 -->
+            <button @click="backToPost" class="postpage-btn">Go To List</button>
           </div>
-          <br />
 
-          <hr :style="{ margin: '5px 30px' }" />
-          <CommentList :post="post" />
+          <div class="comment-div">
+            <!-- 댓글 -->
+            <div class="create-comment-btn mt-5">
+              <CommentForm v-if="this.$store.state.login" :post="post" />
+              <p v-else>댓글을 작성하려면 로그인이 필요합니다.</p>
+            </div>
+
+            <CommentList :post="post" />
+          </div>
         </div>
-        <!-- create-comment-btn 끝 -->
       </div>
     </div>
+
+    <!-- create-comment-btn 끝 -->
   </div>
 </template>
 
