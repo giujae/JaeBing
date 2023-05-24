@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div class="main-img">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -15,20 +16,20 @@
 
     <div id="nav" class="main-nav" v-if="this.$route.path !== '/'">
       <b-navbar toggleable="lg">
-        <b-navbar-toggle target="navbar-nav-collapse">
+        <b-navbar-toggle target="navbar-nav-collapse hambuger">
           <i class="fas fa-bars"></i>
         </b-navbar-toggle>
 
-        <b-navbar-brand href="/movies" class="font-weight-bold">Home</b-navbar-brand>
+        <b-navbar-brand href="/movies" class="font-weight-bold">
+          <img class="Logo" src="./Logo.png" alt="">
+        </b-navbar-brand>
 
         <b-collapse id="navbar-nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item-dropdown text="Community">
-              <b-dropdown-item>
-                <router-link :to="{ name: 'Post' }">Post</router-link>
-              </b-dropdown-item>
-              <b-dropdown-item>ES</b-dropdown-item>
-            </b-nav-item-dropdown>
+            <!-- Remove the dropdown and its items -->
+            <b-nav-item>
+              <router-link :to="{ name: 'Post' }">Community</router-link>
+            </b-nav-item>
 
             <b-nav-item-dropdown v-if="$store.state.login && this.$route.path !== '/login'" :text="username">
               <b-dropdown-item>
@@ -37,12 +38,12 @@
 
               <b-dropdown-item>
                 <router-link @click.native="logout" to="#" class="nav-margin">
-                  <button class="font-weight-bold p-0">Logout</button>
+                  <button class="logout-btn font-weight-bold p-0">Logout</button>
                 </router-link>
               </b-dropdown-item>
             </b-nav-item-dropdown>
 
-            <template v-if="is_admin">
+            <template v-if="is_admin === true">
               <b-nav-item>
                 <router-link :to="{ name: 'ManageMovie' }" class="nav-margin">
                   <span class="badge badge-pill badge-warning">영화관리</span>
@@ -68,13 +69,13 @@
             <template v-else>
               <b-nav-item>
                 <router-link :to="{ name: 'Signup' }" class="nav-margin">
-                  <button class="font-weight-bold">Signup</button>
+                  <button class="nav-btn font-weight-bold">Signup</button>
                 </router-link>
               </b-nav-item>
 
               <b-nav-item>
                 <router-link :to="{ name: 'Login' }" class="nav-margin">
-                  <button class="font-weight-bold">Login</button>
+                  <button class="nav-btn font-weight-bold">Login</button>
                 </router-link>
               </b-nav-item>
             </template>
@@ -89,13 +90,12 @@
     <div class="jumbotron" id="footerjumbo">
       <div class="container">
         <div class="row">
-          <div class="col-3"></div>
-          <div class="col-9"></div>
+          <div class="col-12"></div>
         </div>
       </div>
     </div>
-
   </div>
+</div>
 </template>
 
 <script>
@@ -121,6 +121,8 @@ export default {
       localStorage.removeItem('jwt');
       localStorage.removeItem('username');
       localStorage.removeItem('login_user');
+      localStorage.removeItem('is_admin');
+      localStorage.removeItem('user_movie');
       this.login = false;
       this.$store.state.login = false;
       this.$store.state.is_admin = false;
@@ -155,7 +157,6 @@ export default {
       }
     }
   },
-
   computed: {
     ...mapState(['is_admin', 'username']),
   },
@@ -173,6 +174,7 @@ export default {
   font-style: normal;
 }
 
+/* 전체 div */
 #app {
   font-family: 'NeoDunggeunmoPro-Regular';
   -webkit-font-smoothing: antialiased;
@@ -180,18 +182,36 @@ export default {
   text-align: center;
   color: black;
   background: #101130;
+  min-height: 100vh;
 }
 
+.main-img {
+  background-image: url('제목없음.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* 로고 이미지 */
+.Logo{
+  width: 70px;
+  height: auto;
+  margin: 0px;
+}
+
+/* 햄버거 버튼 */
 .navbar-toggler {
   color: #e8d1d9;
   border-color: #e8d1d9;
   padding: 8px; /* 햄버거 버튼 패딩을 8px로 수정 */
 }
 
+/* 햄버거 버튼, 텍스트 */
 .navbar-toggler .fa-bars {
   margin-right: 4px; /* 햄버거 아이콘과 텍스트 사이의 우측 마진을 4px로 설정 */
 }
 
+/* 네브바의 a링크들 */
 #nav a {
   font-size: 25px;
   font-weight: bold;
@@ -201,17 +221,24 @@ export default {
   /* color: #2c3e50; */
 }
 
+/* 네브바 버튼 클릭시 */
+.nav-btn:focus{
+  outline: none;
+}
+
+
+.hambuger:focus{
+  outline: none;
+}
+
 #nav a.router-link-exact-active {
   /* color: #D44C7F; */
   color: #e8d1d9;
 }
 
-#logo {
-  /* color: #de5078 !important; */
-}
-
+/* 푸터 */
 #footerjumbo {
-  height: 500px;
+  height: 100px;
   margin-bottom: 0rem;
 }
 
@@ -255,12 +282,14 @@ button {
   margin: -5px;
 }
 
+/* 로그아웃 버튼 */
 .logout {
   border-color: #0f264800;
   background-color: #0f264800;
   padding: 8px;
 }
 
+/* 유저 이름 */
 .user {
   color: #e8d1d9;
   padding: 8px 8px 8px 0; /* 상단, 우측, 하단 패딩은 8px, 좌측 패딩은 0으로 수정 */
@@ -281,5 +310,21 @@ button {
 
 .fa-bars {
   color: #e8d1d9;
+}
+
+.dropdown-menu {
+  background-color: #3c537f50 !important;
+}
+
+.dropdown-menu:active {
+  outline: none;
+}
+
+.dropdown-item > a.logout-btn {
+  color: #f5a6c1 !important;
+}
+
+.dropdown-item {
+  text-align: center !important;
 }
 </style>

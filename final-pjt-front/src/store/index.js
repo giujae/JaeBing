@@ -42,8 +42,11 @@ export default new Vuex.Store({
     setName(state, value) {
       state.username = value;
     },
-    IS_ADMIN: function (state, status) {
-      state.is_admin = status;
+    setMovie(state, value) {
+      state.user_movie = value;
+    },
+    setAdmin: function (state, value) {
+      state.is_admin = value;
     },
     GET_MOVIE: function (state) {
       axios
@@ -71,11 +74,12 @@ export default new Vuex.Store({
       } else {
         state.user_movie[`${reviewer_id}`] = [movie_id];
       }
+      localStorage.setItem('user_movie', JSON.stringify(state.user_movie));
       console.log('{유저:[영화]', state.user_movie);
       console.log(state.review_list);
     },
     RECOMMEND_MOVIE: function (state, id) {
-      if (state.is_admin) {
+      if (state.is_admin == true) {
         state.recommend_list = [];
       } else {
         if (!id) {
@@ -86,6 +90,7 @@ export default new Vuex.Store({
             .get(`${SERVER_URL}/movies/recommend/${id}/`)
             .then((res) => {
               state.recommend_list = res.data;
+              console.log('호출');
             })
             .catch((err) => {
               console.log(err);
@@ -95,19 +100,25 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    login({ commit }, { username, jwt, login_user }) {
+    login({ commit }, { username, jwt, login_user, user_movie, is_admin }) {
+      // console.log(user_movie);
       // 로그인 성공 후 로그인 상태 변경
       commit('setLogin', true);
       // 로그인 사용자 변경
       commit('setUser', login_user);
       commit('setName', username);
+      commit('setMovie', user_movie);
+      commit('setAdmin', is_admin);
       // 로그인 정보를 로컬 스토리지에 저장
       localStorage.setItem('username', username);
       localStorage.setItem('jwt', jwt);
       localStorage.setItem('login_user', login_user);
     },
-    isAdmin: function ({ commit }, status) {
-      commit('IS_ADMIN', status);
+    isAdmin: function ({ commit }) {
+      commit('setAdmin');
+    },
+    setMOVIE: function ({ commit }) {
+      commit('setMovie');
     },
     getMovie: function ({ commit }) {
       commit('GET_MOVIE');

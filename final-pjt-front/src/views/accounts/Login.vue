@@ -1,50 +1,55 @@
 <template>
-  <div>
+  <div class="login-div">
     <div class="container">
       <div class="row">
-        <div class="col-6">
-          <h1 class="m-3">안농 :) 어서와!</h1>
-          <h2>로그인 할래yo?</h2>
+        <div class="col-6 welcome-div">
+          <h1 class="m-3">Welcome</h1>
+          <h2>To The New Game :)</h2>
         </div>
       </div>
+
       <div class="row">
         <div class="col-6 d-flex justify-content-center" id="rightline">
           <div class="mb-3 mt-5" style="max-width: 18rem">
             <div class="card-body">
               <div class="input-group-lg">
-                <h4>아이디</h4>
+                <h3>ID</h3>
                 <input
                   type="text"
-                  placeholder="아이디 입력해!"
+                  placeholder="Enter Your ID!"
                   id="username"
-                  class="form-control"
+                  class="form-control1 "
                   v-model="credentials.username"
                 />
               </div>
               <br />
               <br />
               <div class="input-group-lg">
-                <h4>비밀번호</h4>
+                <h3>PASSWORD</h3>
                 <input
-                  placeholder="비밀번호 입력해!"
+                  placeholder="Enter Your PASSWORD!"
                   type="password"
                   id="password"
-                  class="form-control"
+                  class="form-control1"
                   v-model="credentials.password"
                   @keypress.enter="login"
                 />
               </div>
               <br />
-              <button @click="login" class="login-btn btn mt-3 font-1-5em btn-block">웅! 자 드가자</button>
+              <button @click="login" class="login-btn btn mt-3 font-1-5em btn-block">
+                <img src="./startbtn.png" alt="웅 이미지" class="login-image" />
+              </button>
             </div>
           </div>
         </div>
 
         <div class="col-6 d-flex align-items-center justify-content-center">
           <div>
-            <h3 class="signup-ment">이걸 아직도 가입 안 했어?!</h3>
+            <h3 class="signup-ment ml-4 mb-0">Want a new game?</h3>
             <div class="emptydiv"></div>
-            <router-link class="signup-a" :to="{ name: 'Signup' }">당장 가입 해.</router-link>
+            <router-link class="signup-a" :to="{ name: 'Signup' }">
+              <img src="./signup-btn.png" alt="가입 이미지" class="signup-image" />
+            </router-link>
             <div class="emptydiv"></div>
           </div>
         </div>
@@ -98,6 +103,7 @@ export default {
               const id = res.data;
               this.$store.state.login_user = id;
               this.$store.state.username = this.credentials.username;
+              localStorage.setItem('user_movie', JSON.stringify(this.$store.state.user_movie));
               localStorage.setItem('username', this.credentials.username);
               localStorage.setItem('login_user', id);
               this.$store.dispatch('recommendMovie', id);
@@ -112,6 +118,7 @@ export default {
             .post(`${SERVER_URL}/accounts/is-admin/`, this.credentials)
             .then((res) => {
               this.$store.dispatch('isAdmin', res.data);
+              localStorage.setItem('is_admin', res.data);
             })
             .catch((err) => {
               console.log(err);
@@ -168,19 +175,43 @@ export default {
 </script>
 
 <style scoped>
-/* 로그인 멘트 */
-.container {
-  color: #e8d1d9;
+.login-div {
+  background-image: url('loginpagefix2 (1).png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-/* 로그인 카드 속성 */
-
-/* 로그인 인풋 속성 */
-.form-control {
+.container {
+  color: #e8d1d9;
+  min-height: 90vh;
   background-color: #e8d1d900;
 }
 
-/* 중간 점선 */
+.welcome-div{
+  margin-top: 90px;
+}
+
+/* input 속성 */
+.form-control1 {
+  padding: 10px;
+  width: 100%;
+  height: 40px;
+  border: dashed;
+  border-radius: 15px;
+  border-color: #e8d1d969;
+  outline: none;
+  background-color: #0f264859;
+  color:#e8d1d9;
+  font-size: 20px;
+}
+
+/* input 클릭시 */
+.form-control1:focus{
+  padding: 10px;
+  color:#e8d1d9;
+}
+
 #rightline {
   border-right: dashed #e8d1d969;
 }
@@ -189,25 +220,40 @@ export default {
   height: 50px;
 }
 
-/* 회원가입 멘트 속성 */
 .signup-ment {
   text-decoration: none;
-}
-/* 회원가입 버튼 속성 */
-.signup-a {
-  color: #e8d1d9;
-  text-decoration: none;
-  font-size: 20px;
+  font-size: 50px;
 }
 
-/* 로그인 버튼 속성 */
+.signup-a {
+  display: inline-block;
+  color: #e8d1d9;
+  font-size: 20px;
+  position: relative;
+}
+
+.signup-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
+  /* Add any additional styles for the image */
+}
+
 .login-btn {
   color: #e8d1d9;
   font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-html {
-  /* background-color: #0F2648; */
-  background: red !important;
+.login-image {
+  margin-right: 10px;
+  width: auto;
+  height: auto;
+  /* Add any additional styles for the image */
 }
 </style>

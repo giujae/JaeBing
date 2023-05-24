@@ -1,69 +1,117 @@
 <template>
+  <div class="sign-img">
   <div class="container">
-    <h1 class="font-do my-3">Sign up</h1>
+    <h1 class="my-4">Sign up</h1>
 
-    <div class="form-group mt-5 font-poor font-1-2em">
-      <label for="username">사용자 이름: </label>
-      <input type="text" class="form-control" id="username" v-model="credentials.username" />
-    </div>
-
-    <div class="form-group mt-5 font-poor font-1-2em">
-      <label for="password">비밀번호: </label>
-      <input type="password" class="form-control" id="password" v-model="credentials.password" />
-    </div>
-
-    <div class="form-group mt-5 font-poor font-1-2em">
-      <label for="passwordConfirmation">비밀번호 확인: </label>
+    <!-- 유저 네임 -->
+    <div class="signup-form-group mt-4">
+      <label for="username">USERNAME</label>
       <input
+        placeholder="Enter Your USERNAME"
+        type="text"
+        class="form-control2"
+        id="username"
+        v-model="credentials.username"
+      />
+    </div>
+
+    <!-- 비밀번호 -->
+    <div class="signup-form-group mt-4">
+      <label for="password mb-1">PASSWORD</label>
+      <input
+        placeholder="Enter Your PASSWORD"
+        type="password"
+        class="form-control2"
+        id="password"
+        v-model="credentials.password"
+      />
+    </div>
+
+    <!-- 비밀번호 확인 -->
+    <div class="signup-form-group mt-4">
+      <label for="passwordConfirmation">CONFIRM PASSWORD</label>
+      <input
+        placeholder="Confirm PASSWORD"
         type="password"
         id="passwordConfirmation"
         v-model="credentials.passwordConfirmation"
         @keypress.enter="signup"
-        class="form-control"
+        class="form-control2"
       />
     </div>
 
-    <div class="form-group mt-5">
-      <label for="email">이메일: </label>
-      <input type="email" class="form-control" id="email" v-model="credentials.email" />
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <!-- 이메일 -->
+    <div class="signup-form-group mt-4">
+      <label for="email">E-MAIL</label>
+      <input
+        placeholder="Enter Your E-MAIL"
+        type="email"
+        class="form-control2"
+        id="email"
+        v-model="credentials.email"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >We'll never share your email with anyone else.</small
+      >
     </div>
 
-    <div class="form-group mt-5 font-poor font-1-2em">
-      <label for="date_of_birth">생년월일: </label>
-      <input type="date" class="form-control" id="date_of_birth" v-model="credentials.date_of_birth" />
+    <!-- 생년월일 -->
+    <div class="signup-form-group mt-4">
+      <label for="date_of_birth">BIRTH</label>
+      <input
+        type="date"
+        class="form-control2"
+        id="date_of_birth"
+        v-model="credentials.date_of_birth"
+      />
     </div>
 
-    <div class="form-group mt-3 float-left">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck" checked="true" v-model="agree" />
-        <label class="form-check-label" for="gridCheck">
-          <p @click="agreePage">개인정보 이용 약관에 동의합니다.</p>
-        </label>
+    <!-- 개인정보약관동의 박스 -->
+    <div class="form-check">
+      <div class="row">
+        <div class="col-5 d-flex justify-content-end p-2">
+          <input
+            class="check-box m-0"
+            type="checkbox"
+            id="gridCheck"
+            checked="true"
+            v-model="agree"
+          />
+        </div>
+
+        <div class="col-7 d-flex flex justify-content-right p-2">
+          <label for="gridCheck">
+            <p @click="agreePage" class="mt-1">
+              개인정보 이용 약관에 동의합니다.
+            </p>
+          </label>
+        </div>
       </div>
     </div>
     <br />
 
-    <div class="form-group mt-5 font-poor font-1-2em">
-      <button @click="signup" id="signupbtn" class="btn my-5 form-group">회원가입</button>
+    <div class="signup-form-group font-1-2em">
+      <button @click="signup" id="signupbtn"></button>
+      <h5 class="m-0">Do You Want To Start The Game?</h5>
     </div>
   </div>
+</div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: 'Signup',
+  name: "Signup",
   data: function () {
     return {
       credentials: {
-        username: '',
-        password: '',
-        email: '',
-        date_of_birth: '',
+        username: "",
+        password: "",
+        email: "",
+        date_of_birth: "",
       },
       agree: false,
     };
@@ -74,20 +122,20 @@ export default {
         axios
           .post(`${SERVER_URL}/accounts/signup/`, this.credentials)
           .then(() => {
-            this.$router.push({ name: 'Login' });
+            this.$router.push({ name: "Login" });
             this.agree = false;
           })
           .catch((err) => {
             console.log(err);
-            alert('회원가입 정보가 올바르지 않습니다.');
+            alert("회원가입 정보가 올바르지 않습니다.");
           });
       } else {
-        alert('개인정보 이용 약관에 동의해야합니다.');
+        alert("개인정보 이용 약관에 동의해야합니다.");
       }
     },
     agreePage: function () {
       alert(
-        '① 정보주체는 DeJaVue에 대해 언제든지 개인정보 열람,정정,삭제,처리정지 요구 등의 권리를 행사할 수 있습니다. \n② 제1항에 따른 권리 행사는DeJaVue에 대해 개인정보 보호법 시행령 제41조제1항에 따라 서면, 전자우편, 모사전송(FAX) 등을 통하여 하실 수 있으며 DeJaVue은(는) 이에 대해 지체 없이 조치하겠습니다. \n③ 제1항에 따른 권리 행사는 정보주체의 법정대리인이나 위임을 받은 자 등 대리인을 통하여 하실 수 있습니다. 이 경우 개인정보 보호법 시행규칙 별지 제11호 서식에 따른 위임장을 제출하셔야 합니다. \n④ 개인정보 열람 및 처리정지 요구는 개인정보보호법 제35조 제5항, 제37조 제2항에 의하여 정보주체의 권리가 제한 될 수 있습니다. \n⑤ 개인정보의 정정 및 삭제 요구는 다른 법령에서 그 개인정보가 수집 대상으로 명시되어 있는 경우에는 그 삭제를 요구할 수 없습니다. \n⑥ DeJaVue은(는) 정보주체 권리에 따른 열람의 요구, 정정·삭제의 요구, 처리정지의 요구 시 열람 등 요구를 한 자가 본인이거나 정당한 대리인인지를 확인합니다.'
+        "① 정보주체는 DeJaVue에 대해 언제든지 개인정보 열람,정정,삭제,처리정지 요구 등의 권리를 행사할 수 있습니다. \n② 제1항에 따른 권리 행사는DeJaVue에 대해 개인정보 보호법 시행령 제41조제1항에 따라 서면, 전자우편, 모사전송(FAX) 등을 통하여 하실 수 있으며 DeJaVue은(는) 이에 대해 지체 없이 조치하겠습니다. \n③ 제1항에 따른 권리 행사는 정보주체의 법정대리인이나 위임을 받은 자 등 대리인을 통하여 하실 수 있습니다. 이 경우 개인정보 보호법 시행규칙 별지 제11호 서식에 따른 위임장을 제출하셔야 합니다. \n④ 개인정보 열람 및 처리정지 요구는 개인정보보호법 제35조 제5항, 제37조 제2항에 의하여 정보주체의 권리가 제한 될 수 있습니다. \n⑤ 개인정보의 정정 및 삭제 요구는 다른 법령에서 그 개인정보가 수집 대상으로 명시되어 있는 경우에는 그 삭제를 요구할 수 없습니다. \n⑥ DeJaVue은(는) 정보주체 권리에 따른 열람의 요구, 정정·삭제의 요구, 처리정지의 요구 시 열람 등 요구를 한 자가 본인이거나 정당한 대리인인지를 확인합니다."
       );
     },
   },
@@ -98,14 +146,71 @@ export default {
 </script>
 
 <style scoped>
+
+.sign-img {
+  background-image: url('loginpagefix2 (1).png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.container {
+  color: #d5b0c1;
+
+}
+
+.signup-form-group{
+  font-size: 20px;
+}
+
+/*  */
 input {
+  padding: 10px;
   width: 200px;
   height: 40px;
   display: block;
   margin: 0 auto;
+  border: dashed;
+  border-color: #e8d1d969;
+  border-radius: 15px;
+  background-color: #0f264859;
+  outline: none;
+  color:#e8d1d9;
+  font-size: 18px;
 }
+
+input:focus{
+  padding: 10px;
+  color:#e8d1d9;
+  background-color: #0f264859 !important;
+}
+
+/* 회원가입 버튼 */
 #signupbtn {
   font-size: 2em !important;
-  width: 200px !important;
+  width: 300px;
+  height: 40px;
+  margin-bottom: 0px;
+  background-image: url('startbtn.png');
+  /* background-size: cover; */
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/* input 속성 */
+.form-control2 {
+  background-color: #e8d1d900;
+}
+
+
+/* 개인정보약관 */
+.form-check-label {
+}
+/* 체크박스 */
+.check-box {
+  width: 25px !important;
+  height: 25px;
 }
 </style>

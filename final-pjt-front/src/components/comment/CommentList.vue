@@ -3,13 +3,11 @@
     <h2 class="mt-5 font-do">댓글 목록</h2>
 
     <div v-for="(comment, idx) in comments" :key="idx" class="media mt-3">
-      <a class="mr-3" href="#">
-        <img :src="images.flamingo" width="50" class="mr-1" alt="..." />
-      </a>
       <div class="media-body">
         <h3 class="mt-0">[{{ comment.user.username }}] {{ comment.content }}</h3>
         <p>작성: {{ $moment(comment.created_at).format('YYYY-MM-DD hh:mm:ss') }} |</p>
         <p>수정: {{ $moment(comment.created_at).format('YYYY-MM-DD hh:mm:ss') }}</p>
+
         <div v-if="updateTrigger === comment.id">
           <UpdateForm :updateCommentItem="updateCommentItem" :post="post" @trigger="changeTrigger" />
         </div>
@@ -17,8 +15,8 @@
           <!--작성자와 접속자가 같다면, 수정/삭제 버튼 활성화-->
           <!--단, 관리자의 경우 삭제 버튼 활성화 -->
           <button
-            class="btn btn-pink mr-1"
-            v-if="comment.user.id === login_user && updateTrigger === false"
+            class="btn btn-danger mr-1"
+            v-if="comment.user.id == login_user && updateTrigger === false"
             @click="updatePostForm(comment)"
           >
             댓글 수정
@@ -27,13 +25,13 @@
           <button
             class="btn btn-secondary font-jua mr-1"
             v-if="is_admin && updateTrigger === false"
-            @click="deleteComment(comment)"
-          >
+            @click="deleteComment(comment)">
             댓글 삭제
           </button>
+
           <button
             class="btn btn-secondary font-jua mr-1"
-            v-else-if="comment.user.id === login_user && updateTrigger === false"
+            v-else-if="comment.user.id == login_user && updateTrigger === false"
             @click="deleteComment(comment)"
           >
             댓글 삭제
@@ -60,10 +58,6 @@ export default {
     return {
       updateTrigger: false,
       updateCommentItem: '',
-      images: {
-        logo: require('@/assets/images/logo.png'),
-        flamingo: require('@/assets/images/flamingo.png'),
-      },
     };
   },
   props: {

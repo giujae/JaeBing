@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-3 p-0">
-          <h1 class="h1-tag my-3 text-left">게시판</h1>
+          <h1 class="h1-tag mt-5 mt-2 text-left">게시판</h1>
         </div>
 
         <div class="create-btn-div p-0 col-9 d-flex align-items-center justify-content-end align-items-end">
@@ -144,19 +144,12 @@ export default {
 .article {
   width: 100%;
   min-height: 100vh;
-  background-image: linear-gradient(
-      to top,
-      rgba(20, 20, 20, 0.25) 10%,
-      rgba(20, 20, 20, 0.5) 25%,
-      rgba(20, 20, 20, 0.5) 50%,
-      rgba(20, 20, 20, 0.75) 75%,
-      rgba(20, 20, 20, 1) 100%
-    ),
-    url('https://e1.pxfuel.com/desktop-wallpaper/584/162/desktop-wallpaper-2560x1440-tokyo-cityscape-buildings-digital-retro-tokyo.jpg');
+  background-image:
+    url('profilefixtemp.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  backdrop-filter: blur(10px);
+  /* backdrop-filter: blur(10px); */
   color: #e8d1d9;
 }
 
