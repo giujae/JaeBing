@@ -1,6 +1,6 @@
 <template>
   <div class="movie-main">
-    <div class="mb-5" style="max-width: 370px; margin-left: auto; margin-right: 5%">
+    <div style="max-width: 370px; margin-left: auto; margin-right: 5%">
       <h1 class="font-do my-3"></h1>
       <b-row class="d-flex justify-content-end"> </b-row>
       <b-row>
@@ -26,14 +26,15 @@
               style="width: auto"
             >
               <template #img>
-                <div style="display: flex; justify-content: flex-end" class="slide-card-div">
-                  <div>dasd</div>
+                <div class="popluar-text" style="background-color: #e8d1d900; color:#e8d1d9; font-size: 30px; ">Movie Hit</div>
+                <div style="display: flex; justify-content: flex-end; background-color: #e8d1d900;" class="slide-card-div">
                   <img
                     class="d-block img-fluid"
                     :src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`"
                     alt="image slot"
-                    style="max-height: 480px"
+                    style="max-height: 480px; margin: 0px 10px 10px;"
                   />
+
                 </div>
               </template>
             </b-carousel-slide>
@@ -45,7 +46,7 @@
     <!-- 장르 선택 버튼 -->
     <div>
       <div class="d-flex justify-content-end">
-        <b-dropdown id="genreBtn" :text="search || '장르 선택'">
+        <b-dropdown class="mt-3" id="genreBtn" :text="search || '장르 선택'">
           <b-dropdown-item
             class="genreBtn-item"
             v-for="(genre, index) in genres"
@@ -69,8 +70,7 @@
     <!-- 장르 선택시 나타나는 리스트 -->
     <div>
       <h1 v-if="movies.length" class="font-do my-5">{{ search }} 리스트</h1>
-
-      <carousel class="custom-carousel" :perPage="4">
+      <carousel class="custom-carousel" :perPage="8">
         <slide v-for="(movie, idx) in movies" :key="idx">
           <MovieListItem :movie="movie" class="pick" :search="search" />
         </slide>
