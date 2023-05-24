@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="login-div">
+    div
     <div class="container">
       <div class="row">
         <div class="col-6">
@@ -45,7 +46,9 @@
           <div>
             <h3 class="signup-ment">이걸 아직도 가입 안 했어?!</h3>
             <div class="emptydiv"></div>
-            <router-link class="signup-a" :to="{ name: 'Signup' }">당장 가입 해.</router-link>
+            <router-link class="signup-a" :to="{ name: 'Signup' }">
+              <img src="./signup-btn.png" alt="가입 이미지" class="signup-image" />
+            </router-link>
             <div class="emptydiv"></div>
           </div>
         </div>
@@ -171,23 +174,24 @@ export default {
 </script>
 
 <style scoped>
-/* 로그인 멘트 */
-.container {
-  color: #e8d1d9;
-  min-height: 80vh;
+.login-div {
   background-image: url('https://st2.depositphotos.com/14548252/47970/v/600/depositphotos_479708850-stock-illustration-evening-landscape-with-bright-fireworks.jpg');
   background-size: cover;
   background-position: center;
+  /* opacity: 0.4 */
+  ;
 }
 
-/* 로그인 카드 속성 */
+.container {
+  color: #e8d1d9;
+  min-height: 80vh;
+  background-color: #e8d1d900;
+}
 
-/* 로그인 인풋 속성 */
 .form-control {
   background-color: #e8d1d900;
 }
 
-/* 중간 점선 */
 #rightline {
   border-right: dashed #e8d1d969;
 }
@@ -196,26 +200,38 @@ export default {
   height: 50px;
 }
 
-/* 회원가입 멘트 속성 */
 .signup-ment {
   text-decoration: none;
 }
 
-/* 회원가입 버튼 속성 */
 .signup-a {
+  display: inline-block;
   color: #e8d1d9;
-  text-decoration: none;
   font-size: 20px;
+  position: relative;
 }
 
-/* 로그인 버튼 속성 */
+.signup-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
+  /* Add any additional styles for the image */
+}
+
 .login-btn {
   color: #e8d1d9;
   font-size: 20px;
 }
+<<<<<<< HEAD
 
 html {
   /* background-color: #0F2648; */
   /* background: red !important; */
 }
 </style>
+=======
+</style>
+>>>>>>> 044fe919fbb4ec30becf61243ea81d694f317c7b

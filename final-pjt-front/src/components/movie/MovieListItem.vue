@@ -1,12 +1,21 @@
 <template>
   <div>
+<<<<<<< HEAD
     <!-- <b-card
+=======
+      <b-card
+>>>>>>> 044fe919fbb4ec30becf61243ea81d694f317c7b
         v-if="!movie.poster_path.includes('#')"
         :img-src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`"
         img-alt="Image"
         class="card-img my-2"
+<<<<<<< HEAD
         @click="showDetail"></b-card> -->
     <!-- 
+=======
+        @click="showDetail"></b-card>
+
+>>>>>>> 044fe919fbb4ec30becf61243ea81d694f317c7b
       <b-card
         v-else
         img-src="https://image.tmdb.org/t/p/w185/g3gpHLUuQLGI9gRmfraSQCN1TYk.jpg"
@@ -14,7 +23,7 @@
         img-top
         class="my-2"
         @click="showDetail">
-      </b-card> -->
+      </b-card>
 
     <div>
       <div class="cards" v-if="!movie.poster_path.includes('#')">
