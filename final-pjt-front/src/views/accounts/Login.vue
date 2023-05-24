@@ -18,7 +18,7 @@
                   type="text"
                   placeholder="Enter Your ID!"
                   id="username"
-                  class="form-control1 "
+                  class="form-control1"
                   v-model="credentials.username"
                 />
               </div>
@@ -36,8 +36,15 @@
                 />
               </div>
               <br />
-              <button @click="login" class="login-btn btn mt-3 font-1-5em btn-block">
-                <img src="./startbtn.png" alt="웅 이미지" class="login-image" />
+              <button
+                @click="login"
+                class="login-btn btn mt-3 font-1-5em btn-block"
+              >
+                <img
+                  src="./startbtn2.png"
+                  alt="웅 이미지"
+                  class="login-image"
+                />
               </button>
             </div>
           </div>
@@ -48,7 +55,11 @@
             <h3 class="signup-ment ml-4 mb-0">Want a new game?</h3>
             <div class="emptydiv"></div>
             <router-link class="signup-a" :to="{ name: 'Signup' }">
-              <img src="./signup-btn.png" alt="가입 이미지" class="signup-image" />
+              <img
+                src="./signup-btn.png"
+                alt="가입 이미지"
+                class="signup-image"
+              />
             </router-link>
             <div class="emptydiv"></div>
           </div>
@@ -59,23 +70,23 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: 'Login',
+  name: "Login",
   data: function () {
     return {
       credentials: {
-        username: '',
-        password: '',
+        username: "",
+        password: "",
       },
     };
   },
   methods: {
     setToken: function () {
-      const token = localStorage.getItem('jwt');
+      const token = localStorage.getItem("jwt");
 
       const config = {
         headers: {
@@ -90,8 +101,8 @@ export default {
         .post(`${SERVER_URL}/accounts/api-token-auth/`, this.credentials)
         .then((res) => {
           // console.log(res)
-          localStorage.setItem('jwt', res.data.token);
-          this.$emit('login');
+          localStorage.setItem("jwt", res.data.token);
+          this.$emit("login");
           this.$store.state.login = true;
 
           // console.log(res)
@@ -103,11 +114,14 @@ export default {
               const id = res.data;
               this.$store.state.login_user = id;
               this.$store.state.username = this.credentials.username;
-              localStorage.setItem('user_movie', JSON.stringify(this.$store.state.user_movie));
-              localStorage.setItem('username', this.credentials.username);
-              localStorage.setItem('login_user', id);
-              this.$store.dispatch('recommendMovie', id);
-              this.$store.dispatch('getMovie');
+              localStorage.setItem(
+                "user_movie",
+                JSON.stringify(this.$store.state.user_movie)
+              );
+              localStorage.setItem("username", this.credentials.username);
+              localStorage.setItem("login_user", id);
+              this.$store.dispatch("recommendMovie", id);
+              this.$store.dispatch("getMovie");
               // console.log(this.$store.state.login_user)
             })
             .catch((err) => {
@@ -117,8 +131,8 @@ export default {
           axios
             .post(`${SERVER_URL}/accounts/is-admin/`, this.credentials)
             .then((res) => {
-              this.$store.dispatch('isAdmin', res.data);
-              localStorage.setItem('is_admin', res.data);
+              this.$store.dispatch("isAdmin", res.data);
+              localStorage.setItem("is_admin", res.data);
             })
             .catch((err) => {
               console.log(err);
@@ -126,23 +140,23 @@ export default {
           this.$store.state.username = this.credentials.username;
           if (this.flag) {
             this.$router.push({
-              name: 'AdminManagement',
+              name: "AdminManagement",
             });
           } else {
             this.$router.push({
-              name: 'MovieList',
+              name: "MovieList",
             });
           }
         })
         .catch((err) => {
           console.log(err);
-          alert('로그인 정보가 일치하지 않습니다.');
+          alert("로그인 정보가 일치하지 않습니다.");
         });
     },
   },
   mounted() {
     window.scrollTo(0, 0);
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem("jwt");
     if (token) {
       const config = this.setToken();
 
@@ -153,9 +167,9 @@ export default {
           const id = res.data;
           this.$store.state.login_user = id;
           this.$store.state.username = this.credentials.username;
-          localStorage.setItem('username', this.credentials.username);
-          localStorage.setItem('login_user', id);
-          this.$store.dispatch('recommendMovie', id);
+          localStorage.setItem("username", this.credentials.username);
+          localStorage.setItem("login_user", id);
+          this.$store.dispatch("recommendMovie", id);
 
           // 로그인 상태를 설정
           this.$store.state.login = true;
@@ -176,7 +190,7 @@ export default {
 
 <style scoped>
 .login-div {
-  background-image: url('loginpagefix2 (1).png');
+  background-image: url("loginpagefix2 (1).png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -188,7 +202,7 @@ export default {
   background-color: #e8d1d900;
 }
 
-.welcome-div{
+.welcome-div {
   margin-top: 90px;
 }
 
@@ -202,14 +216,14 @@ export default {
   border-color: #e8d1d969;
   outline: none;
   background-color: #0f264859;
-  color:#e8d1d9;
+  color: #e8d1d9;
   font-size: 20px;
 }
 
 /* input 클릭시 */
-.form-control1:focus{
+.form-control1:focus {
   padding: 10px;
-  color:#e8d1d9;
+  color: #e8d1d9;
 }
 
 #rightline {
