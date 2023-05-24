@@ -2,18 +2,22 @@
   <div class="profile-container">
     <!-- 프로필 카드 -->
     <div class="profile-card">
-      <strong><h1 class="my-4 text-left">프로필</h1></strong>
+      <strong><h1 class="my-4 text-left">Profile</h1></strong>
       <div v-if="profile">
         <h2 class="text-left my-3">
           <span class="username pr-2 pl-0">{{ profile.username }}</span>
           <span class="follower">Follower: {{ followersCount }}</span>
-          <span class="grade">Grade: {{ isAdmin ? '관리자' : '일반회원' }}</span>
+          <span class="grade"
+            >Grade: {{ isAdmin ? "관리자" : "일반회원" }}</span
+          >
         </h2>
         <!-- <p class="text-left">
           <strong>가입일:</strong> {{ formatDate(profile.date_joined) }}
         </p> -->
-        <p class="text-left p-auto my-1"><strong>생일:</strong> {{ profile.date_of_birth }}</p>
-        <p class="text-left"><strong>이메일:</strong> {{ profile.email }}</p>
+        <p class="text-left p-auto my-1">
+          <strong>Birth :</strong> {{ profile.date_of_birth }}
+        </p>
+        <p class="text-left"><strong>Email :</strong> {{ profile.email }}</p>
       </div>
     </div>
     <!-- 프로필 카드 끝 -->
@@ -22,8 +26,12 @@
       <!-- <p><strong>회원코드:</strong> {{ profile.id }}</p> -->
 
       <div v-if="!isCurrentUser">
-        <button v-if="!isCurrentUser" @click="toggleFollow" class="btn btn-primary">
-          {{ isFollowing ? '언팔로우' : '팔로우' }}
+        <button
+          v-if="!isCurrentUser"
+          @click="toggleFollow"
+          class="btn btn-primary"
+        >
+          {{ isFollowing ? "언팔로우" : "팔로우" }}
         </button>
       </div>
 
@@ -32,17 +40,26 @@
         <!-- 버튼 넣을 div 박스 -->
         <div class="btn-div">
           <!-- 게시글 -->
-          <button class="created-btn" @click="selectedTab = 'posts'">작성한 게시글</button>
+          <button class="created-btn" @click="selectedTab = 'posts'">
+            작성한 게시글
+          </button>
 
           <!-- 리뷰 -->
-          <button class="created-btn" @click="selectedTab = 'reviews'">작성한 리뷰</button>
+          <button class="created-btn" @click="selectedTab = 'reviews'">
+            작성한 리뷰
+          </button>
 
           <!-- 댓글 -->
-          <button class="created-btn" @click="selectedTab = 'comments'">작성한 댓글</button>
+          <button class="created-btn" @click="selectedTab = 'comments'">
+            작성한 댓글
+          </button>
         </div>
 
         <!-- 작성한 게시글 테이블 -->
-        <table class="created-table table table-hover" v-if="selectedTab === 'posts'">
+        <table
+          class="created-table table table-hover"
+          v-if="selectedTab === 'posts'"
+        >
           <tr>
             <th>No.</th>
             <th>TITLE</th>
@@ -53,12 +70,17 @@
             <th>{{ post.id }}</th>
             <th>{{ post.title }}</th>
             <th>{{ post.content }}</th>
-            <th>{{ $moment(post.created_at).format('YYYY-MM-DD hh:mm:ss') }}</th>
+            <th>
+              {{ $moment(post.created_at).format("YYYY-MM-DD hh:mm:ss") }}
+            </th>
           </tr>
         </table>
 
         <!-- 작성한 리뷰 테이블 -->
-        <table class="created-table table table-hover" v-if="selectedTab === 'reviews'">
+        <table
+          class="created-table table table-hover"
+          v-if="selectedTab === 'reviews'"
+        >
           <tr>
             <th>No.</th>
             <th>MOIVE</th>
@@ -73,13 +95,16 @@
             <th>{{ review.rate }}</th>
             <th>{{ review.content }}</th>
             <th>
-              {{ $moment(review.created_at).format('YYYY-MM-DD hh:mm:ss') }}
+              {{ $moment(review.created_at).format("YYYY-MM-DD hh:mm:ss") }}
             </th>
           </tr>
         </table>
 
         <!-- 작성한 댓글 테이블 -->
-        <table class="created-table table table-hover" v-if="selectedTab === 'comments'">
+        <table
+          class="created-table table table-hover"
+          v-if="selectedTab === 'comments'"
+        >
           <tr>
             <th>No.</th>
             <th>POST NO.</th>
@@ -91,7 +116,7 @@
             <th>{{ comment.post }}</th>
             <th>{{ comment.content }}</th>
             <th>
-              {{ $moment(comment.created_at).format('YYYY-MM-DD hh:mm:ss') }}
+              {{ $moment(comment.created_at).format("YYYY-MM-DD hh:mm:ss") }}
             </th>
           </tr>
         </table>
@@ -102,12 +127,12 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: 'Profile',
+  name: "Profile",
   data() {
     return {
       profile: null,
@@ -118,13 +143,13 @@ export default {
       followersCount: 0, // 팔로워 수
       isFollowing: false,
       isCurrentUser: false,
-      selectedTab: 'posts',
+      selectedTab: "posts",
       followtrial: 0,
     };
   },
   methods: {
     setToken() {
-      const token = localStorage.getItem('jwt');
+      const token = localStorage.getItem("jwt");
 
       const config = {
         headers: {
@@ -134,7 +159,7 @@ export default {
       return config;
     },
     formatDate(date) {
-      return this.$moment(date).format('YYYY-MM-DD');
+      return this.$moment(date).format("YYYY-MM-DD");
     },
     toggleFollow() {
       const username = this.$route.params.username;
@@ -142,9 +167,13 @@ export default {
 
       if (this.isFollowing) {
         axios
-          .post(`${SERVER_URL}/accounts/profile/${username}/unfollow/`, {}, config)
+          .post(
+            `${SERVER_URL}/accounts/profile/${username}/unfollow/`,
+            {},
+            config
+          )
           .then((res) => {
-            alert('언팔로우되었습니다.'); // 알림 표시
+            alert("언팔로우되었습니다."); // 알림 표시
             this.followtrial = 0;
           })
           .catch((err) => {
@@ -158,7 +187,7 @@ export default {
             // console.log(this.$store.state.login_user, '유저');
             // console.log(res.data.includes(this.$store.state.login_user));
             // this.followersCount = res.data.length; // 팔로워 수 설정
-            console.log(res.data, '언팔로우');
+            console.log(res.data, "언팔로우");
             if (res.data.includes(this.$store.state.login_user)) {
               // console.log('있네');
               this.isFollowing = false;
@@ -169,13 +198,17 @@ export default {
           });
       } else {
         axios
-          .post(`${SERVER_URL}/accounts/profile/${username}/follow/`, {}, config)
+          .post(
+            `${SERVER_URL}/accounts/profile/${username}/follow/`,
+            {},
+            config
+          )
           .then((res) => {
             // this.isFollowing = true;
             // console.log(res.data, '팔로우');
             // this.followersCount = res.data.followers_count;
             this.followtrial++;
-            alert('팔로우되었습니다.'); // 알림 표시
+            alert("팔로우되었습니다."); // 알림 표시
           })
           .catch((err) => {
             console.log(err);
@@ -186,8 +219,8 @@ export default {
             // console.log(res.data, '어디 함 볼까2');
             // console.log(this.$store.state.login_user, '유저');
             // console.log(res.data.includes(this.$store.state.login_user));
-            console.log(this.followtrial, '몇번 눌렀니');
-            console.log(res.data, '팔로우');
+            console.log(this.followtrial, "몇번 눌렀니");
+            console.log(res.data, "팔로우");
             this.followersCount = res.data.length + 1;
             if (res.data.includes(this.$store.state.login_user)) {
               // console.log('있네');
@@ -204,7 +237,7 @@ export default {
     },
   },
   created() {
-    const currentusername = localStorage.getItem('username');
+    const currentusername = localStorage.getItem("username");
     const username = this.$route.params.username;
     axios
       .get(`${SERVER_URL}/accounts/profile/${username}/`)
@@ -276,7 +309,7 @@ export default {
   min-height: 100vh;
   width: 100%;
   padding: 0 10%;
-  background-image: url('profilefixtemp.jpg');
+  background-image: url("profile.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -303,7 +336,7 @@ export default {
 
 /* 작성한~ 테이블 속성 */
 .created-table {
-  font-family: 'NeoDunggeunmo';
+  font-family: "NeoDunggeunmo";
   font-size: 20px;
   color: #e8d1d9 !important;
   border-style: dashed;

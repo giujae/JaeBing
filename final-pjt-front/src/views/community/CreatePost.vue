@@ -1,25 +1,39 @@
 <template>
   <div class="post-detail-div">
-    <div class="create-post-container my-5">
+    <div class="create-post-container">
       <div class="htag mt-5">
-        <h1 v-if="this.purpose == 'create'" class="my-4">글 작성하기</h1>
-        <h1 v-else-if="this.purpose == 'update'" class="my-3">글 수정하기</h1>
-      </div>  
-      
+        <h1 v-if="this.purpose == 'create'" style="margin-top: 100px">
+          Create Post
+        </h1>
+        <h1 v-else-if="this.purpose == 'update'" class="my-3">Create Post</h1>
+      </div>
+
       <div class="row justify-content-center">
-        <form v-if="this.purpose == 'create'" v-on:submit.prevent="createPostForm">
-          <div class="post-form-group my-4">
-            <label for="title">Title: </label>
+        <form
+          v-if="this.purpose == 'create'"
+          v-on:submit.prevent="createPostForm"
+        >
+          <div class="post-form-group">
+            <label for="title">Title : </label>
             <div>
-              <input type="text" class="form-control create-form-control" id="title" v-model.trim="title" />
+              <input
+                type="text"
+                class="form-control create-form-control"
+                id="title"
+                v-model.trim="title"
+              />
             </div>
           </div>
 
           <div class="post-form-group my-3">
-            <label for="content">Content: </label>
-              <textarea class="form-control create-form-control" id="content" v-model="content"></textarea>
+            <label for="content">Content : </label>
+            <textarea
+              class="form-control create-form-control"
+              id="content"
+              v-model="content"
+            ></textarea>
           </div>
-          <button class="submit-btn" type="submit">등록하기</button>
+          <button class="submit-btn" type="submit">Submit</button>
         </form>
 
         <form v-if="this.purpose == 'update'" v-on:submit.prevent="updatePost">
@@ -31,7 +45,7 @@
             <label for="content">Content: </label>
             <input type="text" id="content" v-model="content" />
           </div>
-          <button type="submit-btn">등록하기</button>
+          <button type="submit-btn">Submit</button>
         </form>
       </div>
     </div>
@@ -40,22 +54,22 @@
 
 <script>
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  name: 'CreatePost',
+  name: "CreatePost",
   data: function () {
     return {
       posts: [],
-      title: '',
-      content: '',
-      purpose: '',
-      updateId: '',
+      title: "",
+      content: "",
+      purpose: "",
+      updateId: "",
     };
   },
   methods: {
     setToken: function () {
-      const token = localStorage.getItem('jwt');
+      const token = localStorage.getItem("jwt");
 
       const config = {
         headers: {
@@ -76,7 +90,7 @@ export default {
         .then((res) => {
           //console.log(res)
           this.$router.push({
-            name: 'PostDetail',
+            name: "PostDetail",
             params: {
               id: res.data.id,
             },
@@ -84,7 +98,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-          alert('잘못된 정보를 입력했습니다.');
+          alert("잘못된 정보를 입력했습니다.");
         });
     },
     updatePost: function () {
@@ -96,10 +110,14 @@ export default {
         post_code: 1,
       };
       axios
-        .put(`${SERVER_URL}/community/post_delete_update/${this.updateId}/`, postItem, config)
+        .put(
+          `${SERVER_URL}/community/post_delete_update/${this.updateId}/`,
+          postItem,
+          config
+        )
         .then((res) => {
           this.$router.push({
-            name: 'PostDetail',
+            name: "PostDetail",
             params: {
               id: res.data.id,
             },
@@ -122,11 +140,11 @@ export default {
 };
 </script>
 
-<style>
-.create-post-container{
+<style scoped>
+.create-post-container {
   width: 100%;
-  min-height: 70vh;
-  color:#e8d1d9;
+  min-height: 100vh;
+  color: #e8d1d9;
   font-size: 20px;
 }
 
@@ -134,8 +152,22 @@ export default {
   width: 100%;
 }
 
-.create-form-control{
+.create-form-control {
   /* background-color: #e8d1d986 !important; */
 }
 
+input {
+  padding: 10px;
+  width: auto;
+  height: 40px;
+  display: block;
+  margin: 0 auto;
+  border: dashed;
+  border-color: #e8d1d969;
+  border-radius: 15px;
+  background-color: #0f264859;
+  outline: none;
+  color: #e8d1d9;
+  font-size: 18px;
+}
 </style>

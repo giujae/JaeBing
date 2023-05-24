@@ -1,182 +1,199 @@
 <template>
   <div id="app">
     <div class="main-img">
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-      integrity="sha512-..."
-      crossorigin="anonymous"
-    />
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+        crossorigin="anonymous"
+      />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-..."
+        crossorigin="anonymous"
+      />
 
-    <div id="nav" class="main-nav" v-if="this.$route.path !== '/'">
-      <b-navbar toggleable="lg">
-        <b-navbar-toggle target="navbar-nav-collapse hambuger">
-          <i class="fas fa-bars"></i>
-        </b-navbar-toggle>
+      <div id="nav" class="main-nav" v-if="this.$route.path !== '/'">
+        <b-navbar toggleable="lg">
+          <b-navbar-toggle target="navbar-nav-collapse hambuger">
+            <i class="fas fa-bars"></i>
+          </b-navbar-toggle>
 
-        <b-navbar-brand href="/movies" class="font-weight-bold">
-          <img class="Logo" src="./Logo.png" alt="">
-        </b-navbar-brand>
+          <b-navbar-brand href="/movies" class="font-weight-bold">
+            <img class="Logo" src="./Logo.png" alt="" />
+            <!-- <p>JAEBING</p> -->
+          </b-navbar-brand>
 
-        <b-collapse id="navbar-nav-collapse" is-nav>
-          <b-navbar-nav>
-            <!-- Remove the dropdown and its items -->
-            <b-nav-item>
-              <router-link :to="{ name: 'Post' }">Community</router-link>
-            </b-nav-item>
-
-            <b-nav-item-dropdown v-if="$store.state.login && this.$route.path !== '/login'" :text="username">
-              <b-dropdown-item>
-                <router-link :to="{ name: 'Profile', params: { username: username } }">Profile</router-link>
-              </b-dropdown-item>
-
-              <b-dropdown-item>
-                <router-link @click.native="logout" to="#" class="nav-margin">
-                  <button class="logout-btn font-weight-bold p-0">Logout</button>
-                </router-link>
-              </b-dropdown-item>
-            </b-nav-item-dropdown>
-
-            <template v-if="is_admin === true">
+          <b-collapse id="navbar-nav-collapse" is-nav>
+            <b-navbar-nav>
+              <!-- Remove the dropdown and its items -->
               <b-nav-item>
-                <router-link :to="{ name: 'ManageMovie' }" class="nav-margin">
-                  <span class="badge badge-pill badge-warning">영화관리</span>
-                </router-link>
+                <router-link :to="{ name: 'Post' }">Community</router-link>
               </b-nav-item>
 
-              <b-nav-item>
-                <router-link :to="{ name: 'AdminManagement' }" class="nav-margin">
-                  <span class="badge badge-pill badge-warning">회원관리</span>
-                </router-link>
-              </b-nav-item>
-            </template>
-          </b-navbar-nav>
+              <b-nav-item-dropdown
+                v-if="$store.state.login && this.$route.path !== '/login'"
+                :text="username"
+              >
+                <b-dropdown-item>
+                  <router-link
+                    :to="{ name: 'Profile', params: { username: username } }"
+                    >Profile</router-link
+                  >
+                </b-dropdown-item>
 
-          <b-navbar-nav class="ml-auto">
-            <template v-if="$store.state.login">
-              <b-nav-item>
-                <button @click="triggerSearch" class="font-weight-bold font-do search-btn">검색</button>
-              </b-nav-item>
-              <!-- <p class="user font-weight-bold text-truncate">{{ username }}</p> -->
-            </template>
+                <b-dropdown-item>
+                  <router-link @click.native="logout" to="#" class="nav-margin">
+                    <button class="logout-btn font-weight-bold p-0">
+                      Logout
+                    </button>
+                  </router-link>
+                </b-dropdown-item>
+              </b-nav-item-dropdown>
 
-            <template v-else>
-              <b-nav-item>
-                <router-link :to="{ name: 'Signup' }" class="nav-margin">
-                  <button class="nav-btn font-weight-bold">Signup</button>
-                </router-link>
-              </b-nav-item>
+              <template v-if="is_admin === true">
+                <b-nav-item>
+                  <router-link :to="{ name: 'ManageMovie' }" class="nav-margin">
+                    <span class="badge badge-pill badge-warning">영화관리</span>
+                  </router-link>
+                </b-nav-item>
 
-              <b-nav-item>
-                <router-link :to="{ name: 'Login' }" class="nav-margin">
-                  <button class="nav-btn font-weight-bold">Login</button>
-                </router-link>
-              </b-nav-item>
-            </template>
-          </b-navbar-nav>
-        </b-collapse>
-      </b-navbar>
-    </div>
+                <b-nav-item>
+                  <router-link
+                    :to="{ name: 'AdminManagement' }"
+                    class="nav-margin"
+                  >
+                    <span class="badge badge-pill badge-warning">회원관리</span>
+                  </router-link>
+                </b-nav-item>
+              </template>
+            </b-navbar-nav>
 
-    <router-view @login="login = true" />
+            <b-navbar-nav class="ml-auto">
+              <template v-if="$store.state.login">
+                <b-nav-item>
+                  <button
+                    @click="triggerSearch"
+                    class="font-weight-bold font-do search-btn"
+                  >
+                    검색
+                  </button>
+                </b-nav-item>
+                <!-- <p class="user font-weight-bold text-truncate">{{ username }}</p> -->
+              </template>
 
-    <!-- 푸터 -->
-    <div class="jumbotron" id="footerjumbo">
-      <div class="container">
-        <div class="row">
-          <div class="col-12"></div>
+              <template v-else>
+                <b-nav-item>
+                  <router-link :to="{ name: 'Signup' }" class="nav-margin">
+                    <button class="nav-btn font-weight-bold">Signup</button>
+                  </router-link>
+                </b-nav-item>
+
+                <b-nav-item>
+                  <router-link :to="{ name: 'Login' }" class="nav-margin">
+                    <button class="nav-btn font-weight-bold">Login</button>
+                  </router-link>
+                </b-nav-item>
+              </template>
+            </b-navbar-nav>
+          </b-collapse>
+        </b-navbar>
+      </div>
+
+      <router-view @login="login = true" />
+
+      <!-- 푸터 -->
+      <div class="jumbotron" id="footerjumbo">
+        <div class="container">
+          <div class="row">
+            <div class="col-12"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
 // const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 // import axios from 'axios'
 
 export default {
-  name: 'App',
+  name: "App",
   data: function () {
     return {
       login: false,
       images: {
-        logo: require('@/assets/images/logo.png'),
-        flamingo: require('@/assets/images/flamingo.png'),
+        logo: require("@/assets/images/logo.png"),
+        flamingo: require("@/assets/images/flamingo.png"),
       },
       hideAdd: true,
     };
   },
   methods: {
     logout: function () {
-      localStorage.removeItem('jwt');
-      localStorage.removeItem('username');
-      localStorage.removeItem('login_user');
-      localStorage.removeItem('is_admin');
-      localStorage.removeItem('user_movie');
+      localStorage.removeItem("jwt");
+      localStorage.removeItem("username");
+      localStorage.removeItem("login_user");
+      localStorage.removeItem("is_admin");
+      localStorage.removeItem("user_movie");
       this.login = false;
       this.$store.state.login = false;
       this.$store.state.is_admin = false;
-      this.$store.state.login_user = '';
+      this.$store.state.login_user = "";
       this.$store.state.username = null;
       this.$router.push({
-        name: 'Main',
+        name: "Main",
       });
     },
     triggerSearch: function () {
-      this.$router.push({ name: 'MovieSearch' });
+      this.$router.push({ name: "MovieSearch" });
     },
   },
   created: function () {
     // 로그인
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem("jwt");
 
-    if (this.$route.path !== '/') {
-      console.log('입구컷');
+    if (this.$route.path !== "/") {
+      console.log("입구컷");
       if (token) {
         this.login = true;
       }
-      console.log('1번 발동');
-      this.$store.dispatch('getMovie');
+      console.log("1번 발동");
+      this.$store.dispatch("getMovie");
       if (this.$store.state.ordered_movie_list.length == 0) {
         // 영화 목록이 비어있는 경우에만 getMovie 액션 호출
-        console.log('비었는데요?');
+        console.log("비었는데요?");
       }
-      if (this.$route.path !== '/movies') {
-        console.log('2번 발동');
-        this.$router.push({ name: 'MovieList' });
+      if (this.$route.path !== "/movies") {
+        console.log("2번 발동");
+        this.$router.push({ name: "MovieList" });
       }
     }
   },
   computed: {
-    ...mapState(['is_admin', 'username']),
+    ...mapState(["is_admin", "username"]),
   },
 };
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Gothic&family=Poor+Story&family=Slabo+27px&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Gothic&family=Poor+Story&family=Slabo+27px&display=swap");
 
 @font-face {
-  font-family: 'NeoDunggeunmoPro-Regular';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2')
-    format('woff2');
+  font-family: "NeoDunggeunmoPro-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2")
+    format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 
 /* 전체 div */
 #app {
-  font-family: 'NeoDunggeunmoPro-Regular';
+  font-family: "NeoDunggeunmoPro-Regular";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -186,14 +203,14 @@ export default {
 }
 
 .main-img {
-  background-image: url('제목없음.png');
+  background-image: url("제목없음.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 /* 로고 이미지 */
-.Logo{
+.Logo {
   width: 70px;
   height: auto;
   margin: 0px;
@@ -222,12 +239,11 @@ export default {
 }
 
 /* 네브바 버튼 클릭시 */
-.nav-btn:focus{
+.nav-btn:focus {
   outline: none;
 }
 
-
-.hambuger:focus{
+.hambuger:focus {
   outline: none;
 }
 
