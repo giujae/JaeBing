@@ -260,7 +260,7 @@ export default {
       this.show = true;
       const API_Key = 'AIzaSyA6w5yAn6ZwQBz_uR-iJfDl8Mj1PJ_8QtE';
       const movieTitle = this.movie.title;
-      const query = '공식예고편 ' + movieTitle;
+      const query = 'official trailer' + movieTitle;
       this.avgRate = this.movie.rate;
 
       const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_Key}&q=${query}&part=snippet&type=video`;
