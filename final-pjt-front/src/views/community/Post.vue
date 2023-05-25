@@ -3,14 +3,22 @@
     <div class="container">
       <div class="row">
         <div class="col-3 p-0">
-          <h1 class="h1-tag mt-5 mt-2 text-left">게시판</h1>
+          <h1 class="h1-tag mt-5 mt-2 text-left">Post</h1>
         </div>
 
-        <div class="create-btn-div p-0 col-9 d-flex align-items-center justify-content-end align-items-end">
-          <button v-if="this.$store.state.login" @click="createPost()" class="create-btn btn float-right">
-            글 작성할랭
+        <div
+          class="create-btn-div p-0 col-9 d-flex align-items-center justify-content-end align-items-end"
+        >
+          <button
+            v-if="this.$store.state.login"
+            @click="createPost()"
+            class="create-btn btn float-right"
+          >
+            Create Post
           </button>
-          <p v-else class="my-4 float-right">게시글 작성하려면 로그인하구 와!</p>
+          <p v-else class="my-4 float-right">
+            게시글 작성하려면 로그인하구 와!
+          </p>
         </div>
       </div>
 
@@ -19,15 +27,17 @@
         <table class="article-table table table-hover">
           <tr>
             <th>No</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
+            <th>Title</th>
+            <th>Writer</th>
+            <th>Create Date</th>
           </tr>
           <tr v-for="(post, idx) in posts" :key="idx">
             <th>{{ post.id }}</th>
             <th @click="postDetail(post)">{{ post.title }}</th>
             <th>{{ post.user.username }}</th>
-            <th>{{ $moment(post.created_at).format('YYYY-MM-DD hh:mm:ss') }}</th>
+            <th>
+              {{ $moment(post.created_at).format("YYYY-MM-DD hh:mm:ss") }}
+            </th>
           </tr>
         </table>
       </div>
@@ -37,10 +47,10 @@
 
 <script>
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  name: 'Post',
+  name: "Post",
   data: function () {
     return {
       posts: [],
@@ -48,7 +58,7 @@ export default {
   },
   methods: {
     setToken: function () {
-      const token = localStorage.getItem('jwt');
+      const token = localStorage.getItem("jwt");
 
       const config = {
         headers: {
@@ -59,15 +69,15 @@ export default {
     },
     createPost: function () {
       this.$router.push({
-        name: 'CreatePost',
+        name: "CreatePost",
         params: {
-          purpose: 'create',
+          purpose: "create",
         },
       });
     },
     postDetail: function (post) {
       this.$router.push({
-        name: 'PostDetail',
+        name: "PostDetail",
         params: {
           id: post.id,
         },
@@ -93,22 +103,23 @@ export default {
 
 <style>
 @font-face {
-  font-family: 'NeoDunggeunmoPro-Regular';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2')
-    format('woff2');
+  font-family: "NeoDunggeunmoPro-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2")
+    format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'NeoDunggeunmo';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
+  font-family: "NeoDunggeunmo";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 .article-table {
-  font-family: 'NeoDunggeunmo';
+  font-family: "NeoDunggeunmo";
   font-size: 20px;
   color: #e8d1d9 !important;
   border-style: dashed;
@@ -123,14 +134,14 @@ export default {
 
 .create-btn {
   font-size: 20px !important;
-  font-family: 'NeoDunggeunmoPro-Regular';
+  font-family: "NeoDunggeunmoPro-Regular";
   color: #e8d1d9 !important;
   width: auto;
   margin-top: auto;
 }
 
 .h1-tag {
-  font-family: 'NeoDunggeunmoPro-Regular';
+  font-family: "NeoDunggeunmoPro-Regular";
   margin-left: auto;
   margin-right: auto;
 }
@@ -144,8 +155,7 @@ export default {
 .article {
   width: 100%;
   min-height: 100vh;
-  background-image:
-    url('profilefixtemp.jpg');
+  background-image: url("postdetailback.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -154,7 +164,7 @@ export default {
 }
 
 .article-table {
-  font-family: 'NeoDunggeunmo';
+  font-family: "NeoDunggeunmo";
   font-size: 20px;
   color: #e8d1d9 !important;
   border-style: dashed;
