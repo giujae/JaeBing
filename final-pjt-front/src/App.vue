@@ -21,7 +21,7 @@
           </b-navbar-toggle>
 
           <b-navbar-brand href="/movies" class="font-weight-bold">
-            <img class="Logo" src="./Logo.png" alt="" />
+            <img class="Logo" src="./Logo.gif" alt="" />
           </b-navbar-brand>
 
           <b-collapse id="navbar-nav-collapse" is-nav>
@@ -92,7 +92,7 @@
           <div class="row">
             <div class="col-3 ms-5">
               <img src="./Logo.png" style="width: 60px; height: 60px" alt="Logo" />
-              <h8>재빙</h8>
+              <h6>재빙</h6>
             </div>
             <div class="col-3 ms-5">
               <h6>대표이사 : 나야나<br />주소 : 경북 구미시 3공단3로 302<br />통신신고번호 : 어이쿠 깜빡했네</h6>

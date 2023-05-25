@@ -5,7 +5,7 @@
     <header>
       <nav class="nav fixed-top">
         <a href="/" class="home-btn font-weight-bold">
-          <img class="main-Logo" src="./Logo.png" alt="" />
+          <img class="main-Logo" src="./main.gif" alt="재빙" />
           JEABING
         </a>
         <div>
