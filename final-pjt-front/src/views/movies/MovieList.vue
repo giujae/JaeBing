@@ -20,7 +20,7 @@
             :interval="2000"
             controls
             indicators
-            background="#000000"
+            background="#101130;"
             style="text-shadow: 1px 1px 2px #333"
             @sliding-start="onSlideStart"
             @sliding-end="onSlideEnd"
@@ -35,11 +35,22 @@
               style="width: auto"
             >
               <template #img>
-                <div class="popluar-text" style="background-color: #e8d1d900; color: #e8d1d9; font-size: 30px">
+                <div
+                  class="popluar-text"
+                  style="
+                    background-color: #10113000;
+                    color: #e8d1d9;
+                    font-size: 30px;
+                  "
+                >
                   Movie Hit
                 </div>
                 <div
-                  style="display: flex; justify-content: flex-end; background-color: #e8d1d900"
+                  style="
+                    display: flex;
+                    justify-content: flex-end;
+                    background-color: #e8d1d900;
+                  "
                   class="slide-card-div"
                 >
                   <img
@@ -76,7 +87,12 @@
     <div class="movie-container" v-if="login && recommend_list.length > 0">
       <h1 class="font-do my-3">Movie Recommendations For You!</h1>
       <div class="row d-flex justify-content-center">
-        <MovieListItem v-for="(movie, idx) in recommend_list" :key="idx" :movie="movie" class="col-2 p-0" />
+        <MovieListItem
+          v-for="(movie, idx) in recommend_list"
+          :key="idx"
+          :movie="movie"
+          class="col-2 p-0"
+        />
       </div>
     </div>
 
@@ -93,41 +109,41 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
-import MovieListItem from '@/components/movie/MovieListItem';
-import { Carousel, Slide } from 'vue-carousel';
+import MovieListItem from "@/components/movie/MovieListItem";
+import { Carousel, Slide } from "vue-carousel";
 
 export default {
-  name: 'MovieList',
+  name: "MovieList",
   data: function () {
     return {
       slide: 0,
       sliding: null,
-      search: '',
+      search: "",
       i: 0,
       j: false,
-      search: '액션',
+      search: "액션",
       genres: [
-        '액션',
-        '모험',
-        '애니메이션',
-        '코미디',
-        '범죄',
-        '다큐멘터리',
-        '드라마',
-        '가족',
-        '판타지',
-        '역사',
-        '공포',
-        '음악',
-        '미스터리',
-        '로맨스',
-        'SF',
-        'TV 영화',
-        '스릴러',
-        '전쟁',
-        '웨스턴',
+        "액션",
+        "모험",
+        "애니메이션",
+        "코미디",
+        "범죄",
+        "다큐멘터리",
+        "드라마",
+        "가족",
+        "판타지",
+        "역사",
+        "공포",
+        "음악",
+        "미스터리",
+        "로맨스",
+        "SF",
+        "TV 영화",
+        "스릴러",
+        "전쟁",
+        "웨스턴",
       ],
     };
   },
@@ -139,7 +155,7 @@ export default {
   methods: {
     movieDetail: function (movie) {
       this.$router.push({
-        name: 'MovieDetail',
+        name: "MovieDetail",
         params: {
           movie: movie,
         },
@@ -161,12 +177,19 @@ export default {
   created: function () {
     this.i = 0;
     if (this.login === true && this.is_admin == false) {
-      this.$store.dispatch('recommendMovie');
-      console.log('실행');
+      this.$store.dispatch("recommendMovie");
+      console.log("실행");
     }
   },
   computed: {
-    ...mapState(['login', 'login_user', 'is_admin', 'movie_list', 'ordered_movie_list', 'recommend_list']),
+    ...mapState([
+      "login",
+      "login_user",
+      "is_admin",
+      "movie_list",
+      "ordered_movie_list",
+      "recommend_list",
+    ]),
     movies: function () {
       return this.movie_list.filter((movie) => {
         const genreNames = movie.genre_ids.map((id) => id.name);
@@ -191,7 +214,7 @@ export default {
   mounted() {
     window.scrollTo(0, 0);
     if (this.login === true && this.is_admin === false) {
-      this.$store.dispatch('recommendMovie');
+      this.$store.dispatch("recommendMovie");
     }
   },
 };

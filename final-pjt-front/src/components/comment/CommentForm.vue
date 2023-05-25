@@ -18,7 +18,13 @@
             />
           </div>
           <div class="col-3 d-flex align-items-center">
-            <button type="submit" class="comment-create-btn">Submit</button>
+            <button
+              type="submit"
+              class="comment-create-btn"
+              style="color: #d67297"
+            >
+              Submit
+            </button>
           </div>
         </div>
       </form>

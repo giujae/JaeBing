@@ -25,7 +25,7 @@
         <div class="col-3 d-flex align-items-center p-0">
           <button
             class="p-0"
-            style="font-size: 20px"
+            style="font-size: 20px; color: #d67297"
             type="submit"
             @click="updateComment(post)"
           >

@@ -135,7 +135,7 @@ export default {
 .create-btn {
   font-size: 20px !important;
   font-family: "NeoDunggeunmoPro-Regular";
-  color: #e8d1d9 !important;
+  color: #d67297 !important;
   width: auto;
   margin-top: auto;
 }
