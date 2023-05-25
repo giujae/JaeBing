@@ -36,13 +36,13 @@
       title="Movie Information"
       footer-bg-variant="dark"
       footer-text-variant="dark"
-    style="color:#e8d1d9;"
+      style="color: #e8d1d9"
     >
-      <div class="modal-content" >
+      <div class="modal-content">
         <!-- ... -->
       </div>
       <!-- 영화디테일 부분 -->
-      <div class="detail-box" >
+      <div class="detail-box">
         <div
           class="modal-backdrop"
           :style="`background-image: url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`"
@@ -71,22 +71,24 @@
             <img src="https://image.tmdb.org/t/p/w185/g3gpHLUuQLGI9gRmfraSQCN1TYk.jpg" alt="movie poster" v-else />
           </div>
 
-          <div class="details text-right px-2 mb-2" style="background-color: #10113047; color: #e8d1d9; margin-left: 290px; margin-top:50px; text-align: right">
+          <div
+            class="details text-right px-2 mb-2"
+            style="background-color: #10113047; color: #e8d1d9; margin-left: 290px; margin-top: 50px; text-align: right"
+          >
             <!-- Title -->
-            <h4 class="font-fixel m-0">[ {{ movie.title }} ] </h4>
+            <h4 class="font-fixel m-0">[ {{ movie.title }} ]</h4>
 
             <!-- Release Date -->
             <h5 class="font-fixel">Release Date: {{ movie.release_date }}</h5>
 
             <!-- Vote Average -->
             <h5 class="font-fixel">Vote Average: {{ movie.vote_average }}</h5>
-            
+
             <!-- Adult Rating -->
             <h5 class="font-fixel" v-if="movie.adult">19세 관람가</h5>
 
             <!-- Overview -->
             <h5 class="font-fixel" style="text-align: left">{{ movie.overview | truncate(200, '...') }}</h5>
-
           </div>
         </div>
       </div>
@@ -94,9 +96,8 @@
 
       <!-- 리뷰 부분 -->
       <div v-if="login === true" :class="{ appear: showForm }">
-        <h2 class="font-fixel" style="color: #e8d1d9;">Create Review</h2>
+        <h2 class="font-fixel" style="color: #e8d1d9">Create Review</h2>
         <div id="reviewForm">
-
           <!-- 리뷰 별점 부분 -->
           <div>
             <label for="rate" class="float-left font-jua font-1-5em">별점</label>
@@ -109,7 +110,7 @@
             <!-- 별점 박스 -->
             <b-input-group>
               <b-input-group-prepend>
-                <b-button  class="movie-detail-btn" @click="selected_rate = null">Clear</b-button>
+                <b-button class="movie-detail-btn" @click="selected_rate = null">Clear</b-button>
               </b-input-group-prepend>
               <b-form-rating size="lg" id="rate" v-model="selected_rate" color="#DE5078" stars="10"></b-form-rating>
               <b-input-group-append>
@@ -121,9 +122,9 @@
           </div>
 
           <!-- 이 영화를 추천합니다 -->
-          <div class="mt-3" style="color:#e8d1d9;">
+          <div class="mt-3" style="color: #e8d1d9">
             <label for="like" class="mr-2 font-fixel mr-1">Recommend</label>
-            <label for="like" class="font-fixel  mr-2" id="recommend-label">This Movie.</label>
+            <label for="like" class="font-fixel mr-2" id="recommend-label">This Movie.</label>
             <b-form-checkbox size="lg" id="like" checked="true" v-model="like" inline></b-form-checkbox>
           </div>
 
@@ -138,14 +139,18 @@
               rows="5"
               v-model.trim="content"
               placeholder="Please Leave A Comment."
-              style="border: dashed #e8d1d9; border-radius: 10px;"
+              style="border: dashed #e8d1d9; border-radius: 10px"
             ></textarea>
           </div>
 
           <!-- 리뷰 댓글 수정, 삭제 버튼  -->
           <div>
             <div class="d-flex justify-content-center">
-              <button :class="{ appear: showAdd }" class="movie-detail-btn font-fixel mr-1 ml-1" @click="addReview(movie)">
+              <button
+                :class="{ appear: showAdd }"
+                class="movie-detail-btn font-fixel mr-1 ml-1"
+                @click="addReview(movie)"
+              >
                 Submit
               </button>
               <button @click="hideDetail" :class="{ appear: showAdd }" class="movie-detail-btn font-fixel mr-1 ml-1">
@@ -164,8 +169,8 @@
       </div>
 
       <!-- 리뷰목록 -->
-      <h2 style="color: #e8d1d9;" class="font-fixel">Review List</h2>
-      <hr style="border:dashed #e8d1d9; border-width: 2px; border-spacing: 10px;"/>
+      <h2 style="color: #e8d1d9" class="font-fixel">Review List</h2>
+      <hr style="border: dashed #e8d1d9; border-width: 2px; border-spacing: 10px" />
       <ul class="px-3">
         <li v-for="(review, idx) in reviews" :key="idx">
           <div v-if="review.movie.id == movie.id || review.id == movie.id">
@@ -178,7 +183,7 @@
                 </div>
               </div>
 
-              <div class="col-6 font-fixel" id="review-content" style="word-break: break-all; color: #e8d1d9;;">
+              <div class="col-6 font-fixel" id="review-content" style="word-break: break-all; color: #e8d1d9">
                 <!-- 리뷰 내용 부분 -->
                 <p>{{ review.content }}</p>
                 <p>Writer : {{ review.user.username }} | {{ $moment(review.created_at).format('YYYY-MM-DD') }}</p>
@@ -471,18 +476,17 @@ export default {
 </script>
 
 <style scoped>
-
 @font-face {
-  font-family: "NeoDunggeunmoPro-Regular";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2")
-    format("woff2");
+  font-family: 'NeoDunggeunmoPro-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2')
+    format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 /* 픽셀체 */
 .font-fixel {
-  font-family: "NeoDunggeunmoPro-Regular";
+  font-family: 'NeoDunggeunmoPro-Regular';
 }
 /* 디테일부분 모든 버튼 */
 .movie-detail-btn:hover {
@@ -589,7 +593,6 @@ export default {
   border-bottom: dashed #e8d1d9;
 }
 
-
 .card {
   background-color: #826592 !important;
   border: none !important;
@@ -622,4 +625,15 @@ iframe {
   width: 200px !important;
 }
 
+/deep/ .modal > .modal-dialog > .modal-content {
+  background: #101130;
+}
+/deep/ .close,
+/deep/ .modal > .modal-dialog > .modal-content > .modal-header > .modal-title > .close,
+/deep/ .modal > .modal-dialog > .modal-content > .modal-header {
+  color: #e8d1d9 !important;
+}
+/deep/ .modal {
+  background: #e8d1d9c2;
+}
 </style>
