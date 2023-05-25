@@ -1,29 +1,41 @@
 <template>
   <div>
-    <div class="mt-5">
-      <span style="font-size: 35px; padding: 0px 10px 0px 0px">Comment List</span>
+    <div
+      class="mt-4"
+      style="border-style: dashed none; border-color: #e8d1d969; width: 439px"
+    >
+      <span style="font-size: 35px; padding: 0px 10px 0px 0px"
+        >Comment List</span
+      >
       <span style="font-size: 20px">Comment Count : {{ comments.length }}</span>
     </div>
     <div v-for="(comment, idx) in comments" :key="idx" class="media px-0">
-      <div class="media-body">
-        <h4 class="mt-0">[ {{ comment.user.username }} ] {{ comment.content }}</h4>
+      <div class="media-body" style="border-bottom: dashed #e8d1d969">
+        <h4 class="mt-0">
+          [ {{ comment.user.username }} ] {{ comment.content }}
+        </h4>
         <p class="m-0">
           Create:
-          {{ $moment(comment.created_at).format('YYYY-MM-DD hh:mm:ss') }}
+          {{ $moment(comment.created_at).format("YYYY-MM-DD hh:mm:ss") }}
         </p>
         |
         <p class="ml-0">
           Edit Date :
-          {{ $moment(comment.created_at).format('YYYY-MM-DD hh:mm:ss') }}
+          {{ $moment(comment.created_at).format("YYYY-MM-DD hh:mm:ss") }}
         </p>
 
         <div v-if="updateTrigger === comment.id">
-          <UpdateForm :updateCommentItem="updateCommentItem" :post="post" @trigger="changeTrigger" />
+          <UpdateForm
+            :updateCommentItem="updateCommentItem"
+            :post="post"
+            @trigger="changeTrigger"
+          />
         </div>
         <div>
           <!--작성자와 접속자가 같다면, 수정/삭제 버튼 활성화-->
           <!--단, 관리자의 경우 삭제 버튼 활성화 -->
           <button
+            style="color: #d67297"
             class="comment-btn pl-0"
             v-if="comment.user.id == login_user && updateTrigger === false"
             @click="updatePostForm(comment)"
@@ -31,11 +43,17 @@
             Edit
           </button>
 
-          <button class="comment-btn" v-if="is_admin && updateTrigger === false" @click="deleteComment(comment)">
+          <button
+            style="color: #d67297"
+            class="comment-btn"
+            v-if="is_admin && updateTrigger === false"
+            @click="deleteComment(comment)"
+          >
             Delete
           </button>
 
           <button
+            style="color: #d67297"
             class="comment-btn"
             v-else-if="comment.user.id == login_user && updateTrigger === false"
             @click="deleteComment(comment)"
@@ -50,20 +68,20 @@
 
 <script>
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
-import axios from 'axios';
-import UpdateForm from '@/components/comment/UpdateForm';
+import axios from "axios";
+import UpdateForm from "@/components/comment/UpdateForm";
 
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
 export default {
-  name: 'CommentList',
+  name: "CommentList",
   components: {
     UpdateForm,
   },
   data: function () {
     return {
       updateTrigger: false,
-      updateCommentItem: '',
+      updateCommentItem: "",
     };
   },
   props: {
@@ -71,7 +89,7 @@ export default {
   },
   methods: {
     setToken: function () {
-      const token = localStorage.getItem('jwt');
+      const token = localStorage.getItem("jwt");
 
       const config = {
         headers: {
@@ -84,7 +102,10 @@ export default {
     deleteComment: function (comment) {
       const config = this.setToken();
       axios
-        .delete(`${SERVER_URL}/community/${this.post.id}/comment/${comment.id}/`, config)
+        .delete(
+          `${SERVER_URL}/community/${this.post.id}/comment/${comment.id}/`,
+          config
+        )
         .then((res) => {
           const targetCommentIdx = this.comments.findIndex((comment) => {
             return comment.id === res.data.id;
@@ -110,7 +131,7 @@ export default {
     // }
   },
   computed: {
-    ...mapState(['login', 'login_user', 'username', 'is_admin', 'comments']),
+    ...mapState(["login", "login_user", "username", "is_admin", "comments"]),
   },
 };
 </script>

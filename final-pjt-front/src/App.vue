@@ -31,14 +31,23 @@
                 <router-link :to="{ name: 'Post' }">Community</router-link>
               </b-nav-item>
 
-              <b-nav-item-dropdown v-if="$store.state.login && this.$route.path !== '/login'" :text="username">
-                <b-dropdown-item>
-                  <router-link :to="{ name: 'Profile', params: { username: username } }">Profile</router-link>
+              <b-nav-item-dropdown
+                v-if="$store.state.login && this.$route.path !== '/login'"
+                :text="username"
+              >
+                <b-dropdown-item class="dropdown-back">
+                  <router-link
+                    class="drop-item-btn"
+                    :to="{ name: 'Profile', params: { username: username } }"
+                    >Profile</router-link
+                  >
                 </b-dropdown-item>
 
                 <b-dropdown-item>
                   <router-link @click.native="logout" to="#" class="nav-margin">
-                    <button class="logout-btn font-weight-bold p-0">Logout</button>
+                    <button class="drop-item-btn font-weight-bold p-0">
+                      Logout
+                    </button>
                   </router-link>
                 </b-dropdown-item>
               </b-nav-item-dropdown>
@@ -51,7 +60,10 @@
                 </b-nav-item>
 
                 <b-nav-item>
-                  <router-link :to="{ name: 'AdminManagement' }" class="nav-margin">
+                  <router-link
+                    :to="{ name: 'AdminManagement' }"
+                    class="nav-margin"
+                  >
                     <span class="badge badge-pill badge-warning">회원관리</span>
                   </router-link>
                 </b-nav-item>
@@ -61,7 +73,12 @@
             <b-navbar-nav class="ml-auto">
               <template v-if="$store.state.login">
                 <b-nav-item>
-                  <button @click="triggerSearch" class="font-weight-bold search-btn p-0 mr-3">Search</button>
+                  <button
+                    @click="triggerSearch"
+                    class="font-weight-bold search-btn p-0 mr-3"
+                  >
+                    Search
+                  </button>
                 </b-nav-item>
                 <!-- <p class="user font-weight-bold text-truncate">{{ username }}</p> -->
               </template>
@@ -91,24 +108,43 @@
         <div class="container">
           <div class="row">
             <div class="col-3 ms-5">
-              <img src="./Logo.png" style="width: 60px; height: 60px" alt="Logo" />
-              <h6>재빙</h6>
+              <img
+                src="./Logo.gif"
+                style="width: 70px; height: auto"
+                alt="Logo"
+              />
+              <h4>JAEBING</h4>
             </div>
-            <div class="col-3 ms-5">
-              <h6>대표이사 : 나야나<br />주소 : 경북 구미시 3공단3로 302<br />통신신고번호 : 어이쿠 깜빡했네</h6>
+            <div class="col-3 ms-5 my-3">
+              <h6>대표이사 : 나야나</h6>
+              <h6>주소 : 경북 구미시 3공단3로 302</h6>
+              <h6>통신신고번호 : 어이쿠 깜빡했네</h6>
             </div>
-            <div class="col-3 ms-5">
-              <h6>이용약관 * 법적고지<br />개인정보처리방침<br />이메일무단수집거부</h6>
+            <div class="col-3 ms-5 my-3">
+              <h6>이용약관 * 법적고지</h6>
+              <h6>개인정보처리방침</h6>
+              <h6>이메일무단수집거부</h6>
             </div>
-            <div class="col-3 ms-5">
-              <h6>고객지원<br />블로그<br /><span class="clickable" @click="openModal">전화문의</span></h6>
+            <div class="col-3 ms-5 my-3">
+              <span class="clickable" style="color: #d44c7f" @click="openModal"
+                >*전화문의*</span
+              >
               <div class="modal" :class="{ 'is-active': showModal }">
                 <div class="modal-background" @click="closeModal"></div>
                 <div class="modal-image">
-                  <img class="moonhee" src="./Untitled.png" alt="전화문의 이미지" />
+                  <img
+                    class="moonhee"
+                    src="./Untitled.png"
+                    alt="전화문의 이미지"
+                  />
                 </div>
-                <button class="modal-shutdown is-large" @click="closeModal"></button>
+                <button
+                  class="modal-shutdown is-large"
+                  @click="closeModal"
+                ></button>
               </div>
+              <h6>고객지원</h6>
+              <h6>블로그</h6>
             </div>
           </div>
         </div>
@@ -120,17 +156,17 @@
 <script>
 // const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 // import axios from 'axios'
 
 export default {
-  name: 'App',
+  name: "App",
   data: function () {
     return {
       login: false,
       images: {
-        logo: require('@/assets/images/logo.png'),
-        flamingo: require('@/assets/images/flamingo.png'),
+        logo: require("@/assets/images/logo.png"),
+        flamingo: require("@/assets/images/flamingo.png"),
       },
       hideAdd: true,
       showModal: false,
@@ -144,65 +180,65 @@ export default {
       this.showModal = false;
     },
     logout: function () {
-      localStorage.removeItem('jwt');
-      localStorage.removeItem('username');
-      localStorage.removeItem('login_user');
-      localStorage.removeItem('is_admin');
-      localStorage.removeItem('user_movie');
+      localStorage.removeItem("jwt");
+      localStorage.removeItem("username");
+      localStorage.removeItem("login_user");
+      localStorage.removeItem("is_admin");
+      localStorage.removeItem("user_movie");
       this.login = false;
       this.$store.state.login = false;
       this.$store.state.is_admin = false;
-      this.$store.state.login_user = '';
+      this.$store.state.login_user = "";
       this.$store.state.username = null;
       this.$router.push({
-        name: 'Main',
+        name: "Main",
       });
     },
     triggerSearch: function () {
-      this.$router.push({ name: 'MovieSearch' });
+      this.$router.push({ name: "MovieSearch" });
     },
   },
   created: function () {
     // 로그인
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem("jwt");
 
-    if (this.$route.path !== '/') {
-      console.log('입구컷');
+    if (this.$route.path !== "/") {
+      console.log("입구컷");
       if (token) {
         this.login = true;
       }
-      console.log('1번 발동');
-      this.$store.dispatch('getMovie');
+      console.log("1번 발동");
+      this.$store.dispatch("getMovie");
       if (this.$store.state.ordered_movie_list.length == 0) {
         // 영화 목록이 비어있는 경우에만 getMovie 액션 호출
-        console.log('비었는데요?');
+        console.log("비었는데요?");
       }
-      if (this.$route.path !== '/movies') {
-        console.log('2번 발동');
-        this.$router.push({ name: 'MovieList' });
+      if (this.$route.path !== "/movies") {
+        console.log("2번 발동");
+        this.$router.push({ name: "MovieList" });
       }
     }
   },
   computed: {
-    ...mapState(['is_admin', 'username']),
+    ...mapState(["is_admin", "username"]),
   },
 };
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Gothic&family=Poor+Story&family=Slabo+27px&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Gothic&family=Poor+Story&family=Slabo+27px&display=swap");
 
 @font-face {
-  font-family: 'NeoDunggeunmoPro-Regular';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2')
-    format('woff2');
+  font-family: "NeoDunggeunmoPro-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2")
+    format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 
 /* 전체 div */
 #app {
-  font-family: 'NeoDunggeunmoPro-Regular';
+  font-family: "NeoDunggeunmoPro-Regular";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -212,7 +248,7 @@ export default {
 }
 
 .main-img {
-  background-image: url('moviemain.png');
+  background-image: url("moviemain.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -263,7 +299,7 @@ export default {
 
 /* 푸터 */
 #footerjumbo {
-  height: 100px;
+  min-height: 10vh;
   margin-bottom: 0rem;
 }
 
@@ -336,6 +372,8 @@ button {
 .jumbotron {
   background: linear-gradient(180deg, #070512, #101130);
   flex-grow: 1; /* Add this line */
+  padding: 30px 20px 20px !important;
+  color: #e8d1d9;
 }
 
 .fa-bars {
@@ -344,14 +382,24 @@ button {
 
 .dropdown-menu {
   background-color: #3c537f50 !important;
+  margin: 0px !important;
+  padding: 0px !important;
+  border-radius: 5px !important;
 }
 
 .dropdown-menu:active {
   outline: none;
 }
 
-.dropdown-item > a.logout-btn {
+.dropdown-menu:focus {
+}
+
+.drop-item-btn:hover {
   color: #f5a6c1 !important;
+}
+
+.drop-item-btn:focus {
+  outline: none;
 }
 
 .dropdown-item {

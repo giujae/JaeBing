@@ -1,8 +1,11 @@
 <template>
   <div class="post-detail-div">
     <div class="create-post-container">
-      <div class="htag mt-5">
-        <h1 v-if="this.purpose == 'create'">Create Post</h1>
+      <div style="height: 100px"></div>
+      <div class="htag">
+        <h1 v-if="this.purpose == 'create'" style="margin-top: 20px">
+          Create Post
+        </h1>
         <h1 v-else-if="this.purpose == 'update'" class="my-3">Create Post</h1>
       </div>
 
@@ -19,6 +22,7 @@
                 class="form-control create-form-control"
                 id="title"
                 v-model.trim="title"
+                style="color: #e8d1d9"
               />
             </div>
           </div>
@@ -29,9 +33,12 @@
               class="form-control create-form-control"
               id="content"
               v-model="content"
+              style="color: #e8d1d9"
             ></textarea>
           </div>
-          <button class="submit-btn" type="submit">Submit</button>
+          <button style="color: #d67297" class="submit-btn" type="submit">
+            Submit
+          </button>
         </form>
 
         <form v-if="this.purpose == 'update'" v-on:submit.prevent="updatePost">
@@ -141,7 +148,7 @@ export default {
 <style scoped>
 .create-post-container {
   width: 100%;
-  min-height: 100vh;
+  min-height: 85vh;
   color: #e8d1d9;
   font-size: 20px;
 

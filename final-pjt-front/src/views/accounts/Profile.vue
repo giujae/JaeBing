@@ -6,13 +6,30 @@
       <div class="profile-div" v-if="profile">
         <h2 class="text-left my-3">
           <span class="username pr-2 pl-0">[ {{ profile.username }} ]</span>
+
+          <!-- 팔로우 버튼 -->
+          <span v-if="!isCurrentUser">
+            <button
+              style="color: #d67297; width: auto; height: auto"
+              class="follow-btn"
+              v-if="!isCurrentUser"
+              @click="toggleFollow"
+            >
+              {{ isFollowing ? "Unfollow" : "Follow" }}
+            </button>
+          </span>
+
+          <!-- 팔로워 수 -->
           <span style="font-size: 16px" class="follower"
             >Follower: {{ followersCount }}</span
           >
+
+          <!-- 회원등급 -->
           <span style="font-size: 16px" class="grade"
             >Grade: {{ isAdmin ? "관리자" : "일반회원" }}</span
           >
         </h2>
+
         <!-- <p class="text-left">
           <strong>가입일:</strong> {{ formatDate(profile.date_joined) }}
         </p> -->
@@ -31,16 +48,6 @@
 
     <div v-if="profile">
       <!-- <p><strong>회원코드:</strong> {{ profile.id }}</p> -->
-
-      <div v-if="!isCurrentUser">
-        <button
-          v-if="!isCurrentUser"
-          @click="toggleFollow"
-          class="btn btn-primary"
-        >
-          {{ isFollowing ? "언팔로우" : "팔로우" }}
-        </button>
-      </div>
 
       <!-- 전체적인 작성한 디브 -->
       <div class="created-div">
@@ -340,6 +347,17 @@ export default {
   border-style: dashed none;
   border-color: #e8d1d969;
   background-color: #101130b3;
+}
+
+/* 팔로우 버튼 */
+.follow-btn {
+  width: auto;
+  height: auto;
+  padding: 0px;
+}
+
+.follow-btn:focus {
+  outline: none;
 }
 
 /* 작성한~ 버튼 디브 */

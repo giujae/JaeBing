@@ -50,13 +50,20 @@
           id="email"
           v-model="credentials.email"
         />
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <small id="emailHelp" class="form-text text-muted"
+          >We'll never share your email with anyone else.</small
+        >
       </div>
 
       <!-- 생년월일 -->
       <div class="signup-form-group mt-4">
         <label for="date_of_birth">BIRTH</label>
-        <input type="date" class="form-control2" id="date_of_birth" v-model="credentials.date_of_birth" />
+        <input
+          type="date"
+          class="form-control2"
+          id="date_of_birth"
+          v-model="credentials.date_of_birth"
+        />
       </div>
 
       <!-- 개인정보약관동의 박스 -->
@@ -84,26 +91,28 @@
 
       <div class="signup-form-group font-1-2em">
         <button @click="signup" id="signupbtn"></button>
-        <h5 class="m-0">Do You Want To Start The Game?</h5>
+        <h5 class="m-0" style="color: #d67297">
+          Do You Want To Start The Game?
+        </h5>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: 'Signup',
+  name: "Signup",
   data: function () {
     return {
       credentials: {
-        username: '',
-        password: '',
-        email: '',
-        date_of_birth: '',
+        username: "",
+        password: "",
+        email: "",
+        date_of_birth: "",
       },
       agree: false,
     };
@@ -114,20 +123,20 @@ export default {
         axios
           .post(`${SERVER_URL}/accounts/signup/`, this.credentials)
           .then(() => {
-            this.$router.push({ name: 'Login' });
+            this.$router.push({ name: "Login" });
             this.agree = false;
           })
           .catch((err) => {
             console.log(err);
-            alert('회원가입 정보가 올바르지 않습니다.');
+            alert("회원가입 정보가 올바르지 않습니다.");
           });
       } else {
-        alert('개인정보 이용 약관에 동의해야합니다.');
+        alert("개인정보 이용 약관에 동의해야합니다.");
       }
     },
     agreePage: function () {
       alert(
-        '① 선생님은 저희에 대해 언제든지 개인정보 열람,정정,삭제,처리정지 요구 수 있어요^^7. \n② 그러면 빠르게 지워드릴게요^^7 \n③ 사칭하면 혼나요 ^^7.'
+        "① 선생님은 저희에 대해 언제든지 개인정보 열람,정정,삭제,처리정지 요구 수 있어요^^7. \n② 그러면 빠르게 지워드릴게요^^7 \n③ 사칭하면 혼나요 ^^7."
       );
     },
   },
@@ -139,7 +148,7 @@ export default {
 
 <style scoped>
 .sign-img {
-  background-image: url('loginpagefix2 (1).png');
+  background-image: url("loginpagefix2 (1).png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -180,7 +189,7 @@ input:focus {
   width: 300px;
   height: 40px;
   margin-bottom: 0px;
-  background-image: url('startbtn2.png');
+  background-image: url("startbtn2.png");
   /* background-size: cover; */
   background-position: center;
   background-repeat: no-repeat;
