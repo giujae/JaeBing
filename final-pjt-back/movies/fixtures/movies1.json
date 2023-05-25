@@ -306,25 +306,6 @@
   {
     "model": "movies.movie",
     "fields": {
-      "movie_no": 843794,
-      "adult": false,
-      "backdrop_path": "/afsYFdid9pnnRd6tTrHFUbHgXJn.jpg",
-      "genre_ids": [878],
-      "original_language": "ko",
-      "original_title": "\uc815\uc774",
-      "overview": "On an uninhabitable 22nd-century Earth, the outcome of a civil war hinges on cloning the brain of an elite soldier to create a robot mercenary.",
-      "popularity": 180.592,
-      "poster_path": "/z2nfRxZCGFgAnVhb9pZO87TyTX5.jpg",
-      "release_date": "2023-01-12",
-      "title": "JUNG_E",
-      "video": false,
-      "vote_average": 6.3,
-      "vote_count": 458
-    }
-  },
-  {
-    "model": "movies.movie",
-    "fields": {
       "movie_no": 1114905,
       "adult": false,
       "backdrop_path": "/aVPR4EScBkSgznEy0TixQk8z4Ny.jpg",
@@ -3132,25 +3113,6 @@
       "video": false,
       "vote_average": 6.7,
       "vote_count": 11
-    }
-  },
-  {
-    "model": "movies.movie",
-    "fields": {
-      "movie_no": 799379,
-      "adult": false,
-      "backdrop_path": "/kyeqDT2cFhTmwlvtuQY3n2W6Vf3.jpg",
-      "genre_ids": [28, 53, 12, 27],
-      "original_language": "ko",
-      "original_title": "\ub291\ub300\uc0ac\ub0e5",
-      "overview": "While under heavily armed guard, the dangerous convicts aboard a cargo ship unite in a coordinated escape attempt that soon escalates into a bloody, all-out riot. But as the fugitives continue their brutal campaign of terror, they soon discover that not even the most vicious among them is safe from the horror they unknowingly unleashed from the darkness below deck.",
-      "popularity": 97.483,
-      "poster_path": "/dniWicB6fa7NvpGbguxWlNPMc5f.jpg",
-      "release_date": "2022-09-21",
-      "title": "Project Wolf Hunting",
-      "video": false,
-      "vote_average": 6.5,
-      "vote_count": 134
     }
   },
   {

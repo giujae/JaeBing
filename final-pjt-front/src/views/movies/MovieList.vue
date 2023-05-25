@@ -2,8 +2,17 @@
   <div class="movie-main">
     <div style="max-width: 370px; margin-left: auto; margin-right: 5%">
       <h1 class="font-do my-3"></h1>
-      <b-row class="d-flex justify-content-end"> </b-row>
-      <b-row>
+      <b-row class="d-flex justify-content-end">
+        <div class="mainvideo" style="margin-left: 500px">
+          <div class="video-overlay"></div>
+          <video muted autoplay loop>
+            <source src="@/Legend.mp4" type="video/mp4" />
+            <strong>Your browser does not support the video tag.</strong>
+          </video>
+        </div>
+      </b-row>
+
+      <b-row class="find">
         <b-col class="d-flex justify-content-end">
           <b-carousel
             id="carousel-1"
@@ -26,22 +35,11 @@
               style="width: auto"
             >
               <template #img>
-                <div
-                  class="popluar-text"
-                  style="
-                    background-color: #e8d1d900;
-                    color: #e8d1d9;
-                    font-size: 30px;
-                  "
-                >
+                <div class="popluar-text" style="background-color: #e8d1d900; color: #e8d1d9; font-size: 30px">
                   Movie Hit
                 </div>
                 <div
-                  style="
-                    display: flex;
-                    justify-content: flex-end;
-                    background-color: #e8d1d900;
-                  "
+                  style="display: flex; justify-content: flex-end; background-color: #e8d1d900"
                   class="slide-card-div"
                 >
                   <img
@@ -78,17 +76,12 @@
     <div class="movie-container" v-if="login && recommend_list.length > 0">
       <h1 class="font-do my-3">Movie Recommendations For You!</h1>
       <div class="row d-flex justify-content-center">
-        <MovieListItem
-          v-for="(movie, idx) in recommend_list"
-          :key="idx"
-          :movie="movie"
-          class="col-2 p-0"
-        />
+        <MovieListItem v-for="(movie, idx) in recommend_list" :key="idx" :movie="movie" class="col-2 p-0" />
       </div>
     </div>
 
     <!-- 장르 선택시 나타나는 리스트 -->
-    <div>
+    <div class="caro-movie">
       <h1 v-if="movies.length" class="font-do my-5">{{ search }} List</h1>
       <carousel class="custom-carousel" :perPage="8">
         <slide v-for="(movie, idx) in movies" :key="idx">
@@ -100,40 +93,41 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 
-import MovieListItem from "@/components/movie/MovieListItem";
-import { Carousel, Slide } from "vue-carousel";
+import MovieListItem from '@/components/movie/MovieListItem';
+import { Carousel, Slide } from 'vue-carousel';
 
 export default {
-  name: "MovieList",
+  name: 'MovieList',
   data: function () {
     return {
       slide: 0,
       sliding: null,
-      search: "",
+      search: '',
       i: 0,
       j: false,
+      search: '액션',
       genres: [
-        "액션",
-        "모험",
-        "애니메이션",
-        "코미디",
-        "범죄",
-        "다큐멘터리",
-        "드라마",
-        "가족",
-        "판타지",
-        "역사",
-        "공포",
-        "음악",
-        "미스터리",
-        "로맨스",
-        "SF",
-        "TV 영화",
-        "스릴러",
-        "전쟁",
-        "웨스턴",
+        '액션',
+        '모험',
+        '애니메이션',
+        '코미디',
+        '범죄',
+        '다큐멘터리',
+        '드라마',
+        '가족',
+        '판타지',
+        '역사',
+        '공포',
+        '음악',
+        '미스터리',
+        '로맨스',
+        'SF',
+        'TV 영화',
+        '스릴러',
+        '전쟁',
+        '웨스턴',
       ],
     };
   },
@@ -145,7 +139,7 @@ export default {
   methods: {
     movieDetail: function (movie) {
       this.$router.push({
-        name: "MovieDetail",
+        name: 'MovieDetail',
         params: {
           movie: movie,
         },
@@ -167,19 +161,12 @@ export default {
   created: function () {
     this.i = 0;
     if (this.login === true && this.is_admin == false) {
-      this.$store.dispatch("recommendMovie");
-      console.log("실행");
+      this.$store.dispatch('recommendMovie');
+      console.log('실행');
     }
   },
   computed: {
-    ...mapState([
-      "login",
-      "login_user",
-      "is_admin",
-      "movie_list",
-      "ordered_movie_list",
-      "recommend_list",
-    ]),
+    ...mapState(['login', 'login_user', 'is_admin', 'movie_list', 'ordered_movie_list', 'recommend_list']),
     movies: function () {
       return this.movie_list.filter((movie) => {
         const genreNames = movie.genre_ids.map((id) => id.name);
@@ -204,7 +191,7 @@ export default {
   mounted() {
     window.scrollTo(0, 0);
     if (this.login === true && this.is_admin === false) {
-      this.$store.dispatch("recommendMovie");
+      this.$store.dispatch('recommendMovie');
     }
   },
 };
@@ -299,5 +286,42 @@ h1 {
   width: 300px !important;
   display: flex !important;
   justify-content: center !important;
+}
+video {
+  display: flex !important;
+  justify-content: end !important;
+}
+
+.movie-container {
+  position: relative;
+  z-index: 20;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#0e0f2c, transparent, transparent, #020106);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.caro-movie {
+  position: relative;
+  z-index: 15;
+}
+
+.mainvideo {
+  width: 100%;
+  height: 800px;
+  overflow: hidden;
+  margin: 0px auto;
+  position: absolute;
+}
+.find {
+  position: relative;
+  z-index: 30;
 }
 </style>
