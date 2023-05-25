@@ -22,7 +22,6 @@
 
           <b-navbar-brand href="/movies" class="font-weight-bold">
             <img class="Logo" src="./Logo.png" alt="" />
-            <!-- <p>JAEBING</p> -->
           </b-navbar-brand>
 
           <b-collapse id="navbar-nav-collapse" is-nav>

@@ -34,9 +34,7 @@
       v-model="show"
       size="xl"
       title="Movie Information"
-      footer-bg-variant="dark"
-      footer-text-variant="dark"
-      style="color: #e8d1d9"
+      style="color: #e8d1d9; "
     >
       <div class="modal-content">
         <!-- ... -->
@@ -73,10 +71,10 @@
 
           <div
             class="details text-right px-2 mb-2"
-            style="background-color: #10113047; color: #e8d1d9; margin-left: 290px; margin-top: 50px; text-align: right"
+            style="background: linear-gradient( #10113000, #10113050,#10113071,#10113071,#10113071,#10113050, #10113000); color: #e8d1d9; margin-left: 290px; margin-top: 50px; text-align: right"
           >
             <!-- Title -->
-            <h4 class="font-fixel m-0">[ {{ movie.title }} ]</h4>
+            <h4 class="font-fixel mt-4">[ {{ movie.title }} ]</h4>
 
             <!-- Release Date -->
             <h5 class="font-fixel">Release Date: {{ movie.release_date }}</h5>
@@ -88,7 +86,7 @@
             <h5 class="font-fixel" v-if="movie.adult">19세 관람가</h5>
 
             <!-- Overview -->
-            <h5 class="font-fixel" style="text-align: left">{{ movie.overview | truncate(200, '...') }}</h5>
+            <h5 class="font-fixel mb-2" style="text-align: left">{{ movie.overview | truncate(200, '...') }}</h5>
           </div>
         </div>
       </div>
@@ -100,34 +98,35 @@
         <div id="reviewForm">
           <!-- 리뷰 별점 부분 -->
           <div>
-            <label for="rate" class="float-left font-jua font-1-5em">별점</label>
-            <p class="float-left font-jua font-1-5em mr-3">: {{ selected_rate }}점</p>
-            <input type="range" min="1" max="10" step="1" v-model="selected_rate" class="mt-2 justify-content-center" />
-            <select id="rate" v-model="selected_rate" class="ml-1">
+            <label for="rate" class="font-fixel float-left">Rate : </label>
+            <p style="width: 5px; height: 5px; margin-left: 5px;" class="font-fixel float-left">{{ selected_rate }}</p>
+            <input  type="range" min="1" max="10" step="1" v-model="selected_rate" class="justify-content-center ml-3" />
+            <!-- <select id="rate" v-model="selected_rate" class="ml-1">
               <option v-for="(n, idx) in rate_options" :key="idx">{{ n }}</option>
-            </select>
+            </select> -->
 
+
+            <!-- 여기하는 중 -->
             <!-- 별점 박스 -->
             <b-input-group>
-              <b-input-group-prepend>
-                <b-button class="movie-detail-btn" @click="selected_rate = null">Clear</b-button>
-              </b-input-group-prepend>
-              <b-form-rating size="lg" id="rate" v-model="selected_rate" color="#DE5078" stars="10"></b-form-rating>
+              <b-form-rating size="lg" id="rate" v-model="selected_rate" color=#e8d1d9; stars="10" style="background-color: #10113000; border: dashed; border-color: #e8d1d969;"></b-form-rating>
               <b-input-group-append>
-                <b-input-group-text class="justify-content-center" style="min-width: 3em">
+                <b-input-group-text class="justify-content-center m-0 font-fixel " style="min-width: 3em; background-color:#10113000; border-style: dashed none; border-color: #e8d1d969; border-width: 3px;">
                   {{ selected_rate }}
                 </b-input-group-text>
+                <b-input-group-prepend>
+                  <b-button style="background-color: #10113000; border: dashed; border-color: #e8d1d969;" class="movie-detail-btn font-fixel" @click="selected_rate = null">Clear</b-button>
+                </b-input-group-prepend>
               </b-input-group-append>
             </b-input-group>
           </div>
 
           <!-- 이 영화를 추천합니다 -->
-          <div class="mt-3" style="color: #e8d1d9">
-            <label for="like" class="mr-2 font-fixel mr-1">Recommend</label>
-            <label for="like" class="font-fixel mr-2" id="recommend-label">This Movie.</label>
-            <b-form-checkbox size="lg" id="like" checked="true" v-model="like" inline></b-form-checkbox>
+          <div class="mt-3" style="color: #e8d1d9; display: flex; align-items: center;">
+            <label for="like" class="mr-2 font-fixel " style="font-size: 20px;">Recommend</label>
+            <label for="like" class=" mr-2 font-fixel" id="recommend-label" style="font-size: 20px;">This Movie.</label>
+            <b-form-checkbox style="width: 20px; height: auto; margin-bottom: 8px; background-color: #10113000;" id="like" checked="true" v-model="like" inline></b-form-checkbox>
           </div>
-
           <!-- 감상평 인풋 -->
           <div class="input-group">
             <label for="content"></label>
@@ -139,7 +138,7 @@
               rows="5"
               v-model.trim="content"
               placeholder="Please Leave A Comment."
-              style="border: dashed #e8d1d9; border-radius: 10px"
+              style="border: dashed #e8d1d969; border-radius: 10px; background-color:  #10113000; color:#e8d1d9; padding: 15px;"
             ></textarea>
           </div>
 
@@ -178,23 +177,23 @@
               <div class="col-3" id="review-rank">
                 <!-- 리뷰 별점 부분 -->
                 <div>
-                  <b-form-rating color="#DE5078" inline size="sm" :value="review.rate | half()" readonly no-border>
+                  <b-form-rating style="width: auto; background-color: #10113000;" color="#DE5078" inline size="sm" :value="review.rate | half()" readonly no-border>
                   </b-form-rating>
                 </div>
               </div>
 
-              <div class="col-6 font-fixel" id="review-content" style="word-break: break-all; color: #e8d1d9">
+              <div class="col-6 font-fixel" id="review-content" style="word-break: break-all; color: #e8d1d9; font-size: 20px;">
                 <!-- 리뷰 내용 부분 -->
                 <p>{{ review.content }}</p>
                 <p>Writer : {{ review.user.username }} | {{ $moment(review.created_at).format('YYYY-MM-DD') }}</p>
               </div>
 
-              <div class="col-3 font-fixel" id="review-button" v-if="review.user.id == login_user">
+              <div class="col-3 font-fixel d-flex justify-content-end" id="review-button" v-if="review.user.id == login_user">
                 <!-- 리뷰 수정, 삭제 버튼 -->
-                <button @click="updateReady(review)" :class="{ appear: showAdd }" class="movie-detail-btn mr-1 ml-1">
+                <button style="font-size: 20px;" @click="updateReady(review)" :class="{ appear: showAdd }" class="movie-detail-btn mr-1 ml-1">
                   Edit
                 </button>
-                <button @click="deleteReview(movie)" :class="{ appear: showAdd }" class="movie-detail-btn mr-1 ml-1">
+                <button style="font-size: 20px;" @click="deleteReview(movie)" :class="{ appear: showAdd }" class="movie-detail-btn mr-1 ml-1">
                   Delete
                 </button>
               </div>
@@ -487,6 +486,7 @@ export default {
 /* 픽셀체 */
 .font-fixel {
   font-family: 'NeoDunggeunmoPro-Regular';
+  color: #e8d1d9;
 }
 /* 디테일부분 모든 버튼 */
 .movie-detail-btn:hover {
@@ -626,14 +626,35 @@ iframe {
 }
 
 /deep/ .modal > .modal-dialog > .modal-content {
-  background: #101130;
+  background: #1c1e4900;
+  border: none;
 }
 /deep/ .close,
 /deep/ .modal > .modal-dialog > .modal-content > .modal-header > .modal-title > .close,
 /deep/ .modal > .modal-dialog > .modal-content > .modal-header {
   color: #e8d1d9 !important;
+  font-family: 'NeoDunggeunmoPro-Regular';
+
 }
 /deep/ .modal {
-  background: #e8d1d9c2;
+  background: linear-gradient(#101130, #1c1e4900, #1c1e4900, #101130);
 }
+
+input, range{
+  accent-color: #e8d1d9;
+}
+
+/* select {
+  border: dashed 1.5px;
+  background-color: #1c1e49;
+  border-radius: 5px;
+  color:#e8d1d9;
+} */
+
+.input-group-prepend button {
+  background-color: #1c1e49;
+  width: auto;
+  height: auto;
+}
+
 </style>
