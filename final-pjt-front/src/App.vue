@@ -32,22 +32,14 @@
                 <router-link :to="{ name: 'Post' }">Community</router-link>
               </b-nav-item>
 
-              <b-nav-item-dropdown
-                v-if="$store.state.login && this.$route.path !== '/login'"
-                :text="username"
-              >
+              <b-nav-item-dropdown v-if="$store.state.login && this.$route.path !== '/login'" :text="username">
                 <b-dropdown-item>
-                  <router-link
-                    :to="{ name: 'Profile', params: { username: username } }"
-                    >Profile</router-link
-                  >
+                  <router-link :to="{ name: 'Profile', params: { username: username } }">Profile</router-link>
                 </b-dropdown-item>
 
                 <b-dropdown-item>
                   <router-link @click.native="logout" to="#" class="nav-margin">
-                    <button class="logout-btn font-weight-bold p-0">
-                      Logout
-                    </button>
+                    <button class="logout-btn font-weight-bold p-0">Logout</button>
                   </router-link>
                 </b-dropdown-item>
               </b-nav-item-dropdown>
@@ -60,10 +52,7 @@
                 </b-nav-item>
 
                 <b-nav-item>
-                  <router-link
-                    :to="{ name: 'AdminManagement' }"
-                    class="nav-margin"
-                  >
+                  <router-link :to="{ name: 'AdminManagement' }" class="nav-margin">
                     <span class="badge badge-pill badge-warning">회원관리</span>
                   </router-link>
                 </b-nav-item>
@@ -73,12 +62,7 @@
             <b-navbar-nav class="ml-auto">
               <template v-if="$store.state.login">
                 <b-nav-item>
-                  <button
-                    @click="triggerSearch"
-                    class="font-weight-bold search-btn p-0 mr-3"
-                  >
-                    Search
-                  </button>
+                  <button @click="triggerSearch" class="font-weight-bold search-btn p-0 mr-3">Search</button>
                 </b-nav-item>
                 <!-- <p class="user font-weight-bold text-truncate">{{ username }}</p> -->
               </template>
@@ -118,82 +102,82 @@
 <script>
 // const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 // import axios from 'axios'
 
 export default {
-  name: "App",
+  name: 'App',
   data: function () {
     return {
       login: false,
       images: {
-        logo: require("@/assets/images/logo.png"),
-        flamingo: require("@/assets/images/flamingo.png"),
+        logo: require('@/assets/images/logo.png'),
+        flamingo: require('@/assets/images/flamingo.png'),
       },
       hideAdd: true,
     };
   },
   methods: {
     logout: function () {
-      localStorage.removeItem("jwt");
-      localStorage.removeItem("username");
-      localStorage.removeItem("login_user");
-      localStorage.removeItem("is_admin");
-      localStorage.removeItem("user_movie");
+      localStorage.removeItem('jwt');
+      localStorage.removeItem('username');
+      localStorage.removeItem('login_user');
+      localStorage.removeItem('is_admin');
+      localStorage.removeItem('user_movie');
       this.login = false;
       this.$store.state.login = false;
       this.$store.state.is_admin = false;
-      this.$store.state.login_user = "";
+      this.$store.state.login_user = '';
       this.$store.state.username = null;
       this.$router.push({
-        name: "Main",
+        name: 'Main',
       });
     },
     triggerSearch: function () {
-      this.$router.push({ name: "MovieSearch" });
+      this.$router.push({ name: 'MovieSearch' });
     },
   },
   created: function () {
     // 로그인
-    const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem('jwt');
 
-    if (this.$route.path !== "/") {
-      console.log("입구컷");
+    if (this.$route.path !== '/') {
+      console.log('입구컷');
       if (token) {
         this.login = true;
       }
-      console.log("1번 발동");
-      this.$store.dispatch("getMovie");
+      console.log('1번 발동');
+      this.$store.dispatch('getMovie');
       if (this.$store.state.ordered_movie_list.length == 0) {
         // 영화 목록이 비어있는 경우에만 getMovie 액션 호출
-        console.log("비었는데요?");
+        console.log('비었는데요?');
       }
-      if (this.$route.path !== "/movies") {
-        console.log("2번 발동");
-        this.$router.push({ name: "MovieList" });
+      if (this.$route.path !== '/movies') {
+        console.log('2번 발동');
+        this.$router.push({ name: 'MovieList' });
       }
     }
   },
   computed: {
-    ...mapState(["is_admin", "username"]),
+    ...mapState(['is_admin', 'username']),
   },
 };
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Gothic&family=Poor+Story&family=Slabo+27px&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Gothic&family=Poor+Story&family=Slabo+27px&display=swap');
 
 @font-face {
-  font-family: "NeoDunggeunmoPro-Regular";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2")
-    format("woff2");
+  font-family: 'NeoDunggeunmoPro-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2')
+    format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 /* 전체 div */
 #app {
-  font-family: "NeoDunggeunmoPro-Regular";
+  font-family: 'NeoDunggeunmoPro-Regular';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -203,7 +187,7 @@ export default {
 }
 
 .main-img {
-  background-image: url("moviemain.png");
+  background-image: url('moviemain.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

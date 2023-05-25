@@ -7,31 +7,16 @@
         </div>
 
         <button class="post-detail-btn heart-btn" @click="toggleLikePost">
-          <span v-if="isPostLiked"
-            ><img class="heart-img" src="./fullheart.png" alt=""
-          /></span>
-          <span v-else
-            ><img class="heart-img" src="./emptyheart.png" alt=""
-          /></span>
+          <span v-if="isPostLiked"><img class="heart-img" src="./fullheart.png" alt="" /></span>
+          <span v-else><img class="heart-img" src="./emptyheart.png" alt="" /></span>
         </button>
-        <span class="likes-span" style="font-size: 20px"
-          >Likes : {{ likesCount }}</span
-        >
+        <span class="likes-span" style="font-size: 20px">Likes : {{ likesCount }}</span>
 
-        <div
-          class="col media text-justify"
-          style="width: 100%; word-break: break-all"
-        >
-          <div
-            class="col media text-justify p-0"
-            style="width: 100%; word-break: break-all"
-          >
+        <div class="col media text-justify" style="width: 100%; word-break: break-all">
+          <div class="col media text-justify p-0" style="width: 100%; word-break: break-all">
             <p style="font-size: 28px; margin: 0px">
               Writer :
-              <router-link
-                class="router-user"
-                :to="{ name: 'Profile', params: { username: postUsername } }"
-              >
+              <router-link class="router-user" :to="{ name: 'Profile', params: { username: postUsername } }">
                 [ {{ postUsername }} ]</router-link
               >
             </p>
@@ -41,14 +26,7 @@
             </h2>
           </div>
 
-          <div
-            style="
-              width: 100%;
-              height: 100%;
-              border-style: dashed none;
-              border-color: #e8d1d969;
-            "
-          >
+          <div style="width: 100%; height: 100%; border-style: dashed none; border-color: #e8d1d969">
             <!-- 작성자 -->
 
             <!-- 내용 -->
@@ -62,12 +40,12 @@
               <span style="text-align: right; display: block">
                 <span style="display: inline-block; text-align: left">
                   Create :
-                  {{ $moment(post.created_at).format("YYYY-MM-DD hh:mm:ss") }}
+                  {{ $moment(post.created_at).format('YYYY-MM-DD hh:mm:ss') }}
                 </span>
                 |
                 <span style="display: inline-block; text-align: left">
                   Current Edit Date :
-                  {{ $moment(post.updated_at).format("YYYY-MM-DD hh:mm:ss") }}
+                  {{ $moment(post.updated_at).format('YYYY-MM-DD hh:mm:ss') }}
                 </span>
               </span>
             </div>
@@ -122,26 +100,26 @@
 
 <script>
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
-import axios from "axios";
+import axios from 'axios';
 
-import CommentList from "@/components/comment/CommentList";
-import CommentForm from "@/components/comment/CommentForm";
+import CommentList from '@/components/comment/CommentList';
+import CommentForm from '@/components/comment/CommentForm';
 
 export default {
-  name: "PostDetail",
+  name: 'PostDetail',
   components: {
     CommentList,
     CommentForm,
   },
   data() {
     return {
-      post: "",
-      postUsername: "",
-      postItem: "",
-      all_comments: "",
+      post: '',
+      postUsername: '',
+      postItem: '',
+      all_comments: '',
       images: {
-        logo: require("@/assets/images/logo.png"),
-        flamingo: require("@/assets/images/flamingo.png"),
+        logo: require('@/assets/images/logo.png'),
+        flamingo: require('@/assets/images/flamingo.png'),
       },
       isPostLiked: false,
       likesCount: 0,
@@ -149,7 +127,7 @@ export default {
   },
   methods: {
     setToken() {
-      const token = localStorage.getItem("jwt");
+      const token = localStorage.getItem('jwt');
 
       const config = {
         headers: {
@@ -160,19 +138,16 @@ export default {
     },
     backToPost() {
       this.$router.push({
-        name: "Post",
+        name: 'Post',
       });
     },
     deletePost(post) {
       const config = this.setToken();
       axios
-        .delete(
-          `${SERVER_URL}/community/post_delete_update/${post.id}/`,
-          config
-        )
+        .delete(`${SERVER_URL}/community/post_delete_update/${post.id}/`, config)
         .then(() => {
           this.$router.push({
-            name: "Post",
+            name: 'Post',
           });
         })
         .catch((err) => {
@@ -182,12 +157,12 @@ export default {
     updatePostForm(post) {
       const postItem = {
         id: post.id,
-        purpose: "update",
+        purpose: 'update',
         title: post.title,
         content: post.content,
       };
       this.$router.push({
-        name: "CreatePost",
+        name: 'CreatePost',
         params: postItem,
       });
     },
@@ -262,7 +237,7 @@ export default {
   color: #e8d1d9;
   /* margin: 0px 20px; */
   min-height: 90vh;
-  background-image: url("postdetailback.png");
+  background-image: url('postdetailback.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
