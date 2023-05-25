@@ -1,9 +1,7 @@
 <template>
   <div class="search-container">
     <div class="mb-5">
-      <label for="search" class="mx-3" style="color: #e8d1d9; font-size: 30px"
-        >Search:
-      </label>
+      <label for="search" class="mx-3" style="color: #e8d1d9; font-size: 30px">Search: </label>
       <input
         placeholder="Enter Movie Name"
         type="text"
@@ -28,24 +26,9 @@
     </div>
 
     <div class="row" v-if="movies.length">
-      <div
-        class="col-3 h-50 w-100 my-3"
-        v-for="(movie, idx) in movies"
-        :key="idx"
-      >
-        <div
-          class="card"
-          style="
-            background-color: #101130;
-            border: dashed #e8d1d969;
-            border-radius: 10px;
-          "
-        >
-          <img
-            class="card-img-top m-0"
-            :src="movie.poster_path"
-            :alt="movie.title"
-          />
+      <div class="col-3 h-50 w-100 my-3" v-for="(movie, idx) in movies" :key="idx">
+        <div class="card" style="background-color: #101130; border: dashed #e8d1d969; border-radius: 10px">
+          <img class="card-img-top m-0" :src="movie.poster_path" :alt="movie.title" />
           <div class="card-body">
             <h5 style="color: #e8d1d9">{{ movie.title }}</h5>
             <!-- <button @click="addMovie(movie)" class="btn btn-pink">이 영화 추가</button> -->
@@ -61,15 +44,15 @@
 const SEARCH_URL = process.env.VUE_APP_SEARCH_URL;
 const API_KEY = process.env.VUE_APP_API_KEY;
 
-import axios from "axios";
+import axios from 'axios';
 
 export default {
-  name: "MovieSearch",
+  name: 'MovieSearch',
   data: function () {
     return {
       search: null,
       movies: [],
-      img_url: "http://image.tmdb.org/t/p/w185",
+      img_url: 'http://image.tmdb.org/t/p/w185',
     };
   },
   methods: {
@@ -77,9 +60,7 @@ export default {
       if (this.search) {
         this.movies = [];
         axios
-          .get(
-            `${SEARCH_URL}=${API_KEY}&language=ko-KR&query=${this.search}&page=1&include_adult=false`
-          )
+          .get(`${SEARCH_URL}=${API_KEY}&language=ko-KR&query=${this.search}&page=1&include_adult=false`)
           .then((res) => {
             for (const movie of res.data.results) {
               // console.log(movie)
@@ -92,7 +73,7 @@ export default {
                 genres: movie.genre_ids,
               };
               if (movie.poster_path === null) {
-                temp.poster_path = "";
+                temp.poster_path = '';
               }
               // console.log(temp)
               this.movies.push(temp);
@@ -121,7 +102,7 @@ export default {
   min-height: 100vh;
   width: 100%;
   padding: 0 10%;
-  background-image: url("moviemain.png");
+  background-image: url('@/moviemain.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
