@@ -324,8 +324,4 @@ video {
   position: relative;
   z-index: 30;
 }
-<<<<<<< HEAD
 </style>
-=======
-</style>
->>>>>>> d5aa38d58278f96ce1dea4f45e9090339f1d3112
