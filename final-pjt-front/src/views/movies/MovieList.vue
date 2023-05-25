@@ -6,7 +6,7 @@
         <div class="mainvideo" style="margin-left: 500px">
           <div class="video-overlay"></div>
           <video muted autoplay loop>
-            <source src="@/Legend.mp4" type="video/mp4" />
+            <source src="./Movie002.mp4" type="video/mp4" />
             <strong>Your browser does not support the video tag.</strong>
           </video>
         </div>

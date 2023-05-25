@@ -26,7 +26,7 @@
         <div class="jb-box">
           <div class="shadowcover"></div>
           <video muted autoplay loop>
-            <source src="@/Legend.mp4" type="video/mp4" />
+            <source src="./Legend.mp4" type="video/mp4" />
             <strong>Your browser does not support the video tag.</strong>
           </video>
         </div>
