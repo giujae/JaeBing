@@ -21,8 +21,7 @@
           </b-navbar-toggle>
 
           <b-navbar-brand href="/movies" class="font-weight-bold">
-            <img class="Logo" src="./Logo.png" alt="" />
-            <!-- <p>JAEBING</p> -->
+            <img class="Logo" src="./Logo.gif" alt="" />
           </b-navbar-brand>
 
           <b-collapse id="navbar-nav-collapse" is-nav>
@@ -91,7 +90,26 @@
       <div class="jumbotron" id="footerjumbo">
         <div class="container">
           <div class="row">
-            <div class="col-12"></div>
+            <div class="col-3 ms-5">
+              <img src="./Logo.png" style="width: 60px; height: 60px" alt="Logo" />
+              <h6>재빙</h6>
+            </div>
+            <div class="col-3 ms-5">
+              <h6>대표이사 : 나야나<br />주소 : 경북 구미시 3공단3로 302<br />통신신고번호 : 어이쿠 깜빡했네</h6>
+            </div>
+            <div class="col-3 ms-5">
+              <h6>이용약관 * 법적고지<br />개인정보처리방침<br />이메일무단수집거부</h6>
+            </div>
+            <div class="col-3 ms-5">
+              <h6>고객지원<br />블로그<br /><span class="clickable" @click="openModal">전화문의</span></h6>
+              <div class="modal" :class="{ 'is-active': showModal }">
+                <div class="modal-background" @click="closeModal"></div>
+                <div class="modal-image">
+                  <img class="moonhee" src="./Untitled.png" alt="전화문의 이미지" />
+                </div>
+                <button class="modal-shutdown is-large" @click="closeModal"></button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -115,9 +133,16 @@ export default {
         flamingo: require('@/assets/images/flamingo.png'),
       },
       hideAdd: true,
+      showModal: false,
     };
   },
   methods: {
+    openModal() {
+      this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
+    },
     logout: function () {
       localStorage.removeItem('jwt');
       localStorage.removeItem('username');
@@ -331,5 +356,30 @@ button {
 
 .dropdown-item {
   text-align: center !important;
+}
+.modal {
+  display: none;
+}
+.modal.is-active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-behind {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.moonhee {
+  width: 800px !important;
+  height: 782px !important;
+}
+.modal-shutdown {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 </style>

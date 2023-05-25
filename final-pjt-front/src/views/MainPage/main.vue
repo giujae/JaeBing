@@ -4,13 +4,16 @@
     <!-- 네브바 있는 헤더 -->
     <header>
       <nav class="nav fixed-top">
-        <a href="/" class="home font-weight-bold">Home</a>
+        <a href="/" class="home-btn font-weight-bold">
+          <img class="main-Logo" src="./main.gif" alt="재빙" />
+          JEABING
+        </a>
         <div>
           <router-link :to="{ name: 'Signup' }" class="nav-margin">
-            <button class="font-weight-bold">SignUp</button>
+            <button class="main-btn font-weight-bold">SignUp</button>
           </router-link>
           <router-link :to="{ name: 'Login' }" class="nav-margin">
-            <button class="font-weight-bold">Login</button>
+            <button class="main-btn font-weight-bold">Login</button>
           </router-link>
         </div>
       </nav>
@@ -21,8 +24,9 @@
       <div class="video-box">
         <!-- 비디오 박스 -->
         <div class="jb-box">
+          <div class="shadowcover"></div>
           <video muted autoplay loop>
-            <source src="@/Legend.mp4" type="video/mp4" />
+            <source src="./Legend.mp4" type="video/mp4" />
             <strong>Your browser does not support the video tag.</strong>
           </video>
         </div>
@@ -45,9 +49,7 @@
             <li class="first-li-1">
               <picture class="pic">
                 <source
-                  srcset="
-                    https://image.tving.com/upload/cms/caip/CAIP1500/P000643144.jpg/dims/resize/F_webp,1024
-                  "
+                  srcset="https://image.tving.com/upload/cms/caip/CAIP1500/P000643144.jpg/dims/resize/F_webp,1024"
                   type="image/webp"
                   class="src"
                 />
@@ -61,9 +63,7 @@
             <li class="first-li-1">
               <picture class="pic">
                 <source
-                  srcset="
-                    https://image.tving.com/upload/cms/caip/CAIP1500/P001706762.jpg/dims/resize/F_webp,1024
-                  "
+                  srcset="https://image.tving.com/upload/cms/caip/CAIP1500/P001706762.jpg/dims/resize/F_webp,1024"
                   type="image/webp"
                   class="src"
                 />
@@ -77,9 +77,7 @@
             <li class="first-li-1">
               <picture class="pic">
                 <source
-                  srcset="
-                    https://image.tving.com/upload/cms/caip/CAIP1500/P001693843.jpg/dims/resize/F_webp,1024
-                  "
+                  srcset="https://image.tving.com/upload/cms/caip/CAIP1500/P001693843.jpg/dims/resize/F_webp,1024"
                   type="image/webp"
                   class="src"
                 />
@@ -93,9 +91,7 @@
             <li class="first-li-1">
               <picture class="pic">
                 <source
-                  srcset="
-                    https://image.tving.com/upload/cms/caip/CAIP1500/P001691763.jpg/dims/resize/F_webp,1024
-                  "
+                  srcset="https://image.tving.com/upload/cms/caip/CAIP1500/P001691763.jpg/dims/resize/F_webp,1024"
                   type="image/webp"
                   class="src"
                 />
@@ -109,9 +105,7 @@
             <li class="first-li-1">
               <picture class="pic">
                 <source
-                  srcset="
-                    https://image.tving.com/upload/cms/caip/CAIP1500/P001710496.jpg/dims/resize/F_webp,1024
-                  "
+                  srcset="https://image.tving.com/upload/cms/caip/CAIP1500/P001710496.jpg/dims/resize/F_webp,1024"
                   type="image/webp"
                   class="src"
                 />
@@ -137,26 +131,23 @@ export default {
   mounted() {
     var originalID, cloneID; //인터벌 포인터
     //롤링 배너 복제본 생성
-    let roller = document.querySelector(".flow-scene-first");
-    roller.id = "roller1";
+    let roller = document.querySelector('.flow-scene-first');
+    roller.id = 'roller1';
 
     let clone = roller.cloneNode(true);
-    clone.id = "roller2";
-    document.querySelector(".flow-scene-wrap").appendChild(clone); //부착
+    clone.id = 'roller2';
+    document.querySelector('.flow-scene-wrap').appendChild(clone); //부착
 
     //원본, 복제본 배너 위치 지정
-    document.querySelector("#roller1").style.left = "0px";
-    document.querySelector("#roller2").style.left =
-      document.querySelector(".flow-scene-first ul").offsetWidth + "px";
+    document.querySelector('#roller1').style.left = '0px';
+    document.querySelector('#roller2').style.left = document.querySelector('.flow-scene-first ul').offsetWidth + 'px';
 
     //클래스 할당
-    roller.classList.add("original");
-    clone.classList.add("clone");
+    roller.classList.add('original');
+    clone.classList.add('clone');
 
     //인터벌 메서드로 애니메이션 생성
-    let rollerWidth = document.querySelector(
-      ".flow-scene-first ul"
-    ).offsetWidth; //회전 배너 너비값
+    let rollerWidth = document.querySelector('.flow-scene-first ul').offsetWidth; //회전 배너 너비값
     let betweenDistance = 1; //이동 크기 - 정수여야 함
 
     //롤링 시작
@@ -165,13 +156,13 @@ export default {
         betweenRollCallback,
         parseInt(1000 / 100),
         betweenDistance,
-        document.querySelector("#roller1")
+        document.querySelector('#roller1')
       );
       cloneID = window.setInterval(
         betweenRollCallback,
         parseInt(1000 / 100),
         betweenDistance,
-        document.querySelector("#roller2")
+        document.querySelector('#roller2')
       );
     }
 
@@ -183,26 +174,26 @@ export default {
     }
 
     //마우스 호버시 롤링이 멈추었다 벗어나면 다시 롤링이 되도록 처리
-    document.getElementById("roller1").addEventListener("mouseover", () => {
+    document.getElementById('roller1').addEventListener('mouseover', () => {
       stopRoller();
     });
-    document.getElementById("roller2").addEventListener("mouseover", () => {
+    document.getElementById('roller2').addEventListener('mouseover', () => {
       stopRoller();
     });
-    document.getElementById("roller1").addEventListener("mouseout", () => {
+    document.getElementById('roller1').addEventListener('mouseout', () => {
       startRoller();
     });
-    document.getElementById("roller2").addEventListener("mouseout", () => {
+    document.getElementById('roller2').addEventListener('mouseout', () => {
       startRoller();
     });
 
     //인터벌 애니메이션 함수(공용)
     function betweenRollCallback(d, roller) {
       let left = parseInt(roller.style.left);
-      roller.style.left = left - d + "px"; //이동
+      roller.style.left = left - d + 'px'; //이동
       //조건부 위치 리셋
       if (rollerWidth + (left - d) <= 0) {
-        roller.style.left = rollerWidth + "px";
+        roller.style.left = rollerWidth + 'px';
       }
     }
 
@@ -213,17 +204,15 @@ export default {
 
 <style>
 @font-face {
-  font-family: "DungGeunMo";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff")
-    format("woff");
+  font-family: 'DungGeunMo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "EF_watermelonSalad";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_watermelonSalad.woff2")
-    format("woff2");
+  font-family: 'EF_watermelonSalad';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_watermelonSalad.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
@@ -237,6 +226,12 @@ html {
 /* 바디 배경 */
 body {
   padding: 0px;
+  margin: 0px;
+}
+
+.main-Logo {
+  width: 70px;
+  height: auto;
   margin: 0px;
 }
 
@@ -256,6 +251,18 @@ video {
   object-fit: cover;
   opacity: 0.45;
 }
+
+.shadowcover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent, transparent, transparent, #070512) !important;
+  z-index: 10;
+  pointer-events: none;
+}
+
 /* 텍스트 박스 */
 .jb-text {
   position: absolute;
@@ -273,7 +280,7 @@ video {
 
 /* 전체 페이지 속성 */
 #main {
-  font-family: "DungGeunMo";
+  font-family: 'DungGeunMo';
   background-color: #101130;
   /* background: linear-gradient(45deg, #E8D1D9, #3C537F, #0f2648); */
   color: #e8d1d9;
@@ -289,13 +296,41 @@ video {
 }
 
 /* 홈 버튼 속성 */
-.home {
+.home-btn {
   text-decoration-line: none;
   padding: 8px;
   color: #e8d1d9;
   background-color: #10113000;
   width: 70px;
   height: 40px;
+}
+
+/* 홈 버튼에 마우스 올렸을 때 */
+.home-btn:hover {
+  text-decoration-line: none;
+  color: #d5b0c1;
+  outline: none;
+}
+
+/* 홈 버튼 클릭시 */
+.home-btn:active {
+  text-decoration-line: none;
+  border: #d5b0c1;
+  outline: none;
+}
+
+/* 회원가입, 로그인 버튼 */
+.main-btn {
+  font-size: 25px;
+  width: auto;
+  height: auto;
+  margin-right: 8px;
+}
+
+.main-btn:active {
+  text-decoration-line: none;
+  border: #d5b0c1;
+  outline: none;
 }
 
 /* 로그인, 회원가입 버튼 속성 */
@@ -336,8 +371,10 @@ img {
 }
 
 .flow-scene-wrap {
+  position: relative;
   overflow: hidden;
   height: 800px;
+  z-index: 5;
 }
 
 .flow-scene-first {
