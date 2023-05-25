@@ -32,6 +32,24 @@ Django 프로젝트를 실행합니다
 > python manage.py runserver
 ```
 
+프론트 서버 경로에 진입합니다.
+
+```bash
+> cd final-pjt-front
+```
+
+설치하고
+
+```bash
+> npm i
+```
+
+서버를 실행합니다
+
+```bash
+> npm run serve
+```
+
 &nbsp;
 
 ## 2. 업무 분담
