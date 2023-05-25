@@ -50,20 +50,13 @@
           id="email"
           v-model="credentials.email"
         />
-        <small id="emailHelp" class="form-text text-muted"
-          >We'll never share your email with anyone else.</small
-        >
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
 
       <!-- 생년월일 -->
       <div class="signup-form-group mt-4">
         <label for="date_of_birth">BIRTH</label>
-        <input
-          type="date"
-          class="form-control2"
-          id="date_of_birth"
-          v-model="credentials.date_of_birth"
-        />
+        <input type="date" class="form-control2" id="date_of_birth" v-model="credentials.date_of_birth" />
       </div>
 
       <!-- 개인정보약관동의 박스 -->
@@ -76,14 +69,13 @@
               id="gridCheck"
               checked="true"
               v-model="agree"
+              @click="agreePage"
             />
           </div>
 
           <div class="col-7 d-flex flex justify-content-right p-2">
             <label for="gridCheck">
-              <p @click="agreePage" class="mt-1">
-                개인정보 이용 약관에 동의합니다.
-              </p>
+              <p class="mt-1">개인정보 이용 약관에 동의합니다.</p>
             </label>
           </div>
         </div>
@@ -99,19 +91,19 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: "Signup",
+  name: 'Signup',
   data: function () {
     return {
       credentials: {
-        username: "",
-        password: "",
-        email: "",
-        date_of_birth: "",
+        username: '',
+        password: '',
+        email: '',
+        date_of_birth: '',
       },
       agree: false,
     };
@@ -122,20 +114,20 @@ export default {
         axios
           .post(`${SERVER_URL}/accounts/signup/`, this.credentials)
           .then(() => {
-            this.$router.push({ name: "Login" });
+            this.$router.push({ name: 'Login' });
             this.agree = false;
           })
           .catch((err) => {
             console.log(err);
-            alert("회원가입 정보가 올바르지 않습니다.");
+            alert('회원가입 정보가 올바르지 않습니다.');
           });
       } else {
-        alert("개인정보 이용 약관에 동의해야합니다.");
+        alert('개인정보 이용 약관에 동의해야합니다.');
       }
     },
     agreePage: function () {
       alert(
-        "① 정보주체는 DeJaVue에 대해 언제든지 개인정보 열람,정정,삭제,처리정지 요구 등의 권리를 행사할 수 있습니다. \n② 제1항에 따른 권리 행사는DeJaVue에 대해 개인정보 보호법 시행령 제41조제1항에 따라 서면, 전자우편, 모사전송(FAX) 등을 통하여 하실 수 있으며 DeJaVue은(는) 이에 대해 지체 없이 조치하겠습니다. \n③ 제1항에 따른 권리 행사는 정보주체의 법정대리인이나 위임을 받은 자 등 대리인을 통하여 하실 수 있습니다. 이 경우 개인정보 보호법 시행규칙 별지 제11호 서식에 따른 위임장을 제출하셔야 합니다. \n④ 개인정보 열람 및 처리정지 요구는 개인정보보호법 제35조 제5항, 제37조 제2항에 의하여 정보주체의 권리가 제한 될 수 있습니다. \n⑤ 개인정보의 정정 및 삭제 요구는 다른 법령에서 그 개인정보가 수집 대상으로 명시되어 있는 경우에는 그 삭제를 요구할 수 없습니다. \n⑥ DeJaVue은(는) 정보주체 권리에 따른 열람의 요구, 정정·삭제의 요구, 처리정지의 요구 시 열람 등 요구를 한 자가 본인이거나 정당한 대리인인지를 확인합니다."
+        '① 선생님은 저희에 대해 언제든지 개인정보 열람,정정,삭제,처리정지 요구 수 있어요^^7. \n② 그러면 빠르게 지워드릴게요^^7 \n③ 사칭하면 혼나요 ^^7.'
       );
     },
   },
@@ -147,7 +139,7 @@ export default {
 
 <style scoped>
 .sign-img {
-  background-image: url("loginpagefix2 (1).png");
+  background-image: url('loginpagefix2 (1).png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -188,7 +180,7 @@ input:focus {
   width: 300px;
   height: 40px;
   margin-bottom: 0px;
-  background-image: url("startbtn2.png");
+  background-image: url('startbtn2.png');
   /* background-size: cover; */
   background-position: center;
   background-repeat: no-repeat;
